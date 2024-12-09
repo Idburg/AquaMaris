@@ -7,10 +7,10 @@
 - Una pantalla de registro 
 - Un mapa interactivo de su región o país donde:
   - Se puede precisar mediante una búsqueda
-  - Una barra inferior que contiene:
-    - Perfil
-    - Icono de pez (base de datos)
-    - Ajustes
+  - Una barra inferior que contiene los iconos de:
+    - Perfil del usuario
+    - Icono de pez, registro de todos los peces
+    - Ajustes 
     - Reporte de fallos
   - Un buscador en la parte superior del mapa en donde se pueden introducir:
     - El nombre de la especie que se busca
