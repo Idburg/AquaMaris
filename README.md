@@ -23,23 +23,19 @@
 
 Pantalla que aparece al *inicializar la aplicación*
 
-![image](https://github.com/user-attachments/assets/58622afc-cbd7-42fc-8e88-8d8990f2e12e)
+![image](https://github.com/user-attachments/assets/6275b02d-ca05-4138-8ab8-6e7e6da0cac5)
 
+Pantalla *principal*, contiene el mapa, el buscador y la barra inferior
+
+![image](https://github.com/user-attachments/assets/e1cab6d3-1bb3-4627-abc5-7e48ab963acb)  
 
 Pantalla de *login*
 
 ![image](https://github.com/user-attachments/assets/70aa91f0-28f4-4421-af80-a42fa66f7645)
 
-
 Pantalla de *registro*
 
 ![image](https://github.com/user-attachments/assets/e442c64a-d529-4cc8-bff9-1ba2c12b9f90)
-
-
-Pantalla *principal*, contiene el mapa, el buscador y la barra inferior
-
-![image](https://github.com/user-attachments/assets/e1cab6d3-1bb3-4627-abc5-7e48ab963acb)
-
 
 Ejemplo de información acerca del pez payaso
 
