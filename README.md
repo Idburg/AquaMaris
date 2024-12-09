@@ -1,5 +1,4 @@
-# AquaMaris
-## ¡Explora el mundo acuático!
+# AquaMaris, ¡explora el mundo acuático!
 
 ## Características
 ***AquaMaris*** ofrece información sobre la vida marítima en los alrededores del usuario. Con el fin de crear una aplicación simple y eficaz, AquaMaris contiene varias características:  
