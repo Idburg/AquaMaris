@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/inter_light"
-            android:text="Enter your email and password to login"
+            android:text="@string/subtext"
             android:textColor="@color/pasty_white"
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@id/guideEnd"
