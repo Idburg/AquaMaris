@@ -7,13 +7,76 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/main"
+        app:layout_constraintEnd_toEndOf="@id/main"
+        app:layout_constraintStart_toStartOf="@id/main"/>
+
+    <EditText
+        android:id="@+id/editTextText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:ems="12"
+        android:inputType="text"
+        android:text="Buscar"
+        android:drawableRight="@drawable/ic_user"
+        app:layout_constraintBottom_toBottomOf="@id/top"
+        app:layout_constraintEnd_toEndOf="@id/top"
+        app:layout_constraintStart_toStartOf="@id/top"
+        app:layout_constraintTop_toTopOf="@id/top" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/main"
+        app:layout_constraintEnd_toEndOf="@id/main"
+        app:layout_constraintStart_toStartOf="@id/main"/>
+
+
+
+    <ImageButton
+        android:id="@+id/user"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_user"
+        android:layout_marginRight="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom"
+        app:layout_constraintEnd_toEndOf="@id/pez"
+        app:layout_constraintStart_toStartOf="@id/bottom"
+        app:layout_constraintTop_toTopOf="@id/bottom"
+         />
+    <ImageButton
+        android:id="@+id/pez"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_user"
+
+
+        app:layout_constraintBottom_toBottomOf="@id/bottom"
+        app:layout_constraintEnd_toEndOf="@id/ajustes"
+        app:layout_constraintStart_toStartOf="@id/user"
+        app:layout_constraintTop_toTopOf="@id/bottom"
+        />
+    <ImageButton
+        android:id="@+id/ajustes"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_user"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom"
+        app:layout_constraintEnd_toEndOf="@id/main"
+        app:layout_constraintStart_toStartOf="@id/pez"
+        app:layout_constraintTop_toTopOf="@id/bottom"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

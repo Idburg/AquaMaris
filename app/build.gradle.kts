@@ -40,4 +40,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.google.android.gms:play-services-maps:17.0.1")  // Versión más reciente
+    implementation ("com.google.android.gms:play-services-location:17.0.0")
 }
