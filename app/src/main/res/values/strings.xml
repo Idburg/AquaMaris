@@ -3,4 +3,5 @@
     <string name="sign_in_text">"Sign in to your\nAccount"</string>
     <string name="subtext">Enter your email and password to login</string>
     <string name="google_txt">Continue with Google</string>
+    <string name="log_txt">Or login with</string>
 </resources>
