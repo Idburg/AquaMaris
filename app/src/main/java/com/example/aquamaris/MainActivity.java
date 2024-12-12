@@ -1,5 +1,6 @@
 package com.example.aquamaris;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import com.example.aquamaris.db.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button b;
+    private Button b, b2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         b = findViewById(R.id.button);
+        b2 = findViewById(R.id.button2);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast.makeText(MainActivity.this, "BASE DE DATOS CREADA", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
             }
         });
 
