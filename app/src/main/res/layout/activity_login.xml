@@ -103,6 +103,7 @@
             >
 
             <Button
+                android:id="@+id/google_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -110,13 +111,51 @@
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/pasty_white"
                 android:drawableLeft="@drawable/google_vector"
-                android:gravity="center"
-                android:text="Continúa con Google"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/google_txt"
                 android:textColor="@color/black"
                 app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/lineStart"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/pale_grey"
+                app:layout_constraintTop_toBottomOf="@id/google_login"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/login_inbetween_lines"
+                />
+
+            <View
+                android:id="@+id/lineEnd"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/pale_grey"
+                app:layout_constraintTop_toBottomOf="@id/google_login"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/login_inbetween_lines"
+                />
+
+            <TextView
+                android:id="@+id/login_inbetween_lines"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Or login with"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/google_login"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,4 +2,5 @@
     <string name="app_name">AquaMaris</string>
     <string name="sign_in_text">"Sign in to your\nAccount"</string>
     <string name="subtext">Enter your email and password to login</string>
+    <string name="google_txt">Continue with Google</string>
 </resources>
