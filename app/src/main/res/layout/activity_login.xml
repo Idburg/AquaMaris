@@ -109,7 +109,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/pasty_white"
+                android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/google_vector"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/google_txt"
@@ -117,7 +117,9 @@
                 app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/pasty_white"
+                app:strokeWidth="1dp" />
 
             <View
                 android:id="@+id/lineStart"
@@ -156,6 +158,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/google_login"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="ejemplo@gmail.com"
+                android:background="@drawable/edit_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login_inbetween_lines"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
