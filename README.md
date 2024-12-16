@@ -4,14 +4,9 @@
 ***AquaMaris*** ofrece información sobre la vida marítima en los alrededores del usuario. Con el fin de crear una aplicación simple y eficaz, AquaMaris contiene varias características:  
 - Una animación de inicio 
 - Una pantalla de registro 
-- Un mapa *interactivo* de su región o país que:
-  - Se puede precisar zona mediante una búsqueda o directamente pulsando en él
-  - Contiene una *barra inferior* que contiene los iconos de:
-    - Perfil del usuario
-    - Icono de pez, registro de todos los peces
-    - Ajustes 
-    - Reporte de fallos
-  - Contiene un *buscador* en la parte superior del mapa en donde se pueden introducir:
+- Una actividad principal que:
+  - Muestra las distintas comunidades de España mediante cards
+  - Contiene un *buscador* y un icono de ajustes en la parte superior del mapa en donde se pueden introducir:
     - El nombre de la especie que se busca
     - La zona de búsqueda
 
@@ -24,9 +19,9 @@ Pantalla que aparece al *inicializar la aplicación*
 
 ![image](https://github.com/user-attachments/assets/6275b02d-ca05-4138-8ab8-6e7e6da0cac5)
 
-Pantalla *principal*, contiene el mapa, el buscador y la barra inferior
+Pantalla *principal*
 
-![image](https://github.com/user-attachments/assets/e1cab6d3-1bb3-4627-abc5-7e48ab963acb)  
+![image](https://github.com/user-attachments/assets/3add7630-8f4d-4af0-a77f-6fc93af288af)
 
 Pantalla de *login*
 
