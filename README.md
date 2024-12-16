@@ -6,7 +6,7 @@
 - Una pantalla de registro 
 - Una actividad principal que:
   - Muestra las distintas comunidades de España mediante cards
-    - Al pulsar en una de ellas se cambia a una actividad que muestra una lista de la fauna de esa zona con imágenes y con su propia card
+    - Al pulsar en una de ellas se cambia a una actividad que muestra una lista de la fauna de esa zona con su propia card
   - Contiene un *buscador* y un icono de ajustes en la parte superior del mapa en donde se pueden introducir:
     - El nombre de la especie que se busca
     - La zona de búsqueda
