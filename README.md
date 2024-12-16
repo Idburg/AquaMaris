@@ -24,6 +24,10 @@ Pantalla *principal*
 
 ![image](https://github.com/user-attachments/assets/3add7630-8f4d-4af0-a77f-6fc93af288af)
 
+Pantalla *listado*
+
+![image](https://github.com/user-attachments/assets/c1321190-9bbb-460b-92bb-093d8ca7a980)
+
 Pantalla de *login*
 
 ![image](https://github.com/user-attachments/assets/70aa91f0-28f4-4421-af80-a42fa66f7645)
