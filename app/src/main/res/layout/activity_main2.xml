@@ -7,58 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity2">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/main"
-        app:layout_constraintEnd_toEndOf="@id/main"
-        app:layout_constraintStart_toStartOf="@id/main"/>
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="12"
+        android:layout_width="359dp"
+        android:layout_height="579dp"
+        android:ems="10"
         android:inputType="text"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="@id/top"
-        app:layout_constraintEnd_toEndOf="@id/top"
-        app:layout_constraintStart_toStartOf="@id/top"
-        app:layout_constraintTop_toTopOf="@id/top" />
-
-    <ImageButton
-        android:id="@+id/ajustes"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@id/top"
-        app:layout_constraintEnd_toEndOf="@id/main"
-        app:layout_constraintStart_toEndOf="@id/editTextText"
-        app:layout_constraintTop_toTopOf="@id/top"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="consulta"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/texto"
-        android:layout_width="413dp"
-        android:layout_height="180dp"
-        android:text="RESULTADOS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.272" />
-
+        app:layout_constraintVertical_bias="0.925" />
 </androidx.constraintlayout.widget.ConstraintLayout>
