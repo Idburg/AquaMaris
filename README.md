@@ -1,4 +1,7 @@
 # AquaMaris, ¡explora el mundo acuático!
+
+> *****Creadores:*** Mario Sánchez-Seco Díaz, Daniel Blanco Martín, José Luis Ruiz Barrios e Idlir Bregu**
+
 [ENLACE AL TRELLO](https://trello.com/b/dPoR8SSo/aqua-maris)
 
 ## Características
