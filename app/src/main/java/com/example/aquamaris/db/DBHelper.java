@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLA+"("+
                 "pais TEXT NOT NULL,"+
-                "nombre_científico TEXT NOT NULL,"+
+                "nombre_cientifico TEXT NOT NULL,"+
                 "familia TEXT NOT NULL,"+
                 "localizacion TEXT NOT NULL,"+
                 "provincias TEXT NOT NULL)");
@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Raja clavata','Rajidae','Islas Canarias','Fuerteventura')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Ruvettus pretiosus','Gempylidae','Islas Canarias','La Gomera')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pagellus centrodontus','Sparidae','Islas Canarias','El Hierro')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','(Sin Especie)','Carangidae','Islas Canarias','Tenerife')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Carangidae','Carangidae','Islas Canarias','Tenerife')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Scorpaena ustulata','Scorpaenidae','Islas Canarias','Lanzarote')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Sphyraena sphyraena','Sphyraenidae','Islas Canarias','Gran Canaria')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Trigla lineata','Triglidae','Islas Canarias','Fuerteventura')");
@@ -77,7 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lepidaplois scrofa','Labridae','Islas Canarias','Fuerteventura')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Conger conger','Congridae','Islas Canarias','La Palma')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Sparus pagrus','Sparidae','Islas Canarias','La Gomera')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','(Sin Especie)','Bramidae','Islas Canarias','El Hierro')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Bramidae','Bramidae','Islas Canarias','El Hierro')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Muraena','Muraenidae','Islas Canarias','Tenerife')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Caranx dentex','Carangidae','Islas Canarias','Lanzarote')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lycodontis unicolor','Muraenidae','Islas Canarias','Gran Canaria')");
@@ -91,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Mustelus mustelus','Triakidae','Islas Canarias','La Palma')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lycodontis vicinus','Muraenidae','Islas Canarias','La Gomera')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Scomber colias','Scombridae','Islas Canarias','El Hierro')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','(Sin Especie)','Priacanthidae','Islas Canarias','Tenerife')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pricanthidae','Priacanthidae','Islas Canarias','Tenerife')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Priacanthus fulgens','Priacanthidae','Islas Canarias','Gran Canaria')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Trachurus trachurus','Carangidae','Islas Canarias','Lanzarote')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Dentex macrophthalmus','Sparidae','Islas Canarias','Fuerteventura')");
@@ -103,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Fundulus heteroclitus','Fundulidae','Islas Canarias','Lanzarote')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gymnothorax bacalladoi','Muraenidae','Islas Canarias','Fuerteventura')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Argentina sphyraena','Argentinidae','Peninsula','Madrid, Valencia, Cádiz')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','(Sin Especie)','Gobiidae','Peninsula','Barcelona, Alicante, Castellón')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gobiidae','Gobiidae','Peninsula','Barcelona, Alicante, Castellón')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Thalassoma','Labridae','Peninsula','Valencia, Málaga, Alicante')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Apogon imberbis','Apogonidae','Peninsula','Sevilla, Huelva, Cádiz')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Scorpaena maderensis','Scorpaenidae','Peninsula','Málaga, Cádiz, Alicante')");
@@ -116,7 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Parablennius parvicornis','Blenniidae','Peninsula','Murcia, Alicante, Castellón')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Labrisomus cricota','Labrisomidae','Peninsula','Cádiz, Málaga, Baleares')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Canthigaster','Tetraodontidae','Peninsula','Barcelona, Valencia, Baleares')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','(Sin Especie)','Lutjanidae','Peninsula','Valencia, Málaga, Baleares')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lutjanidae','Lutjanidae','Peninsula','Valencia, Málaga, Baleares')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Aphanius iberus','Cyprinodontidae','Peninsula','Madrid, Valencia, Castellón')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Valencia hispanica','Cyprinodontidae','Peninsula','Valencia, Alicante, Tarragona')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Salaria fluviatilis','Blenniidae','Peninsula','Castellón, Tarragona, Valencia')");

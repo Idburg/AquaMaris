@@ -1,5 +1,6 @@
 package com.example.aquamaris;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class Consulta extends AppCompatActivity {
     TextView resultado;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) throws IllegalStateException{
         super.onCreate(savedInstanceState);
@@ -36,21 +38,22 @@ public class Consulta extends AppCompatActivity {
                 c.moveToFirst();
                 do{
                     //int indiceP = c.getColumnIndex("pais");
-                    int indiceN = c.getColumnIndex("nombre_cientifico");
+                    int indiceN = c.getColumnIndex("nombre_científico");
                     //int indiceF = c.getColumnIndex("familia");
                     //int indiceL = c.getColumnIndex("localizacion");
                     //int indicePV = c.getColumnIndex("provincias");
 
                     //String pais = c.getString(indiceP);
-                    String nombre_cientifico = c.getString(indiceN);
+                    String nombrecientifico = c.getString(indiceN);
                     //String familia = c.getString(indiceF);
                     //String localizacion = c.getString(indiceL);
                     //String provincias = c.getString(indicePV);
 
-                    resultado.setText(resultado.getText()+" "+nombre_cientifico+"\n");
-                    //" "+nombre_cientifico+
-                    //" "+provincias+
-                    //" "+familia+" "+localizacion+
+
+                    resultado.setText(resultado.getText()+" "+nombrecientifico+"\n");
+                    //" "+pais+
+                    //" "+provincias+" "+familia+" "+localizacion+
+                    //
                 }while(c.moveToNext());
             }
 
