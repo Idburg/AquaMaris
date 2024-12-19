@@ -16,10 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aquamaris.db.DBHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Consulta extends AppCompatActivity {
 
     TextView resultado;
-
+    List<ListarElementos> elements;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -65,10 +68,21 @@ public class Consulta extends AppCompatActivity {
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
 
+
+        init();
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void init()
+    {
+        elements = new ArrayList<>{};
+        elements.add(new ListarElementos("#775447","Pedro","Mexico","Activo"));
     }
 }
