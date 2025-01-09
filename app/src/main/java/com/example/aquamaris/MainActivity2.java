@@ -1,6 +1,7 @@
 package com.example.aquamaris;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     EditText et;
     Button b3;
+    String provincia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +28,15 @@ public class MainActivity2 extends AppCompatActivity {
         b3 = findViewById(R.id.button3);
         et = findViewById(R.id.editTextText);
 
-        String provincia = et.getText().toString();
-
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                provincia = et.getText().toString();
                 Intent intent = new Intent(MainActivity2.this, Consulta.class);
 
                 intent.putExtra("PROVINCIA",provincia);
 
                 startActivity(intent);
-
-
             }
         });
 
