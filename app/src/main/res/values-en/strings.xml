@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AquaMaris</string>
+    <string name="Noticias">News</string>
+    <string name="Provincias">Provinces</string>
+    <string name="Top_noticias">Top News</string>
+    <string name="Ajustes">Settings</string>
+</resources>
