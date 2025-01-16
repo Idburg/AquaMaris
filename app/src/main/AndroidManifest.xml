@@ -13,7 +13,6 @@
         android:theme="@style/Theme.AquaMaris"
         tools:targetApi="31">
         <activity
-
             android:name=".Comunidades"
             android:exported="false" />
         <activity
@@ -34,10 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
         </activity>
 
         <meta-data
