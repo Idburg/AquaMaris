@@ -11,4 +11,11 @@
     <string name="log_in_txt">Log in</string>
     <string name="account_question">Don\'t have an account?</string>
     <string name="sign_up_link_txt">Sign up</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in"><a href="#">Log in</a></string>
+    <string name="or_text">Or</string>
+    <string name="sign_up_with_google">Sign Up with Google</string>
+    <string name="phone_number">+34 999 99 99 99</string>
+    <string name="date_hint">03/06/1988</string>
 </resources>
