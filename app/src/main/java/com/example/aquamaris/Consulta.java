@@ -27,7 +27,7 @@ public class Consulta extends AppCompatActivity {
     TextView resultado;
     List<ListarElementos> elements;
     int contador = 0;
-    String provincia;
+    String provincia, prov;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,14 +43,7 @@ public class Consulta extends AppCompatActivity {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
             provincia = getIntent().getExtras().getString("PROVINCIA");
-            provincia.replaceAll(",","");
-            provincia.replaceAll("á","a");
-            provincia.replaceAll("é","e");
-            provincia.replaceAll("í","i");
-            provincia.replaceAll("ó","o");
-            provincia.replaceAll("ú","u");
-            provincia.replaceAll(",","");
-            provincia.replaceAll(" ","");
+
             Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+provincia+"%'", null);
             Log.d("ValorProvincia", "Provincia: " + provincia);
             //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
@@ -58,33 +51,6 @@ public class Consulta extends AppCompatActivity {
             {
                 elements = new ArrayList<>();
                 do{
-                    /*
-                    //int indiceP = c.getColumnIndex("pais");
-                    int indiceN = c.getColumnIndex("nombre_científico");
-                    //int indiceF = c.getColumnIndex("familia");
-                    //int indiceL = c.getColumnIndex("localizacion");
-                    int indicePV = c.getColumnIndex("provincias");
-
-                    //String pais = c.getString(indiceP);
-                    String nombrecientifico = c.getString(indiceN);
-                    //String familia = c.getString(indiceF);
-                    //String localizacion = c.getString(indiceL);
-                    String provinciass = c.getString(indicePV);
-
-                    contador++;
-
-
-                    for(int i = 0; i < contador; i++)
-                    {
-                        elements.add(new ListarElementos("#775447",nombrecientifico,provinciass,"Ver"));
-                    }
-
-                    //resultado.setText(resultado.getText()+" "+nombrecientifico+" "+provinciass+"\n");
-
-                    //" "+pais+
-                    //" "+familia+" "+localizacion+
-                    //
-                    */
 
                     int indiceN = c.getColumnIndex("nombre_científico");
                     int indicePV = c.getColumnIndex("provincias");
@@ -102,17 +68,96 @@ public class Consulta extends AppCompatActivity {
             {
                 Toast.makeText(this, "No se encontraron resultados para esta provincia.", Toast.LENGTH_SHORT).show();
                 Log.d("Consulta", "No se encontraron resultados.");
+                try{
+
+                    DBHelper db2 = new DBHelper(this);
+                    SQLiteDatabase obj2 = db2.getReadableDatabase();
+                    prov = getIntent().getStringExtra("PROV");
+                    Cursor c2 = obj2.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+prov+"%'", null);
+                    if(c2 != null && c2.moveToFirst())
+                    {
+                        elements = new ArrayList<>();
+                        do{
+
+                            int indiceN2 = c2.getColumnIndex("nombre_científico");
+                            int indicePV2 = c2.getColumnIndex("provincias");
+
+                            String nombrecientifico2 = c2.getString(indiceN2);
+                            String provinciass2 = c2.getString(indicePV2);
+
+                            contador++;
+
+                            Log.d("Consulta", "Provincia encontrada: " + provinciass2);
+                            elements.add(new ListarElementos("#775447", nombrecientifico2, provinciass2, "Ver"));
+                        }while(c2.moveToNext());
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "No se encontraron resultados para esta provincia. Mediante los botones", Toast.LENGTH_SHORT).show();
+                        //Log.d("Consulta", "No se encontraron resultados. Mediante los botones");
+                    }
+                    c2.close();
+                    db2.close();
+
+                }catch(Exception e)
+                {
+                    Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+                }
+
+                init2();
+
+                ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+                    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                    return insets;
+                });
             }
-            c.close();
-            db.close();
+                c.close();
+                db.close();
 
-        }catch(Exception e)
-        {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
-        }
+            init();
+            }catch(Exception e)
+            {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            }
 
+        try{
 
-        init();
+            DBHelper db2 = new DBHelper(this);
+            SQLiteDatabase obj2 = db2.getReadableDatabase();
+            prov = getIntent().getStringExtra("PROV");
+            Cursor c2 = obj2.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+prov+"%'", null);
+            if(c2 != null && c2.moveToFirst())
+            {
+                elements = new ArrayList<>();
+                do{
+
+                    int indiceN2 = c2.getColumnIndex("nombre_científico");
+                    int indicePV2 = c2.getColumnIndex("provincias");
+
+                    String nombrecientifico2 = c2.getString(indiceN2);
+                    String provinciass2 = c2.getString(indicePV2);
+
+                    contador++;
+
+                    Log.d("Consulta", "Provincia encontrada: " + provinciass2);
+                    elements.add(new ListarElementos("#775447", nombrecientifico2, provinciass2, "Ver"));
+                }while(c2.moveToNext());
+            }
+            else
+            {
+                Toast.makeText(this, "No se encontraron resultados para esta provincia. Mediante los botones", Toast.LENGTH_SHORT).show();
+                //Log.d("Consulta", "No se encontraron resultados. Mediante los botones");
+            }
+            c2.close();
+            db2.close();
+
+            }catch(Exception e)
+            {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            init2();
 
 
 
@@ -126,6 +171,15 @@ public class Consulta extends AppCompatActivity {
     public void init()
     {
 
+        ListAdapter listAdapter = new ListAdapter(elements, this);
+        RecyclerView recyclerView = findViewById(R.id.listRecycleView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(listAdapter);
+    }
+
+    public void init2()
+    {
         ListAdapter listAdapter = new ListAdapter(elements, this);
         RecyclerView recyclerView = findViewById(R.id.listRecycleView);
         recyclerView.setHasFixedSize(true);

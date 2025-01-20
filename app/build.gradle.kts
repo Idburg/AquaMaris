@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -42,4 +43,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.cardview)
     implementation(libs.recyclerview.selection)
+    implementation(libs.firebase.bom)
 }

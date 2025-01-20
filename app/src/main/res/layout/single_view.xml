@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
 
         <ImageView
             android:layout_width="160dp"
@@ -14,16 +14,18 @@
             android:id="@+id/imagen" />
 
 
-        <TextView
+        <Button
+            android:id="@+id/texto"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:text="Provincia"
             android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/white"
             android:gravity="center"
+            android:text="Provincia"
             android:textAlignment="center"
-            android:id="@+id/texto"
+            android:textColor="@color/black"
             android:textSize="25dp"
-            android:textStyle="bold"/>
-
+            android:textStyle="bold"
+            app:cornerRadius="0sp" />
 
 </LinearLayout>

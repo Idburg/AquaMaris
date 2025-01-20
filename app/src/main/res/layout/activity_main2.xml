@@ -8,12 +8,10 @@
     tools:context=".MainActivity2">
 
 
-
-
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="359dp"
-        android:layout_height="wrap_content"
+        android:layout_width="257dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:inputType="text"
         android:text=""
@@ -30,20 +28,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:scrollbars="vertical">
+        android:layout_marginBottom="100dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/coordinator">
 
     </androidx.recyclerview.widget.RecyclerView>
+    <!--
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="consulta"
-        android:text="Button"
+        android:src="@drawable/lupa_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925" />-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabAlignmentMode="center"
+            app:menu="@menu/bottom_app_bar"
+            app:navigationIcon="@drawable/lupa_foreground"
+            app:fabAnchorMode="cradle"
+            app:fabCradleRoundedCornerRadius="30dp"
+            app:fabCradleMargin="20dp"
+            />
+
+    <!--         style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lupa_foreground"
+            app:fabSize="normal"
+            app:layout_anchor="@+id/bottom_app_bar"
+            app:tint="@android:color/white"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
@@ -71,4 +107,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.90" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
