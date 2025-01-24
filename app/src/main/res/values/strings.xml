@@ -16,6 +16,6 @@
     <string name="log_in"><a href="#">Log in</a></string>
     <string name="or_text">Or</string>
     <string name="sign_up_with_google">Sign Up with Google</string>
-    <string name="phone_number">+34 999 99 99 99</string>
+    <string name="phone_number">999 99 99 99</string>
     <string name="date_hint">03/06/1988</string>
 </resources>
