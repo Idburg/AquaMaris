@@ -1,6 +1,5 @@
 [versions]
 agp = "8.6.0"
-flagkitAndroid = "1.0.5"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -10,7 +9,6 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 
 [libraries]
-flagkit-android = { module = "com.github.murgupluoglu:flagkit-android", version.ref = "flagkitAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

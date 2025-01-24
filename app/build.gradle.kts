@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.flagkit.android)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
