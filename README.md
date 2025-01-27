@@ -24,13 +24,19 @@ Pantalla que aparece al *inicializar la aplicación*
 
 ![image](https://github.com/user-attachments/assets/6275b02d-ca05-4138-8ab8-6e7e6da0cac5)
 
+Al iniciarse la aplicación, se observará un pez moviéndose por la pantalla hasta situarse encima de la "m" del logo de la aplicación. 
+
 Pantalla *principal*
 
 ![image](https://github.com/user-attachments/assets/3add7630-8f4d-4af0-a77f-6fc93af288af)
 
+Aquí se pueden navegar las distintas comunidades autónomas, pulsando en la que interesa
+
 Pantalla *listado*
 
 ![image](https://github.com/user-attachments/assets/c1321190-9bbb-460b-92bb-093d8ca7a980)
+
+Aquí aparece una lista de los peces de la región seleccionada. Se ha utilizado una API de Wikipedia para obtener las imágenes y el texto
 
 Pantalla de *login*
 
