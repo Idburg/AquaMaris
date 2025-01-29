@@ -44,9 +44,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 provincias = ((Button)view).getText().toString();
-                Intent intent = new Intent(view.getContext(), Consulta.class);
-                intent.putExtra("PROV",provincias);
-                view.getContext().startActivity(intent);
+                Intent intent2 = new Intent(view.getContext(), Consulta2.class);
+                intent2.putExtra("PROV",provincias);
+                view.getContext().startActivity(intent2);
                 }
             });
     }

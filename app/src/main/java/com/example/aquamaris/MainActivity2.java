@@ -40,6 +40,7 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         et = findViewById(R.id.editTextText);
+        b3 = findViewById(R.id.button3);
 
         // Crear una lista de provincias
         List<Province> provinciaList = new ArrayList<>();
@@ -113,6 +114,7 @@ public class MainActivity2 extends AppCompatActivity {
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setHasFixedSize(true);
 
+        /*
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
         FloatingActionButton myfab = findViewById(R.id.fab);
 
@@ -150,8 +152,8 @@ public class MainActivity2 extends AppCompatActivity {
                 return false;
             }
         });
-
-        myfab.setOnClickListener(new View.OnClickListener() {
+    */
+        b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 provincia = et.getText().toString();

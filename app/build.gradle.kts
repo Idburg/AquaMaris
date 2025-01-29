@@ -39,10 +39,16 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.glide)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.cardview)
     implementation(libs.recyclerview.selection)
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database.v2000)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.core)
+
 }
