@@ -21,8 +21,9 @@ public class Register extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
 
-        EditText datePopUp = findViewById(R.id.popup_birthday);
 
+
+        EditText datePopUp = findViewById(R.id.popup_birthday);
         datePopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
