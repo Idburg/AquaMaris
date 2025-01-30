@@ -2,6 +2,11 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
 
+        <item>@font/playfair_display_bold</item>
+        <item>@font/playfair_display_extrabold</item>
+        <item>@font/playfair_display_semibold</item>
+        <item>@font/playfair_display_semibold_italic</item>
+        <item>@font/roboto_bold</item>
         <item>@font/roboto_flex</item>
 
         <item>@font/inter</item>
