@@ -7,60 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".Noticias">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="24dp"
-        android:fontFamily="@font/roboto_flex"
-        android:text="@string/Top_noticias"
-        android:textColor="@color/azul"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2" />
+        android:theme="@style/Theme.First.AppBarOverlay"
+        android:gravity="bottom"
+        android:backgroundTint="@color/marine_blue"
+        app:layout_constraintBottom_toBottomOf="@id/view_pager"
+        tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></androidx.viewpager.widget.ViewPager>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/azul"
-        android:fontFamily="@font/roboto_flex"
-        android:text="@string/Noticias"
-        app:cornerRadius="1dp"
-        app:layout_constraintEnd_toStartOf="@id/button2"
-        app:layout_constraintStart_toStartOf="@id/main"
-
-        app:layout_constraintTop_toTopOf="@id/main" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/azul"
-        android:fontFamily="@font/roboto_flex"
-        android:text="@string/Provincias"
-        app:cornerRadius="1dp"
-        app:layout_constraintEnd_toStartOf="@id/button3"
-        app:layout_constraintStart_toEndOf="@id/button1"
-
-
-        app:layout_constraintTop_toTopOf="@id/main" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/azul"
-        android:fontFamily="@font/roboto_flex"
-        android:text="@string/Ajustes"
-        app:cornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="@id/main"
-        app:layout_constraintStart_toEndOf="@id/button2"
-        app:layout_constraintTop_toTopOf="@id/main" />
+        android:layout_gravity="bottom"
+        android:background="@color/marine_blue"
+        app:menu="@menu/bottom_navigation_menu"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="@id/view_pager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

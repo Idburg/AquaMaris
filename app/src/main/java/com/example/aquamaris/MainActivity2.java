@@ -28,7 +28,7 @@ import java.util.List;
 public class MainActivity2 extends AppCompatActivity {
 
     EditText et;
-    Button b3, prov;
+    Button b3;
     String provincia;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -40,7 +40,7 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         et = findViewById(R.id.editTextText);
-        b3 = findViewById(R.id.button3);
+        //b3 = findViewById(R.id.button3);
 
         // Crear una lista de provincias
         List<Province> provinciaList = new ArrayList<>();
@@ -102,42 +102,45 @@ public class MainActivity2 extends AppCompatActivity {
         provinciaList.add(new Province(R.drawable.vizcaya, "Vizcaya"));
         provinciaList.add(new Province(R.drawable.zamora, "Zamora"));
         provinciaList.add(new Province(R.drawable.zaragoza, "Zaragoza"));
-        // Agrega las demás provincias de forma similar
 
-        // Configurar el RecyclerView
+
+
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Configurar el adaptador con la lista de provincias
+
         recyclerViewAdapter = new RecyclerViewAdapter(provinciaList);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setHasFixedSize(true);
 
-        /*
+
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
         FloatingActionButton myfab = findViewById(R.id.fab);
 
-        //click event en el  FAB
+
         myfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity2.this, "FAB Clicked", Toast.LENGTH_SHORT).show();
+                provincia = et.getText().toString();
+                Intent intent = new Intent(MainActivity2.this, Consulta.class);
+                intent.putExtra("PROVINCIA", provincia);
+                startActivity(intent);
             }
         });
 
-        //click event en el Hamburguer menu
+
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity2.this, "Menu clicked", Toast.LENGTH_SHORT).show();
-//                sheetBehavior = BottomSheetBehavior.from(sheet);
+
             }
 
 
         });
 
-        //click event en el Bottom bar menu item
+
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -148,11 +151,16 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     Toast.makeText(MainActivity2.this, "Added to favourites", Toast.LENGTH_SHORT).show();
                 }
-
+                if(id == R.id.search)
+                {
+                    Toast.makeText(MainActivity2.this, "Beginning search", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
-    */
+
+
+        /*
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,7 +170,7 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+    */
 
     }
 

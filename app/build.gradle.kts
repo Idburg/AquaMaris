@@ -50,5 +50,6 @@ dependencies {
     implementation(libs.firebase.database.v2000)
     implementation(libs.play.services.auth)
     implementation(libs.firebase.core)
+    implementation(libs.material.v150)
 
 }

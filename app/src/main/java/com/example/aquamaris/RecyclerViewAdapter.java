@@ -39,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // Asignar la imagen y el nombre de la provincia al view holder
         holder.imageView.setImageResource(provincia.getImagen());
         holder.textView.setText(provincia.getNombre());
+        holder.btnProv.setText(provincia.getNombre());
         //holder.textView.setOnClickListener(v -> {Intent intent = new Intent (v.getContext(), Consulta.class);
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 view.getContext().startActivity(intent2);
                 }
             });
+        holder.btnProv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                provincias = ((Button)view).getText().toString();
+                Intent intent3 = new Intent(view.getContext(), Consulta2.class);
+                intent3.putExtra("PROV",provincias);
+                view.getContext().startActivity(intent3);
+            }
+        });
     }
 
     @Override
@@ -58,13 +68,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        Button textView;
+        Button textView, btnProv;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imagen);  // Asegúrate de que el ID esté correcto
+            imageView = itemView.findViewById(R.id.imagen);
             textView = itemView.findViewById(R.id.texto);
-            // Asegúrate de que el ID esté correcto
+            btnProv = itemView.findViewById(R.id.botonProvincias);
+
         }
     }
 

@@ -7,4 +7,11 @@
         android:icon="@drawable/lupa_foreground"
         app:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/search"
+        android:title="Language"
+        android:icon="@drawable/lupa_foreground"
+        app:showAsAction="ifRoom"
+        />
 </menu>

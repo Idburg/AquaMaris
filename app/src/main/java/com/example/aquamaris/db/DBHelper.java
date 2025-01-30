@@ -192,7 +192,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Hippocampus hippocampus','Syngnathidae','Peninsula','Cádiz, Valencia, Málaga')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pomatoschistus microps','Gobiidae','Peninsula','Valencia, Tarragona, Alicante')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('Francia o España','Hippocampus','Syngnathidae','Peninsula','Girona, Valencia')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Fundulidae','Fundulidae','Peninsula','Huelva, Cádiz')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Fundulidae','Fundulidae','Peninsula','Huelva, Cádiz, Granada')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Antennarius nummifer','Antennariidae','Islas Canarias','La Gomera, El Hierro')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Neoraja iberica','Rajidae','Península','Valencia, Tarragona, Alicante')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Triglidae','Triglidae','Península','Barcelona, Tarragona, Cádiz')");
