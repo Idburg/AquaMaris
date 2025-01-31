@@ -210,6 +210,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
             app:endIconMode="password_toggle"
+            app:endIconDrawable="@drawable/pass_toggler"
             app:layout_constraintTop_toBottomOf="@id/mail">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -224,7 +225,6 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"/>
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <CheckBox
             android:id="@+id/remember"

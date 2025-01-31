@@ -235,27 +235,29 @@
             app:layout_constraintStart_toStartOf="@id/phone"
             app:layout_constraintTop_toBottomOf="@id/popup_birthday"/>
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
-            android:autofillHints="password"
-            android:inputType="textPassword"
-            android:paddingStart="14dp"
-            android:paddingEnd="2dp"
-            android:hint="@string/hidden_pass"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:fontFamily="@font/inter"
-            android:background="@drawable/edit_text"
-            android:drawableEnd="@drawable/pass_hidden_foreground"
-            app:layout_constraintTop_toBottomOf="@id/phone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:endIconMode="password_toggle"
+            app:endIconDrawable="@drawable/pass_toggler"
+            app:layout_constraintTop_toBottomOf="@id/phone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pass2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signup_button"
@@ -273,7 +275,7 @@
             app:cornerRadius="9dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password" />
+            app:layout_constraintTop_toBottomOf="@id/passwordLayout" />
 
         <View
             android:id="@+id/lineStart"
