@@ -20,7 +20,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/marine_blue"
+        android:background="@drawable/dots_background"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -100,6 +100,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="42dp"
         android:layout_marginStart="3dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_form"
@@ -114,14 +116,16 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="8dp"
             android:paddingStart="14dp"
             android:paddingEnd="2dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/inter"
             android:textSize="12sp"
             android:textColor="@color/black"
-            android:hint="Name"
+            android:autofillHints="name"
+            android:hint="@string/name"
+            android:inputType="text"
             app:layout_constraintEnd_toStartOf="@id/new_surname"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -130,16 +134,18 @@
             android:id="@+id/new_surname"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
+            android:autofillHints="name"
             android:paddingStart="14dp"
             android:paddingEnd="2dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/inter"
             android:textSize="12sp"
             android:textColor="@color/black"
-            android:hint="Surname"
+            android:hint="@string/surname"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/new_name"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -151,6 +157,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
+            android:autofillHints="emailAddress"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/inter"
             android:textSize="12sp"
@@ -172,6 +179,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/inter"
+            android:importantForAutofill="no"
             android:textSize="12sp"
             android:textColor="@color/black"
             android:hint="@string/date_hint"
@@ -184,7 +192,8 @@
             android:drawableEnd="@drawable/calendar_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mail"/>
+            app:layout_constraintTop_toBottomOf="@id/mail"
+            tools:ignore="TextFields" />
 
         <EditText
             android:id="@+id/phone"
@@ -193,6 +202,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
+            android:autofillHints="phone"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/inter"
             android:textSize="12sp"
@@ -210,6 +220,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:contentDescription="@string/spain"
             android:src="@mipmap/spain_round"
             app:layout_constraintStart_toStartOf="@id/phone"
             app:layout_constraintTop_toBottomOf="@id/popup_birthday" />
@@ -231,6 +242,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
+            android:autofillHints="password"
             android:inputType="textPassword"
             android:paddingStart="14dp"
             android:paddingEnd="2dp"
@@ -245,16 +257,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signup_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:backgroundTint="@color/marine_blue"
+            android:background="@drawable/button_background"
             android:fontFamily="@font/inter_medium"
             android:text="@string/sign_up"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
             app:cornerRadius="9dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

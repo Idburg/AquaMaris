@@ -18,4 +18,8 @@
     <string name="sign_up_with_google">Sign Up with Google</string>
     <string name="phone_number">999 99 99 99</string>
     <string name="date_hint">03/06/1988</string>
+    <string name="spain">spain</string>
+    <string name="surname">Surname</string>
+    <string name="name">Name</string>
+    <string name="logo">logo</string>
 </resources>
