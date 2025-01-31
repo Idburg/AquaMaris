@@ -21,7 +21,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/marine_blue"
+        android:background="@drawable/dots_background"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -56,7 +56,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/aqua_maris_logo"
+        android:src="@mipmap/aqua_maris_logo_foreground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,6 +179,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_inbetween_lines" />
 
+        <!--
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
             android:layout_width="match_parent"
@@ -196,7 +197,7 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
@@ -262,7 +263,7 @@
             android:background="@drawable/button_background"
             android:fontFamily="@font/inter_medium"
             android:text="@string/log_in_txt"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="@color/white"
             android:textAllCaps="false"
             app:cornerRadius="9dp"
