@@ -1,15 +1,23 @@
 package com.example.aquamaris;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,6 +52,56 @@ public class Noticias extends AppCompatActivity {
 
         // Cargar noticias mediante scraping
         loadNewsFromScraping();
+
+        BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
+/*
+        // crear badges
+        BottomNavigationMenuView bottomNavigationMenuView =
+                (BottomNavigationMenuView) mybottomNavView.getChildAt(0);
+        View v = bottomNavigationMenuView.getChildAt(2);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+
+        LayoutInflater.from(this)
+                .inflate(R.layout.layout_badge, itemView, true);
+
+        */
+        mybottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int id = item.getItemId();
+                if (id == R.id.likes) {
+
+                    item.setChecked(true);
+                    Toast.makeText(Noticias.this, "Noticias", Toast.LENGTH_SHORT).show();
+                    //removeBadge(mybottomNavView,item.getItemId());
+
+                }
+                if (id == R.id.add) {
+                    item.setChecked(true);
+                    Intent intent = new Intent(Noticias.this, MainActivity2.class);
+                    startActivity(intent);
+                    //Toast.makeText(Noticias.this, "Add clicked.", Toast.LENGTH_SHORT).show();
+                    //removeBadge(mybottomNavView,item.getItemId());
+
+                }
+                if(id == R.id.browse) {
+                    item.setChecked(true);
+                    Toast.makeText(Noticias.this, "Browse clicked.", Toast.LENGTH_SHORT).show();
+                    //removeBadge(mybottomNavView,item.getItemId());
+
+                }
+
+                return false;
+            }
+        });
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.news), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 
     private void loadNewsFromScraping() {
@@ -52,7 +110,7 @@ public class Noticias extends AppCompatActivity {
                 int i = 0;
                 Document doc = Jsoup.connect("https://www.farodevigo.es/mar/").get();
                 List<Element> articleElements = doc.select("article");
-                Elements articleElements1 = doc.getElementsByClass("new over premium");
+                Elements articleElements1 = doc.getElementsByClass("new over");
                 Element firstArticle = articleElements1.first();
                 if (firstArticle != null) {
                     Elements ima = firstArticle.getElementsByTag("img");

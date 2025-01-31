@@ -9,6 +9,7 @@ firebaseDatabaseVersion = "20.0.0"
 firebaseFirestore = "25.1.1"
 glide = "4.16.0"
 glideVersion = "4.15.1"
+jsoup = "1.16.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -31,6 +32,7 @@ firebase-database-v2000 = { module = "com.google.firebase:firebase-database", ve
 firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-v4151 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

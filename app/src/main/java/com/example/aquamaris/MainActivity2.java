@@ -140,7 +140,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         });
 
-
+        /*
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -158,7 +158,7 @@ public class MainActivity2 extends AppCompatActivity {
                 return false;
             }
         });
-
+        */
 
         /*
         b3.setOnClickListener(new View.OnClickListener() {

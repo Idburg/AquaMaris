@@ -45,7 +45,10 @@
             android:layout_gravity="bottom"
             app:fabAlignmentMode="center"
             app:menu="@menu/bottom_app_bar_menu"
-            app:navigationIcon="@drawable/lupa_foreground" />
+            app:fabAnchorMode="cradle"
+            app:fabCradleRoundedCornerRadius="20dp"
+            app:fabCradleMargin="10dp"
+            android:backgroundTint="@color/marine_blue"/>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -54,7 +57,9 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/lupa_foreground"
                 app:fabSize="normal"
-                app:layout_anchor="@+id/bottom_app_bar" />
+                app:layout_anchor="@+id/bottom_app_bar"
+                android:backgroundTint="@color/black"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/likes"
-        android:title="Likes"
-        android:icon="@drawable/lupa_foreground"
+        android:title="@string/Noticias"
+        android:icon="@drawable/newsppr"
         android:contentDescription="none"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/add"
-        android:title="Add"
-        android:icon="@drawable/lupa_foreground"
+        android:title="@string/Provincias"
+        android:icon="@drawable/city"
         android:contentDescription="none"
         app:showAsAction="always"
         >
@@ -20,8 +20,8 @@
 
     <item
         android:id="@+id/browse"
-        android:title="Browse"
-        android:icon="@drawable/lupa_foreground"
+        android:title="@string/Ajustes"
+        android:icon="@drawable/ajuste"
         android:contentDescription="none"
         app:showAsAction="always"
         />

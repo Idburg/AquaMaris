@@ -17,4 +17,6 @@
     <color name="pale_grey">#EDF1F3</color>
     <color name="grey">#6C7278</color>
 
+    <color name="transparente">#00000000</color>
+
 </resources>
