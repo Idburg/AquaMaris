@@ -113,7 +113,7 @@
         <EditText
             android:id="@+id/new_name"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -133,7 +133,7 @@
         <EditText
             android:id="@+id/new_surname"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
@@ -153,7 +153,7 @@
         <EditText
             android:id="@+id/mail"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
@@ -173,7 +173,7 @@
         <EditText
             android:id="@+id/popup_birthday"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
@@ -198,7 +198,7 @@
         <EditText
             android:id="@+id/phone"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
@@ -229,7 +229,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="46dp"
             android:layout_width="1dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:orientation="vertical"
             android:background="@color/pale_grey"
             app:layout_constraintStart_toStartOf="@id/phone"
@@ -238,10 +238,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
+            android:hint="@string/hidden_pass"
             app:endIconMode="password_toggle"
             app:endIconDrawable="@drawable/pass_toggler"
             app:layout_constraintTop_toBottomOf="@id/phone">
