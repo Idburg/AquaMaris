@@ -3,6 +3,17 @@
     <string name="app_name">AquaMaris</string>
     <string name="Noticias">Noticias</string>
     <string name="Provincias">Provincias</string>
-    <string name="Top_noticias">Top Noticias</string>
+    <string name="Top_noticias">Mejores Noticias</string>
     <string name="Ajustes">Ajustes</string>
+    <string name="sign_in_text">Inicia sesión en tu cuenta</string>
+    <string name="subtext">Escribe tu correo y contraseña</string>
+    <string name="google_txt">Continua con Google</string>
+    <string name="log_txt">o registrate con</string>
+    <string name="email_hint">ejemplo@gmail.com</string>
+    <string name="hidden_pass">*********</string>
+    <string name="remember_me">Recuerdame</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="log_in_txt">Iniciar sesion</string>
+    <string name="account_question">¿No tienes una cuenta?</string>
+    <string name="sign_up_link_txt">Crear una</string>
 </resources>
