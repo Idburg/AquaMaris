@@ -4,6 +4,7 @@
     <string name="Noticias">News</string>
     <string name="Provincias">Provinces</string>
     <string name="Top_noticias">Top News</string>
+    <string name="Ultimas_Noticias">Recent News</string>
     <string name="Ajustes">Settings</string>
     <string name="sign_in_text">Sign in to your Account</string>
     <string name="subtext">Enter your email and password to login</string>
