@@ -267,7 +267,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/button_background"
             android:fontFamily="@font/inter_medium"
-            android:text="@string/log_in_txt"
+            android:text="@string/log_in_button"
             android:textSize="16sp"
             android:textColor="@color/white"
             android:textAllCaps="false"
