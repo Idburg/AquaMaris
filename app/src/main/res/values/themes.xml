@@ -6,4 +6,6 @@
     </style>
 
     <style name="Theme.AquaMaris" parent="Base.Theme.AquaMaris" />
+
+    <style name="Theme.First.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

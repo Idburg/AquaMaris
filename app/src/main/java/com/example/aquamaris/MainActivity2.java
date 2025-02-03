@@ -3,12 +3,15 @@ package com.example.aquamaris;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -16,67 +19,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
-/*
-    EditText et;
-    Button b3;
-    String provinciaa;
-    private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerViewAdapter recyclerViewAdapter;
-
-    int []arr={R.drawable.alava,R.drawable.albacete,R.drawable.alicante,R.drawable.almeria,R.drawable.asturias,R.drawable.avila,
-            R.drawable.badajoz,R.drawable.barcelona,R.drawable.burgos,R.drawable.cabrera,R.drawable.caceres,R.drawable.cadiz,R.drawable.cantabria,
-            R.drawable.castellon,R.drawable.ciudadreal,R.drawable.cordoba,R.drawable.cuenca,R.drawable.elhierro,R.drawable.formentera,
-            R.drawable.fuerteventura,R.drawable.gerona,R.drawable.gipuzkoa,R.drawable.granada,R.drawable.grancanaria,R.drawable.guadalajara,
-            R.drawable.huelva,R.drawable.huesca,R.drawable.ibiza,R.drawable.jaen,R.drawable.lacorunha,R.drawable.lagomera,R.drawable.lanzarote,
-            R.drawable.lapalma,R.drawable.larioja,R.drawable.leon,R.drawable.lerida,R.drawable.lugo,R.drawable.madrid,R.drawable.malaga,R.drawable.mallorca,
-            R.drawable.menorca,R.drawable.murcia,R.drawable.navarra,R.drawable.ourense,R.drawable.palencia,R.drawable.pontevedra,R.drawable.salamanca,
-            R.drawable.sevilla,R.drawable.soria,R.drawable.tarragona,R.drawable.tenerife,R.drawable.teruel,R.drawable.toledo,
-            R.drawable.valencia,R.drawable.valladolid,R.drawable.vizcaya,R.drawable.zamora,R.drawable.zaragoza};
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main2);
-
-        b3 = findViewById(R.id.button3);
-        et = findViewById(R.id.editTextText);
-
-
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(this,2);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapter = new RecyclerViewAdapter(arr);
-
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-        recyclerView.setHasFixedSize(true);
-
-
-
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                provinciaa = et.getText().toString();
-                Intent intent = new Intent(MainActivity2.this, Consulta.class);
-
-                intent.putExtra("PROVINCIA",provinciaa);
-
-                startActivity(intent);
-            }
-        });
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }*/
 
     EditText et;
     Button b3;
@@ -90,8 +39,8 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        b3 = findViewById(R.id.button3);
         et = findViewById(R.id.editTextText);
+        //b3 = findViewById(R.id.button3);
 
         // Crear una lista de provincias
         List<Province> provinciaList = new ArrayList<>();
@@ -153,18 +102,65 @@ public class MainActivity2 extends AppCompatActivity {
         provinciaList.add(new Province(R.drawable.vizcaya, "Vizcaya"));
         provinciaList.add(new Province(R.drawable.zamora, "Zamora"));
         provinciaList.add(new Province(R.drawable.zaragoza, "Zaragoza"));
-        // Agrega las demás provincias de forma similar
 
-        // Configurar el RecyclerView
+
+
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Configurar el adaptador con la lista de provincias
+
         recyclerViewAdapter = new RecyclerViewAdapter(provinciaList);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setHasFixedSize(true);
 
+
+        BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
+        FloatingActionButton myfab = findViewById(R.id.fab);
+
+
+        myfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                provincia = et.getText().toString();
+                Intent intent = new Intent(MainActivity2.this, Consulta.class);
+                intent.putExtra("PROVINCIA", provincia);
+                startActivity(intent);
+            }
+        });
+
+
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity2.this, "Menu clicked", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        });
+
+
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                int id = item.getItemId();
+
+                if(id == R.id.heart)
+                {
+                    Toast.makeText(MainActivity2.this, "Added to favourites", Toast.LENGTH_SHORT).show();
+                }
+                if(id == R.id.search)
+                {
+                    Toast.makeText(MainActivity2.this, "Beginning search", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+
+
+        /*
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,6 +170,8 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    */
+
     }
 
 }
