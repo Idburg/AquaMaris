@@ -87,7 +87,7 @@ public class Noticias extends AppCompatActivity {
                 }
                 if(id == R.id.browse) {
                     item.setChecked(true);
-                    Toast.makeText(Noticias.this, "Browse clicked.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Noticias.this, "Ajustes", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
 
                 }
