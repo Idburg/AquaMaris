@@ -220,7 +220,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:contentDescription="spain"
+            android:contentDescription="@string/spain"
             android:src="@mipmap/spain_round"
             app:layout_constraintStart_toStartOf="@id/phone"
             app:layout_constraintTop_toBottomOf="@id/popup_birthday" />
@@ -328,7 +328,7 @@
             android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/google_vector"
             android:fontFamily="@font/inter_semibold"
-            android:text="Sign up with Google"
+            android:text="@string/sign_up_with_google"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:cornerRadius="8dp"

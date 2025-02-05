@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -67,5 +69,12 @@ public class Register extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private boolean isValidEmail(CharSequence text) {
+        if (TextUtils.isEmpty(text))
+            return false;
+        else
+            return Patterns.EMAIL_ADDRESS.matcher(text).matches();
     }
 }

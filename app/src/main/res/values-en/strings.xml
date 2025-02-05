@@ -26,4 +26,6 @@
     <string name="surname">Surname</string>
     <string name="dateH">09/06/1993</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="spain">spain</string>
 </resources>
