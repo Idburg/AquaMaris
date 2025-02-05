@@ -1,7 +1,11 @@
 package com.example.aquamaris;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +25,13 @@ public class Login extends AppCompatActivity {
         AppCompatButton logButton = findViewById(R.id.login_button);
         logButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        TextView signup_link = findViewById(R.id.signup_link);
+        signup_link.setOnClickListener(view -> {
+            signup_link.setPaintFlags(signup_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            Intent intent = new Intent(this, Register.class);
             startActivity(intent);
         });
 

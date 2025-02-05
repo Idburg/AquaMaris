@@ -24,4 +24,5 @@
     <string name="log_in"><a href="#">Entrar</a></string>
     <string name="surname">Apellido</string>
     <string name="dateH">09/06/1993</string>
+    <string name="already_have_an_account">¿Ya tienes cuenta?</string>
 </resources>

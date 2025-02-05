@@ -1,14 +1,17 @@
 package com.example.aquamaris;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,7 +24,11 @@ public class Register extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
 
-
+        TextView login_link = findViewById(R.id.login_link);
+        login_link.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+        });
 
         EditText datePopUp = findViewById(R.id.popup_birthday);
         datePopUp.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +56,11 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        AppCompatButton signup_button = findViewById(R.id.signup_button);
+        signup_button.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
