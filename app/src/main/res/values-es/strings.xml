@@ -25,4 +25,6 @@
     <string name="surname">Apellido</string>
     <string name="dateH">09/06/1993</string>
     <string name="already_have_an_account">¿Ya tienes cuenta?</string>
+    <string name="sign_up_with_google">Regístrate con Google</string>
+    <string name="spain">spain</string>
 </resources>
