@@ -17,6 +17,10 @@
             android:name=".Comunidades"
             android:exported="false" />
         <activity
+            android:name=".WebNews"
+            android:exported="true"
+            android:parentActivityName=".Noticias"/>
+        <activity
             android:name=".Noticias"
             android:exported="true" />
 
