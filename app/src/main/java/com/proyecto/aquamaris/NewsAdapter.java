@@ -1,6 +1,7 @@
 package com.proyecto.aquamaris;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +37,25 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         NewsItem newsItem = newsList.get(position);
         holder.title.setText(newsItem.getTitle());
 
+        // Cargar la imagen con Glide
         if (!newsItem.getImageUrl().isEmpty()) {
             Glide.with(context).load(newsItem.getImageUrl()).into(holder.image);
         } else {
             holder.image.setImageResource(R.drawable.pez); // Imagen por defecto
         }
+
+        // Cuando el item de noticias es clickeado, abrir el WebView con la URL
+        holder.itemView.setOnClickListener(v -> {
+            // Obtener el href de la noticia
+            String href = newsItem.getHref(); // Asegúrate de tener un getter en NewsItem para href
+
+            // Crear el Intent para abrir la actividad WebNews
+            Intent intent = new Intent(context, WebNews.class);
+            intent.putExtra("url", href); // Pasar el href a la actividad WebNews
+            context.startActivity(intent);
+        });
     }
+
 
     @Override
     public int getItemCount() {

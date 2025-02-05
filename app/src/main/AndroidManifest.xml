@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,40 +12,27 @@
         android:roundIcon="@mipmap/aqua_maris_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaMaris"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".PezIndividual"
-            android:exported="true"
-            android:parentActivityName=".Consulta2"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
-        <activity
-            android:name=".PantallaAjustes"
+            android:name=".Comunidades"
             android:exported="false" />
         <activity
-            android:name=".nombre_peces"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Consulta"
+            android:name=".WebNews"
             android:exported="true"
-            android:parentActivityName=".MainActivity2"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
-        <activity
-            android:name=".Consulta2"
-            android:exported="true"
-            android:parentActivityName=".MainActivity2"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
-        <activity
-            android:name=".MainActivity2"
-            android:exported="true" />
-        <activity
-            android:name=".FirebaseImplementation"
-            android:exported="true" />
+            android:parentActivityName=".Noticias"/>
         <activity
             android:name=".Noticias"
-            android:exported="true" >
+            android:exported="true" />
+
+        <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
