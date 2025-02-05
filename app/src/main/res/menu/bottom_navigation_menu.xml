@@ -6,7 +6,6 @@
         android:id="@+id/likes"
         android:title="@string/Noticias"
         android:icon="@drawable/newsppr"
-        android:contentDescription="none"
         app:showAsAction="always"
         />
 
@@ -14,7 +13,6 @@
         android:id="@+id/add"
         android:title="@string/Provincias"
         android:icon="@drawable/city"
-        android:contentDescription="none"
         app:showAsAction="always"
         >
     </item>
@@ -23,7 +21,6 @@
         android:id="@+id/browse"
         android:title="@string/Ajustes"
         android:icon="@drawable/ajuste"
-        android:contentDescription="none"
         app:showAsAction="always"
         />
 

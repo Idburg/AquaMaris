@@ -88,7 +88,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.First.AppBarOverlay"
         android:gravity="bottom"
-        android:backgroundTint="@color/marine_blue"
         app:layout_constraintBottom_toBottomOf="@id/view_pager"
         tools:ignore="MissingConstraints">
 
@@ -122,5 +121,9 @@
         android:background="@color/marine_blue"
         app:menu="@menu/bottom_navigation_menu"
         tools:ignore="MissingConstraints"
-        app:layout_constraintBottom_toBottomOf="@id/view_pager"/>
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+        app:layout_constraintBottom_toBottomOf="@id/view_pager"
+        android:onClick="cambiocolor"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

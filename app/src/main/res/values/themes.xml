@@ -8,4 +8,12 @@
     <style name="Theme.AquaMaris" parent="Base.Theme.AquaMaris" />
 
     <style name="Theme.First.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Base.Theme.BottomNavigationView" parent="Theme.Material3.DayNight.NoActionBar"/>
+
+    <!--
+    <style name="bottomNavigationView">
+        <item name="colorSecondaryContainer">#FFD300</item>
+    </style>
+    -->
 </resources>
