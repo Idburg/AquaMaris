@@ -12,7 +12,7 @@
     <item
         android:id="@+id/provincias"
         android:title="@string/Provincias"
-        android:icon="@drawable/city"
+        android:icon="@drawable/province_selector"
         app:showAsAction="always"
         >
     </item>
@@ -20,7 +20,7 @@
     <item
         android:id="@+id/ajustes"
         android:title="@string/Ajustes"
-        android:icon="@drawable/ajuste"
+        android:icon="@drawable/settings_selector"
         app:showAsAction="always"
         />
 
