@@ -1,4 +1,4 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 public class ListarElementos
 {

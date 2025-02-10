@@ -1,10 +1,9 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.view.View; // Asegúrate de tener esta importación
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -16,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 
-import com.bumptech.glide.Glide;
+import com.example.aquamaris.R;
 
 public class Splash extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.aquamaris.db;
+package com.proyecto.aquamaris.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

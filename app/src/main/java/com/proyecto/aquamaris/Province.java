@@ -1,4 +1,4 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 public class Province {
     private int imagen;  // Recurso de la imagen

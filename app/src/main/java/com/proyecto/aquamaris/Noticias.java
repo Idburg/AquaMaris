@@ -1,4 +1,4 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -6,10 +6,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.aquamaris.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

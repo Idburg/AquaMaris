@@ -1,10 +1,8 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +11,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.aquamaris.R;
 
 public class Login extends AppCompatActivity {
 

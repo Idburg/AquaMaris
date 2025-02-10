@@ -1,21 +1,20 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aquamaris.db.DBHelper;
+import com.example.aquamaris.R;
+import com.proyecto.aquamaris.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
