@@ -13,8 +13,6 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aquamaris.R;
-
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
 {
     private List<ListarElementos> aData;

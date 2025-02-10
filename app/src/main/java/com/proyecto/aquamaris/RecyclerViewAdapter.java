@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aquamaris.R;
-
 import java.util.List;
 
 

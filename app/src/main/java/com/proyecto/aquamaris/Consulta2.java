@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aquamaris.R;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import java.util.ArrayList;

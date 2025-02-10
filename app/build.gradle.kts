@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.aquamaris"
+    namespace = "com.proyecto.aquamaris"
     compileSdk = 34
 
     defaultConfig {

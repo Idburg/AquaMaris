@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.aquamaris.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

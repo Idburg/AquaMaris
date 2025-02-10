@@ -15,8 +15,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 
-import com.example.aquamaris.R;
-
 public class Splash extends AppCompatActivity {
 
     private ImageView pez;
