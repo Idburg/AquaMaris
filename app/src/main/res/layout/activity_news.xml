@@ -24,7 +24,7 @@
                 android:layout_marginTop="30dp"
                 android:text="@string/Top_noticias"
                 android:textColor="@color/azul"
-                android:textSize="60sp"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_gravity="center" />
@@ -56,7 +56,7 @@
                     android:fontFamily="@font/playfair_display_extrabold"
                     android:padding="8dp"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
+                    android:textSize="23sp"
                      />
             </FrameLayout>
 
