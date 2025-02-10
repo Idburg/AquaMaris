@@ -2,7 +2,11 @@ package com.example.aquamaris;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -56,8 +61,9 @@ public class Noticias extends AppCompatActivity {
         loadNewsFromScraping();
 
         BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
+        mybottomNavView.setItemIconTintList(null);
 
-        mybottomNavView.setItemIconTintList(ContextCompat.getColorStateList(this,R.color.white));
+
 
 /*
         // crear badges
@@ -70,44 +76,39 @@ public class Noticias extends AppCompatActivity {
                 .inflate(R.layout.layout_badge, itemView, true);
 
         */
+
         mybottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
                 int id = item.getItemId();
-                if (id == R.id.likes) {
+
+                if (id == R.id.noticias && item.isChecked()) {
 
                     //item.setChecked(true);
                     Toast.makeText(Noticias.this, "Noticias", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
-                    cambiocolor();
 
                 }
-                if (id == R.id.add) {
+
+                if (id == R.id.provincias) {
                     //item.setChecked(true);
                     Intent intent = new Intent(Noticias.this, MainActivity2.class);
                     startActivity(intent);
                     //Toast.makeText(Noticias.this, "Add clicked.", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
-                    cambiocolor();
+
 
                 }
-                if(id == R.id.browse) {
+                if(id == R.id.ajustes) {
                     //item.setChecked(true);
                     Toast.makeText(Noticias.this, "Ajustes", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
-                    cambiocolor();
-
                 }
 
-                for(int i = 0; i < 2; i++)
-                {}
-
-                return false;
+                return true;
             }
-        });
 
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.news), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -172,5 +173,13 @@ public class Noticias extends AppCompatActivity {
         BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
 
         mybottomNavView.setItemIconTintList(ContextCompat.getColorStateList(this,R.color.black));
+    }
+
+    public void colorOriginal()
+    {
+        BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
+
+        mybottomNavView.setItemIconTintList(ContextCompat.getColorStateList(this,R.color.white));
+
     }
 }

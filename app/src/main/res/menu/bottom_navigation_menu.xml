@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:style="http://schemas.android.com/tools">
     <item
-        android:id="@+id/likes"
+        android:id="@+id/noticias"
         android:title="@string/Noticias"
-        android:icon="@drawable/newsppr"
+        android:icon="@drawable/news_selector"
         app:showAsAction="always"
         />
 
     <item
-        android:id="@+id/add"
+        android:id="@+id/provincias"
         android:title="@string/Provincias"
         android:icon="@drawable/city"
         app:showAsAction="always"
@@ -18,7 +18,7 @@
     </item>
 
     <item
-        android:id="@+id/browse"
+        android:id="@+id/ajustes"
         android:title="@string/Ajustes"
         android:icon="@drawable/ajuste"
         app:showAsAction="always"
