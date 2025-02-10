@@ -58,11 +58,16 @@ public class Noticias extends AppCompatActivity {
                 String HrefPrincipal="";
                 Document doc = Jsoup.connect("https://www.farodevigo.es/mar/").get();
                 List<Element> articleElements = doc.select("article");
-                Elements articleElements1 = doc.getElementsByClass("new over");
+                Elements articleElements1 = doc.select(".new.over");
                 if (articleElements1.isEmpty()) {
-                    articleElements1 = doc.getElementsByClass("new over premiun");
+                    articleElements1 = doc.select(".new.over.premiun");
+                }
+                for(Element e : articleElements1){
+                    System.out.println(e.id());
                 }
                 Element firstArticle = articleElements1.first();
+                System.out.println("Noticias Principales: "+articleElements1.size());
+
                 if (firstArticle != null) {
                     Elements ima = firstArticle.getElementsByTag("img");
                     String img = ima.attr("src");
@@ -94,8 +99,7 @@ public class Noticias extends AppCompatActivity {
                     });
 
                 } else {
-                    String title = "MAL";
-                    newsTitle.setText(title);
+                   System.out.println("Noticia principal vacia");
                 }
 
                 // Asegúrate de que setOnClickListener se ejecuta en el hilo principal
