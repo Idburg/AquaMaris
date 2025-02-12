@@ -27,4 +27,5 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="spain">spain</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
 </resources>
