@@ -36,6 +36,19 @@ android {
     }
 }
 
+secrets {
+    // To add your Maps API key to this project:
+    // 1. If the secrets.properties file does not exist, create it in the same folder as the local.properties file.
+    // 2. Add this line, where YOUR_API_KEY is your API key:
+    //        MAPS_API_KEY=YOUR_API_KEY
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.defaults.properties"
+}
+
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -55,6 +68,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database.v2000)
     implementation(libs.play.services.auth)
+    implementation(libs.play.services.maps)
     implementation(libs.firebase.core)
     implementation(libs.material.v150)
 
