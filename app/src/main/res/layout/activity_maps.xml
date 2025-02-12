@@ -5,4 +5,8 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.proyecto.aquamaris.MapsActivity" />
+    map:cameraTargetLat="40.4165"
+    map:cameraTargetLng="-3.70256"
+    map:cameraZoom="12"
+    tools:context="com.proyecto.aquamaris.MapsActivity"
+    />
