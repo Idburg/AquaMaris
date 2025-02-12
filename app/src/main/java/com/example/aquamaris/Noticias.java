@@ -1,12 +1,7 @@
 package com.example.aquamaris;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,12 +14,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,17 +29,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.main.SectionsPagerAdapter;
+
 public class Noticias extends AppCompatActivity {
     private ImageView newsImage;
     private TextView newsTitle;
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private List<NewsItem> newsList;
+    private SectionsPagerAdapter sectionsPagerAdapter;
+    private MenuItem prevMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
+        sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+//        ViewPager viewPager = binding.viewPager;
+        ViewPager viewPager1 = findViewById(R.id.view_pager);
+        viewPager1.setAdapter(sectionsPagerAdapter);
 
         recyclerView = findViewById(R.id.recyclerView);
         newsImage = findViewById(R.id.newsImageLarge);  // Imagen
@@ -65,7 +68,7 @@ public class Noticias extends AppCompatActivity {
 
 
 
-/*
+        /*
         // crear badges
         BottomNavigationMenuView bottomNavigationMenuView =
                 (BottomNavigationMenuView) mybottomNavView.getChildAt(0);
@@ -74,8 +77,8 @@ public class Noticias extends AppCompatActivity {
 
         LayoutInflater.from(this)
                 .inflate(R.layout.layout_badge, itemView, true);
-
         */
+
 
         mybottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -87,6 +90,7 @@ public class Noticias extends AppCompatActivity {
                     //item.setChecked(true);
                     Toast.makeText(Noticias.this, "Noticias", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
+                    viewPager1.setCurrentItem(0);
 
                 }
 
@@ -96,18 +100,42 @@ public class Noticias extends AppCompatActivity {
                     startActivity(intent);
                     //Toast.makeText(Noticias.this, "Add clicked.", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
-
+                    viewPager1.setCurrentItem(1);
 
                 }
                 if(id == R.id.ajustes) {
                     //item.setChecked(true);
                     Toast.makeText(Noticias.this, "Ajustes", Toast.LENGTH_SHORT).show();
                     //removeBadge(mybottomNavView,item.getItemId());
+                    viewPager1.setCurrentItem(2);
                 }
 
                 return true;
             }
 
+        });
+
+        viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(false);
+                } else {
+                    mybottomNavView.getMenu().getItem(0).setChecked(false);
+                    mybottomNavView.getMenu().getItem(position).setChecked(true);
+                    //removeBadge(mybottomNavView, mybottomNavView.getMenu().getItem(position).getItemId());
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.news), (v, insets) -> {
@@ -166,20 +194,7 @@ public class Noticias extends AppCompatActivity {
                 });
             }
         }).start();
-    }
 
-    public void cambiocolor()
-    {
-        BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
-
-        mybottomNavView.setItemIconTintList(ContextCompat.getColorStateList(this,R.color.black));
-    }
-
-    public void colorOriginal()
-    {
-        BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
-
-        mybottomNavView.setItemIconTintList(ContextCompat.getColorStateList(this,R.color.white));
 
     }
 }

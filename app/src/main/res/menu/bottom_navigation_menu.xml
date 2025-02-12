@@ -4,22 +4,22 @@
     xmlns:style="http://schemas.android.com/tools">
     <item
         android:id="@+id/noticias"
-        android:title="@string/Noticias"
+        android:title=""
         android:icon="@drawable/news_selector"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/provincias"
-        android:title="@string/Provincias"
+        android:title=""
         android:icon="@drawable/province_selector"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         >
     </item>
 
     <item
         android:id="@+id/ajustes"
-        android:title="@string/Ajustes"
+        android:title=""
         android:icon="@drawable/settings_selector"
         app:showAsAction="always"
         />
