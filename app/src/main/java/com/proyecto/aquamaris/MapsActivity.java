@@ -10,7 +10,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.data.geojson.GeoJsonFeature;
+import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 import com.proyecto.aquamaris.databinding.ActivityMapsBinding;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -44,8 +53,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(40.4165, -3.70256);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng spainCenter = new LatLng(40.4168, -3.7038); // Madrid
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spainCenter, 5.75f));
+
+        loadGeoJson();
     }
+
+    private void loadGeoJson() {
+        try {
+            InputStream inputStream = getResources().openRawResource(R.raw.spain_provinces);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            reader.close();
+            inputStream.close();
+
+            JSONObject jsonObject = new JSONObject(jsonString.toString());
+
+            GeoJsonLayer layer = new GeoJsonLayer(mMap, jsonObject);
+
+            for (GeoJsonFeature feature : layer.getFeatures()) {
+                GeoJsonPolygonStyle polygonStyle = new GeoJsonPolygonStyle();
+
+                polygonStyle.setStrokeColor(0xEE000000);
+                polygonStyle.setStrokeWidth(2.5f);
+
+                // Aplicar estilo a la provincia
+                feature.setPolygonStyle(polygonStyle);
+            }
+
+            layer.addLayerToMap();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

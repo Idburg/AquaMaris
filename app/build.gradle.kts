@@ -57,8 +57,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
     testImplementation(libs.junit)
-    implementation("org.jsoup:jsoup:1.16.1")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.jsoup)
+    implementation(libs.glide)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.cardview)
@@ -71,5 +71,5 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.firebase.core)
     implementation(libs.material.v150)
-
+    implementation(libs.android.maps.utils)
 }
