@@ -2,15 +2,20 @@ package com.proyecto.aquamaris;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.geojson.GeoJsonFeature;
+import com.google.maps.android.data.geojson.GeoJsonMultiPolygon;
+import com.google.maps.android.data.geojson.GeoJsonPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 import com.proyecto.aquamaris.databinding.ActivityMapsBinding;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
@@ -20,11 +25,16 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    private final LatLng defaultCoords = new LatLng(40.4168, -3.7038); // Madrid
+    private final float defaultZoom = 5.75f;
+    private GeoJsonFeature selectedFeature = null;
+    private LatLngBounds selectedBounds = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +61,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng spainCenter = new LatLng(40.4168, -3.7038); // Madrid
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spainCenter, 5.75f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
 
         loadGeoJson();
     }
 
     private void loadGeoJson() {
+        boolean alreadyClicked = false;
+        float currentZoom = defaultZoom;
+
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.spain_provinces);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -87,7 +97,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 feature.setPolygonStyle(polygonStyle);
             }
 
+            layer.setOnFeatureClickListener(feature -> {
+                selectedFeature = (GeoJsonFeature) feature;
+
+                String provincia = feature.getProperty("name");
+                Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
+
+                LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+                selectedBounds = boundsBuilder.build();
+
+                if (feature.getGeometry() instanceof GeoJsonPolygon) {
+                    GeoJsonPolygon polygon = (GeoJsonPolygon) feature.getGeometry();
+
+
+                    // Recorrer todas las coordenadas del polígono
+                    for (List<LatLng> coordinates : polygon.getCoordinates()) {
+                        for (LatLng point : coordinates) {
+                            boundsBuilder.include(point);
+                        }
+                    }
+
+                }
+                else if (feature.getGeometry() instanceof GeoJsonMultiPolygon) {
+                    GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
+
+                    // Recorrer cada polígono en el multipolígono
+                    for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
+                        for (List<LatLng> coordinates : polygon.getCoordinates()) {
+                            for (LatLng point : coordinates) {
+                                boundsBuilder.include(point);
+                            }
+                        }
+                    }
+                }
+
+                centrarMapa(boundsBuilder);
+
+                Intent intent = new Intent(this, Consulta.class);
+                intent.putExtra("PROVINCIA",provincia);
+                startActivity(intent);
+
+            });
+
             layer.addLayerToMap();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void centrarMapa(LatLngBounds.Builder bob) {
+        // Ajustar la cámara para centrar la vista en la provincia seleccionada
+        try {
+            LatLngBounds bounds = bob.build();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void descentrarMapa(LatLngBounds.Builder bob) {
+        try {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
         } catch (Exception e) {
             e.printStackTrace();
         }

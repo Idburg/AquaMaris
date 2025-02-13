@@ -95,8 +95,6 @@ public class MainActivity2 extends AppCompatActivity {
         provinciaList.add(new Province(R.drawable.zamora, "Zamora"));
         provinciaList.add(new Province(R.drawable.zaragoza, "Zaragoza"));
 
-
-
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);

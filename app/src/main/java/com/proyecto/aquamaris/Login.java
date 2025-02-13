@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
 
         AppCompatButton logButton = findViewById(R.id.login_button);
         logButton.setOnClickListener(view -> {
-            Intent intent = new Intent(this, Noticias.class);
+            Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         });
 
