@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:style="http://schemas.android.com/tools">
     <item
-        android:id="@+id/likes"
-        android:title="Likes"
-        android:icon="@drawable/lupa_foreground"
-        android:contentDescription="none"
+        android:id="@+id/noticias"
+        android:title=""
+        android:icon="@drawable/news_selector"
         app:showAsAction="always"
         />
 
     <item
-        android:id="@+id/add"
-        android:title="Add"
-        android:icon="@drawable/lupa_foreground"
-        android:contentDescription="none"
-        app:showAsAction="always"
+        android:id="@+id/provincias"
+        android:title=""
+        android:icon="@drawable/province_selector"
+        app:showAsAction="ifRoom"
         >
     </item>
 
     <item
-        android:id="@+id/browse"
-        android:title="Browse"
-        android:icon="@drawable/lupa_foreground"
-        android:contentDescription="none"
+        android:id="@+id/ajustes"
+        android:title=""
+        android:icon="@drawable/settings_selector"
         app:showAsAction="always"
         />
 

@@ -2,6 +2,7 @@ package com.proyecto.aquamaris;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.proyecto.aquamaris.db.DBHelper;
+
+import com.example.aquamaris.Fragmentos.Prueba1;
+import com.example.aquamaris.db.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
     private Button b, b2, b3;
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FirebaseImplementation.class);
+                Intent intent = new Intent(MainActivity.this, Prueba1.class);
                 startActivity(intent);
             }
         });
