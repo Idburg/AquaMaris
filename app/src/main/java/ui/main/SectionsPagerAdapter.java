@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.aquamaris.Fragmentos.Prueba1;
-import com.example.aquamaris.Fragmentos.Prueba2;
-import com.example.aquamaris.Fragmentos.Prueba3;
+import com.proyecto.aquamaris.Fragmentos.Prueba1;
+import com.proyecto.aquamaris.Fragmentos.Prueba2;
+import com.proyecto.aquamaris.Fragmentos.Prueba3;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     //    @StringRes

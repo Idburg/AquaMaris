@@ -1,4 +1,4 @@
-package com.example.aquamaris.Fragmentos;
+package com.proyecto.aquamaris.Fragmentos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.aquamaris.R;
+import com.proyecto.aquamaris.R;
 
 public class Prueba3 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

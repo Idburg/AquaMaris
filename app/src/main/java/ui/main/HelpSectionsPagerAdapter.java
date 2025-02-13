@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.aquamaris.Fragmentos.HPage1;
-import com.example.aquamaris.Fragmentos.HPage2;
+import com.proyecto.aquamaris.Fragmentos.HPage1;
+import com.proyecto.aquamaris.Fragmentos.HPage2;
 
 public class HelpSectionsPagerAdapter extends FragmentPagerAdapter {
     private final Context mContext;

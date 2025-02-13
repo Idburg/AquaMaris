@@ -1,33 +1,19 @@
-package com.example.aquamaris.Fragmentos;
+package com.proyecto.aquamaris.Fragmentos;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aquamaris.Consulta;
-import com.example.aquamaris.MainActivity2;
-import com.example.aquamaris.Province;
-import com.example.aquamaris.R;
-import com.example.aquamaris.RecyclerViewAdapter;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.proyecto.aquamaris.MainActivity2;
+import com.proyecto.aquamaris.NewsAdapter;
+import com.proyecto.aquamaris.NewsItem;
+import com.proyecto.aquamaris.Noticias;
+import com.proyecto.aquamaris.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Prueba2 extends Fragment {
+public class Prueba1 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,7 +23,7 @@ public class Prueba2 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Prueba2() {
+    public Prueba1() {
         // Required empty public constructor
     }
 
@@ -47,11 +33,11 @@ public class Prueba2 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Page2.
+     * @return A new instance of fragment Page1.
      */
     // TODO: Rename and change types and number of parameters
-    public static Prueba2 newInstance(String param1, String param2) {
-        Prueba2 fragment = new Prueba2();
+    public static Prueba1 newInstance(String param1, String param2) {
+        Prueba1 fragment = new Prueba1();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,7 +58,7 @@ public class Prueba2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.prueba2, container, false);
+        return inflater.inflate(R.layout.prueba1, container, false);
     }
 }
 

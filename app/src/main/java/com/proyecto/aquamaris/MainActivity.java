@@ -2,7 +2,6 @@ package com.proyecto.aquamaris;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.aquamaris.Fragmentos.Prueba1;
-import com.example.aquamaris.db.DBHelper;
+import com.proyecto.aquamaris.Fragmentos.Prueba1;
+import com.proyecto.aquamaris.db.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
     private Button b, b2, b3;
