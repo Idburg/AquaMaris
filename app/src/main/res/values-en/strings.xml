@@ -5,4 +5,8 @@
     <string name="Provincias">Provinces</string>
     <string name="Top_noticias">Top News</string>
     <string name="Ajustes">Settings</string>
+    <string name="cerrar_sesion">Sign Out</string>
+    <string name="informacion">Personal Information</string>
+    <string name="nombreusuario">User Name</string>
+    <string name="correo">Email</string>
 </resources>

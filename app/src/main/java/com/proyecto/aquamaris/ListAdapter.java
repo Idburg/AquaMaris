@@ -1,11 +1,13 @@
 package com.proyecto.aquamaris;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position)
     {
         holder.bindData(aData.get(position));
+        holder.status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), PezIndividual.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     public void setItems(List<ListarElementos> items)
@@ -53,7 +62,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         ImageView iconImage;
-        TextView name, city, status;
+        TextView name, city;
+        Button status;
 
         ViewHolder(View itemView)
         {

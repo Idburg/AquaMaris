@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.proyecto.aquamaris.Consulta;
+import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.Province;
 import com.proyecto.aquamaris.RecyclerViewAdapter;
@@ -152,8 +153,7 @@ public class Prueba2 extends Fragment {
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getPackageManager().getLaunchIntentForPackage(""));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(getContext(), Consulta2.class);
                 intent.putExtra("PROVINCIA", provincia);
                 startActivity(intent);
             }

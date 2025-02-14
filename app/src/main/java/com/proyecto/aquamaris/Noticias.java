@@ -1,5 +1,6 @@
 package com.proyecto.aquamaris;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -43,30 +45,40 @@ public class Noticias extends AppCompatActivity {
         BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
         mybottomNavView.setItemIconTintList(null);
 
-
-
         mybottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
 
+                ColorStateList colorStateList = new ColorStateList(
+                        new int[][]{
+                                new int[]{android.R.attr.state_selected},
+                                new int[]{}
+                        },
+                        new int[]{
+                                ContextCompat.getColor(Noticias.this, R.color.black),
+                                ContextCompat.getColor(Noticias.this, R.color.white)
+                        }
+                );
+
+
                 if (id == R.id.noticias) {
-
+                    mybottomNavView.setItemTextColor(colorStateList);
                     viewPager1.setCurrentItem(0);
-                }
-                if (id == R.id.provincias) {
-
+                } else if (id == R.id.provincias) {
+                    mybottomNavView.setItemTextColor(colorStateList);
                     viewPager1.setCurrentItem(1);
-
-                }
-                if(id == R.id.ajustes) {
+                } else if (id == R.id.ajustes) {
+                    mybottomNavView.setItemTextColor(colorStateList);
                     viewPager1.setCurrentItem(2);
                 }
 
                 return true;
             }
-
         });
+
+        mybottomNavView.setSelectedItemId(R.id.noticias);
+
 
         viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

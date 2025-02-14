@@ -24,7 +24,7 @@ public class nombre_peces extends AppCompatActivity {
 
     String province;
     TextView resultado2;
-    List<ListarElementos> elements;
+    List<NombrePeces> pecesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class nombre_peces extends AppCompatActivity {
             //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
             if(c != null && c.moveToFirst())
             {
-                elements = new ArrayList<>();
+                pecesList = new ArrayList<>();
                 do{
 
                     int indiceN = c.getColumnIndex("nombre_cientifico");
@@ -50,7 +50,7 @@ public class nombre_peces extends AppCompatActivity {
                     //contador++;
 
                     Log.d("Consulta", "Provincia encontrada: ");
-                    elements.add(new ListarElementos(null, nombrecientifico, null, null));
+                    pecesList.add(new NombrePeces(nombrecientifico));
                 }while(c.moveToNext());
                 c.close();
             }
@@ -65,10 +65,10 @@ public class nombre_peces extends AppCompatActivity {
     public void init3()
     {
 
-        ListAdapter listAdapter = new ListAdapter(elements, this);
+        NombrePecesAdapter npa = new NombrePecesAdapter(pecesList, this);
         RecyclerView recyclerView = findViewById(R.id.listRecycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(listAdapter);
+        recyclerView.setAdapter(npa);
     }
 }

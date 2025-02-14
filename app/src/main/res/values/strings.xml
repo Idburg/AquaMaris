@@ -5,6 +5,10 @@
     <string name="Provincias">Provincias</string>
     <string name="Top_noticias">Top Noticias</string>
     <string name="Ultimas_Noticias">Ultimas Noticias</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="informacion">Información Personal</string>
+    <string name="nombreusuario">Nombre de Usuario</string>
+    <string name="correo">Correo Electrónico</string>
 
     <string name="Ajustes">Ajustes</string>
 
@@ -19,5 +23,6 @@
     <string name="log_in_txt">Log in</string>
     <string name="account_question">Don\'t have an account?</string>
     <string name="sign_up_link_txt">Sign up</string>
+    <string name="sign_out">Sign Out</string>
 
 </resources>
