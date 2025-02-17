@@ -10,9 +10,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonMultiPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygon;
@@ -34,7 +37,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final LatLng defaultCoords = new LatLng(40.4168, -3.7038); // Madrid
     private final float defaultZoom = 5.75f;
     private GeoJsonFeature selectedFeature = null;
+    private GeoJsonFeature lastFeature = null;
     private LatLngBounds selectedBounds = null;
+    private Marker currentMarker = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,35 +98,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 polygonStyle.setStrokeColor(0xEE000000);
                 polygonStyle.setStrokeWidth(2.5f);
 
-                // Aplicar estilo a la provincia
                 feature.setPolygonStyle(polygonStyle);
+
+                String provinceName = feature.getProperty("name");
+
+
             }
 
             layer.setOnFeatureClickListener(feature -> {
-                selectedFeature = (GeoJsonFeature) feature;
 
                 String provincia = feature.getProperty("name");
                 Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
 
+                if (lastFeature != null && lastFeature.equals(feature)) {
+                    // Si es la misma provincia, abrir la Activity
+                    abrirDetalleProvincia(provincia);
+                    return; // Salimos para evitar recargar la vista
+                }
+
+                selectedFeature = (GeoJsonFeature) feature;
+                lastFeature = (GeoJsonFeature) feature;
+
+                // Obtener los límites de la provincia seleccionada para usar más tarde
                 LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-                selectedBounds = boundsBuilder.build();
 
                 if (feature.getGeometry() instanceof GeoJsonPolygon) {
                     GeoJsonPolygon polygon = (GeoJsonPolygon) feature.getGeometry();
-
-
-                    // Recorrer todas las coordenadas del polígono
                     for (List<LatLng> coordinates : polygon.getCoordinates()) {
                         for (LatLng point : coordinates) {
                             boundsBuilder.include(point);
                         }
                     }
-
-                }
-                else if (feature.getGeometry() instanceof GeoJsonMultiPolygon) {
+                } else if (feature.getGeometry() instanceof GeoJsonMultiPolygon) {
                     GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
-
-                    // Recorrer cada polígono en el multipolígono
                     for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
                         for (List<LatLng> coordinates : polygon.getCoordinates()) {
                             for (LatLng point : coordinates) {
@@ -131,11 +140,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
 
-                centrarMapa(boundsBuilder);
+                selectedBounds = boundsBuilder.build();
 
-                Intent intent = new Intent(this, Consulta.class);
-                intent.putExtra("PROVINCIA",provincia);
-                startActivity(intent);
+                if (currentMarker != null) {
+                    currentMarker.remove();
+                }
+
+                centrarMapa(selectedBounds,provincia);
+
+                mMap.setOnMapClickListener(latLng -> {
+                    if (selectedBounds != null && !selectedBounds.contains(latLng)) {
+                        // Si el clic está fuera de la provincia, descentrar
+                        descentrarMapa();
+                        if (currentMarker != null) {
+                            currentMarker.remove();
+                        }
+                    }
+                });
 
             });
 
@@ -145,22 +166,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void centrarMapa(LatLngBounds.Builder bob) {
+    private void centrarMapa(LatLngBounds bob, String provincia) {
         // Ajustar la cámara para centrar la vista en la provincia seleccionada
         try {
-            LatLngBounds bounds = bob.build();
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+            LatLng center = bob.getCenter();
+
+            currentMarker = mMap.addMarker(new MarkerOptions()
+                            .position(center)
+                            .title(provincia)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 100));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void descentrarMapa(LatLngBounds.Builder bob) {
+    private void descentrarMapa() {
         try {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void abrirDetalleProvincia(String provincia) {
+        Intent intent = new Intent(MapsActivity.this, Consulta.class);
+        intent.putExtra("PROVINCIA", provincia);
+        startActivity(intent);
     }
 
 }

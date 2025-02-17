@@ -37,7 +37,7 @@
             android:exported="true"/>
         <activity
             android:name="com.proyecto.aquamaris.Consulta"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="com.proyecto.aquamaris.Consulta2"
             android:exported="false" />
