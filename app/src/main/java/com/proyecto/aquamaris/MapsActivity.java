@@ -102,7 +102,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 String provinceName = feature.getProperty("name");
 
-
             }
 
             layer.setOnFeatureClickListener(feature -> {
@@ -175,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             .position(center)
                             .title(provincia)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 100));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 120),1200,null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -183,7 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void descentrarMapa() {
         try {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom),1000,null);
         } catch (Exception e) {
             e.printStackTrace();
         }
