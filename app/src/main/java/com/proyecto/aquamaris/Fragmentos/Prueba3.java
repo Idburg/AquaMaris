@@ -49,7 +49,7 @@ public class Prueba3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.prueba3, container, false);
+        return inflater.inflate(R.layout.activity_pantalla_ajustes, container, false);
     }
 
     @Override
@@ -87,14 +87,14 @@ public class Prueba3 extends Fragment {
                 c.close();
             }
 
-            init3(view);
+            //init3(view);
         }catch(Exception e)
         {
             System.out.println("Error");
         }
 
     }
-
+/*
     public void init3(View view)
     {
 
@@ -104,5 +104,5 @@ public class Prueba3 extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(npa);
     }
-
+*/
 }

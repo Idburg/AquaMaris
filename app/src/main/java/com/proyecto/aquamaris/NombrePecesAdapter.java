@@ -22,6 +22,11 @@ public class NombrePecesAdapter extends RecyclerView.Adapter<NombrePecesAdapter.
         this.Data = itemList;
     }
 
+    public NombrePecesAdapter() {
+        Data = null;
+        context = null;
+    }
+
     @Override
     public int getItemCount() {
         return Data.size();
@@ -50,6 +55,4 @@ public class NombrePecesAdapter extends RecyclerView.Adapter<NombrePecesAdapter.
             nombres = itemView.findViewById(R.id.nompez);
         }
     }
-
-
 }

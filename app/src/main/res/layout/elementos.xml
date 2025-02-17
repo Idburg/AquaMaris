@@ -29,7 +29,8 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:paddingLeft="14dp"
-                android:paddingRight="14dp"/>
+                android:paddingRight="14dp"
+                android:src="@drawable/elhierro"/>
             <LinearLayout
                 android:id="@+id/LinearLayout"
                 android:layout_width="match_parent"
@@ -44,7 +45,7 @@
 
                 <TextView
                     android:id="@+id/nameTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:text="CodeLia"
@@ -54,7 +55,7 @@
 
                 <TextView
                     android:id="@+id/cityTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:text="Mexico"
                     android:textSize="12sp"/>
@@ -63,7 +64,7 @@
             <Button
                 android:id="@+id/statusTextView"
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:backgroundTint="@color/grey"

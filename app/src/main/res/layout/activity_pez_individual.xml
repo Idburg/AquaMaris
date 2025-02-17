@@ -8,4 +8,10 @@
     android:layout_height="match_parent"
     tools:context=".PezIndividual">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <WebView
+      android:id="@+id/vistaWeb"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

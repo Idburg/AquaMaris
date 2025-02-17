@@ -15,11 +15,14 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.checkerframework.checker.units.qual.N;
+
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
 {
     private List<ListarElementos> aData;
     private LayoutInflater mInflater;
     private Context context;
+    String nombrepez;
 
     public ListAdapter(List<ListarElementos> itemList, Context context)
     {
@@ -44,11 +47,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position)
     {
+        ListarElementos le = aData.get(position);
+        //holder.name.setText(le.getName());
         holder.bindData(aData.get(position));
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nombrepez = le.getName();
                 Intent intent = new Intent(view.getContext(), PezIndividual.class);
+                intent.putExtra("PEZ", nombrepez);
                 view.getContext().startActivity(intent);
             }
         });

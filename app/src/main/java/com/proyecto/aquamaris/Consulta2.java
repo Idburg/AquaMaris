@@ -24,6 +24,7 @@ import java.util.List;
 public class Consulta2 extends AppCompatActivity {
     String prov;
     List<ListarElementos> elements2;
+    List<NombrePeces> peces2;
     TextView resultado2;
     Button inf;
 
