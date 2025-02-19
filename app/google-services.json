@@ -7,31 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:338097780955:android:72e62ea73599d5a047b4fe",
-        "android_client_info": {
-          "package_name": "com.example.aquamaris"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCySUld08VFe0U5xsGZusPqDESriROmsxA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:338097780955:android:295ff60dcc00c0c347b4fe",
+        "mobilesdk_app_id": "1:338097780955:android:9a92c0045c812e0247b4fe",
         "android_client_info": {
           "package_name": "com.proyecto.aquamaris"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "338097780955-d16k00i4e4etsggrd04pdo8brmk3cqek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.aquamaris",
+            "certificate_hash": "d8ca104355c8d06e00140c692df73b39512cbd11"
+          }
+        },
+        {
+          "client_id": "338097780955-t9mrs2ff468kgf3b0m2a2jl93ouukbi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCySUld08VFe0U5xsGZusPqDESriROmsxA"
@@ -39,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338097780955-t9mrs2ff468kgf3b0m2a2jl93ouukbi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
