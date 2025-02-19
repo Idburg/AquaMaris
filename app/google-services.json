@@ -9,7 +9,26 @@
       "client_info": {
         "mobilesdk_app_id": "1:338097780955:android:72e62ea73599d5a047b4fe",
         "android_client_info": {
-          "package_name": "com.proyecto.aquamaris"
+          "package_name": "com.example.aquamaris"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCySUld08VFe0U5xsGZusPqDESriROmsxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338097780955:android:295ff60dcc00c0c347b4fe",
+        "android_client_info": {
+          "package_name": "com.proyecto.aquamarios"
         }
       },
       "oauth_client": [],

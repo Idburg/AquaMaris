@@ -151,7 +151,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/mail2"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="20dp"
@@ -192,7 +192,7 @@
             android:drawableEnd="@drawable/calendar_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mail"
+            app:layout_constraintTop_toBottomOf="@id/mail2"
             tools:ignore="TextFields" />
 
         <EditText
@@ -219,7 +219,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:contentDescription="@string/spain"
             android:src="@mipmap/spain_round"
             app:layout_constraintStart_toStartOf="@id/phone"
@@ -248,7 +248,7 @@
             app:layout_constraintTop_toBottomOf="@id/phone">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pass2"
+                android:id="@+id/pass3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text"

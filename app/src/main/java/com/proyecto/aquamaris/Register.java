@@ -18,6 +18,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 public class Register extends AppCompatActivity {
 
     @Override
@@ -25,6 +27,16 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
+
+        EditText emailInput = findViewById(R.id.mail2);
+        EditText phoneInput = findViewById(R.id.phone);
+        TextInputEditText passInput = findViewById(R.id.pass3);
+        AppCompatButton signup_button = findViewById(R.id.signup_button);
+
+        signup_button.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
 
         TextView login_link = findViewById(R.id.login_link);
         login_link.setOnClickListener(view -> {
@@ -58,12 +70,6 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        AppCompatButton signup_button = findViewById(R.id.signup_button);
-        signup_button.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -71,10 +77,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    private boolean isValidEmail(CharSequence text) {
-        if (TextUtils.isEmpty(text))
-            return false;
-        else
-            return Patterns.EMAIL_ADDRESS.matcher(text).matches();
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 }
