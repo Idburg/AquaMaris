@@ -1,10 +1,12 @@
 package com.proyecto.aquamaris;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,10 @@ public class Login extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        CheckBox remember = findViewById(R.id.remember);
         AppCompatButton logButton = findViewById(R.id.login_button);
         TextInputEditText passInput = findViewById(R.id.pass2);
         EditText emailInput = findViewById(R.id.mail);
@@ -52,8 +58,19 @@ public class Login extends AppCompatActivity {
                     mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful())
+                            if (task.isSuccessful()) {
+                                if (remember.isChecked()) {
+                                    editor.putBoolean("rememberMe", true);
+                                    editor.putString("userEmail", email);
+                                    editor.apply();
+                                }
+                                else {
+                                    editor.clear();
+                                    editor.apply();
+                                }
                                 Toast.makeText(getApplicationContext(), "Iniciando sesión...", Toast.LENGTH_SHORT).show();
+                                mainPage();
+                            }
                             else
                                 Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                         }

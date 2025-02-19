@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Splash extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        //FirebaseAuth.getInstance().signOut();
 
         ImageView fondo = findViewById(R.id.fondo);
         ImageView logo = findViewById(R.id.logo);
