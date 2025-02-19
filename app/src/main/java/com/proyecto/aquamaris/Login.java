@@ -89,12 +89,12 @@ public class Login extends AppCompatActivity {
     }
 
     private void mainPage() {
-        Intent intent = new Intent(this, Noticias.class);
+        Intent intent = new Intent(Login.this, Noticias.class);
         startActivity(intent);
         finish();
     }
 
-    public static boolean isValidEmail(CharSequence target) {
+    private static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 }
