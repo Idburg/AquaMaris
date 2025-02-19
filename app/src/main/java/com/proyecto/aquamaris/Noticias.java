@@ -1,17 +1,26 @@
 package com.proyecto.aquamaris;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,117 +31,93 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.main.SectionsPagerAdapter;
+
 public class Noticias extends AppCompatActivity {
     private ImageView newsImage;
     private TextView newsTitle;
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private List<NewsItem> newsList;
-    private FrameLayout NoticiaPrincipal;
+    private SectionsPagerAdapter sectionsPagerAdapter;
+    private MenuItem prevMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        newsImage = findViewById(R.id.newsImageLarge);  // Imagen
-        newsTitle = findViewById(R.id.newsTitleLarge);  // Título
-        NoticiaPrincipal = findViewById(R.id.imageContainer);
-        newsList = new ArrayList<>();
+        sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+//        ViewPager viewPager = binding.viewPager;
+        ViewPager viewPager1 = findViewById(R.id.view_pager);
+        viewPager1.setAdapter(sectionsPagerAdapter);
 
-        // Configurar RecyclerView con un LinearLayoutManager (dos columnas)
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columnas
-        adapter = new NewsAdapter(newsList, this);
-        recyclerView.setAdapter(adapter);
 
-        // Cargar noticias mediante scraping
-        loadNewsFromScraping();
-    }
+        BottomNavigationView mybottomNavView = findViewById(R.id.bottom_navigation);
+        mybottomNavView.setItemIconTintList(null);
 
-    private void loadNewsFromScraping() {
-        new Thread(() -> {
-            try {
-                int i = 0;
-                String href = "";
-                String HrefPrincipal="";
-                Document doc = Jsoup.connect("https://www.farodevigo.es/mar/").get();
-                List<Element> articleElements = doc.select("article");
-                Elements articleElements1 = doc.select(".new.over");
-                if (articleElements1.isEmpty()) {
-                    articleElements1 = doc.select(".new.over.premiun");
-                }
-                for(Element e : articleElements1){
-                    System.out.println(e.id());
-                }
-                Element firstArticle = articleElements1.first();
-                System.out.println("Noticias Principales: "+articleElements1.size());
+        mybottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
 
-                if (firstArticle != null) {
-                    Elements ima = firstArticle.getElementsByTag("img");
-                    String img = ima.attr("src");
+                ColorStateList colorStateList = new ColorStateList(
+                        new int[][]{
+                                new int[]{android.R.attr.state_selected},
+                                new int[]{}
+                        },
+                        new int[]{
+                                ContextCompat.getColor(Noticias.this, R.color.black),
+                                ContextCompat.getColor(Noticias.this, R.color.white)
+                        }
+                );
 
-                    Elements h1 = firstArticle.getElementsByTag("h1");
-                    String title = h1.text();
 
-                    Elements aP = firstArticle.getElementsByTag("a");
-                    Element aP_newHeadline = aP.select(".new__headline").first();
-                    if (aP_newHeadline != null) {
-                        HrefPrincipal = aP_newHeadline.attr("href"); // Obtiene el atributo href
-                        System.out.println("Href Principal: " + HrefPrincipal);
-                    }
-
-                    // Asignamos los datos al UI (en el hilo principal)
-                    String finalHrefPrincipal = HrefPrincipal;
-                    runOnUiThread(() -> {
-                        newsTitle.setText(title);  // Asignamos el título
-                        Glide.with(Noticias.this).load(img).into(newsImage);
-                        NoticiaPrincipal.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // Aquí, pasar el href al WebNews Activity
-                                Intent intent = new Intent(Noticias.this, WebNews.class);
-                                intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
-                                startActivity(intent);
-                            }
-                        });
-                    });
-
-                } else {
-                    System.out.println("Noticia principal vacia");
+                if (id == R.id.noticias) {
+                    mybottomNavView.setItemTextColor(colorStateList);
+                    viewPager1.setCurrentItem(0);
+                } else if (id == R.id.provincias) {
+                    mybottomNavView.setItemTextColor(colorStateList);
+                    viewPager1.setCurrentItem(1);
+                } else if (id == R.id.ajustes) {
+                    mybottomNavView.setItemTextColor(colorStateList);
+                    viewPager1.setCurrentItem(2);
                 }
 
-                // Asegúrate de que setOnClickListener se ejecuta en el hilo principal
-
-                for (Element elemento : articleElements) {
-                    Elements imagen = elemento.getElementsByTag("source");
-                    String img = imagen.attr("srcset");
-                    Elements h2 = elemento.getElementsByTag("h2");
-                    Elements a = elemento.getElementsByTag("a");
-                    Element a_newHeadline = a.select(".new__headline").first(); // Selecciona por clase
-                    String title = h2.text();
-
-                    // Verifica si el elemento <a> con la clase "new__headline" existe
-                    if (a_newHeadline != null) {
-                        href = a_newHeadline.attr("href"); // Obtiene el atributo href
-                        System.out.println("Href: " + href);
-                    }
-
-                    // Agrega los artículos a la lista si hay imagen y título
-                    if (!imagen.isEmpty() && !h2.isEmpty() && i < 8) {
-                        newsList.add(new NewsItem(title, img, href));
-                        runOnUiThread(() -> adapter.notifyDataSetChanged());
-                        i++;
-                    }
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                runOnUiThread(() -> {
-                    newsList.add(new NewsItem("Error al cargar noticias", "", ""));
-                    adapter.notifyDataSetChanged();
-                });
+                return true;
             }
-        }).start();
+        });
+
+        mybottomNavView.setSelectedItemId(R.id.noticias);
+
+
+        viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(false);
+                } else {
+                    mybottomNavView.getMenu().getItem(0).setChecked(false);
+                    mybottomNavView.getMenu().getItem(position).setChecked(true);
+                    //removeBadge(mybottomNavView, mybottomNavView.getMenu().getItem(position).getItemId());
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.news), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 }
