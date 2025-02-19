@@ -1,4 +1,4 @@
-package com.example.aquamaris;
+package com.proyecto.aquamaris;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
