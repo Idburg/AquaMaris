@@ -25,9 +25,14 @@
             android:name=".WebNews"
             android:exported="true"
             android:parentActivityName=".Noticias"/>
+
+        <activity
+            android:name=".nombre_peces"
+            android:exported="false"/>
+
         <activity
             android:name=".Noticias"
-            android:name=".nombre_peces"
+
             android:exported="true" />
         <activity
             android:name=".MainActivity"
@@ -50,7 +55,7 @@
             android:name=".FirebaseImplementation"
             android:exported="true" />
         <activity
-            android:name=".Noticias"
+            android:name=".Splash"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
