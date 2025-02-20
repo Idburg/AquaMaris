@@ -1,10 +1,12 @@
 package com.proyecto.aquamaris.Fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.proyecto.aquamaris.NewsAdapter;
 import com.proyecto.aquamaris.NewsItem;
+import com.proyecto.aquamaris.Noticias;
 import com.proyecto.aquamaris.R;
+import com.proyecto.aquamaris.WebNews;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,6 +43,7 @@ public class Prueba1 extends Fragment {
     private List<NewsItem> newsList;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private MenuItem prevMenuItem;
+    private FrameLayout NoticiaPrincipal;
 
     public Prueba1() {
         // Required empty public constructor
@@ -71,7 +76,9 @@ public class Prueba1 extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         newsImage = view.findViewById(R.id.newsImageLarge);  // Imagen
         newsTitle = view.findViewById(R.id.newsTitleLarge);  // Título
+        NoticiaPrincipal = view.findViewById(R.id.imageContainer);
         newsList = new ArrayList<>();
+
 
         // Configurar RecyclerView con un LinearLayoutManager (una sola columna)
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 columnas
@@ -82,51 +89,86 @@ public class Prueba1 extends Fragment {
     }
 
 
-    private void loadNewsFromScraping() throws NullPointerException{
-    new Thread(() -> {
-        try {
-            int i = 0;
-            Document doc = Jsoup.connect("https://www.farodevigo.es/mar/").get();
-            List<Element> articleElements = doc.select("article");
-            Elements articleElements1 = doc.getElementsByClass("new over");
-            Element firstArticle = articleElements1.first();
-            if (firstArticle != null) {
-                Elements ima = firstArticle.getElementsByTag("img");
-                String img = ima.attr("src");
+    private void loadNewsFromScraping() {
+        new Thread(() -> {
+            try {
+                int i = 0;
+                String href = "";
+                String HrefPrincipal="";
+                Document doc = Jsoup.connect("https://www.farodevigo.es/mar/").get();
+                List<Element> articleElements = doc.select("article");
+                Elements articleElements1 = doc.select(".new.over");
+                if (articleElements1.isEmpty()) {
+                    articleElements1 = doc.select(".new.over.premiun");
+                }
+                for(Element e : articleElements1){
+                    System.out.println(e.id());
+                }
+                Element firstArticle = articleElements1.first();
+                System.out.println("Noticias Principales: "+articleElements1.size());
 
-                Elements h1 = firstArticle.getElementsByTag("h1");
-                String title = h1.text();
+                if (firstArticle != null) {
+                    Elements ima = firstArticle.getElementsByTag("img");
+                    String img = ima.attr("src");
+
+                    Elements h1 = firstArticle.getElementsByTag("h1");
+                    String title = h1.text();
+
+                    Elements aP = firstArticle.getElementsByTag("a");
+                    Element aP_newHeadline = aP.select(".new__headline").first();
+                    if (aP_newHeadline != null) {
+                        HrefPrincipal = aP_newHeadline.attr("href"); // Obtiene el atributo href
+                        System.out.println("Href Principal: " + HrefPrincipal);
+                    }
 
                     // Asignamos los datos al UI (en el hilo principal)
-                this.getActivity().runOnUiThread(() -> {
-                    newsTitle.setText(title);  // Asignamos el título
-                            // Aquí se podría cargar la imagen si tienes una librería como Glide o Picasso
-                    Glide.with(requireContext()).load(img).into(newsImage);
-                });
-            }
-            else{
-                String title="MAL";
-                newsTitle.setText(title);
-            }
+                    String finalHrefPrincipal = HrefPrincipal;
+                    this.getActivity().runOnUiThread(() -> {
+                        newsTitle.setText(title);  // Asignamos el título
+                        Glide.with(getContext()).load(img).into(newsImage);
+                        NoticiaPrincipal.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Aquí, pasar el href al WebNews Activity
+                                Intent intent = new Intent(getContext(), WebNews.class);
+                                intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
+                                startActivity(intent);
+                            }
+                        });
+                    });
 
-            for (Element elemento : articleElements) {
-                 Elements imagen = elemento.getElementsByTag("source");
-                 String img = imagen.attr("srcset");
+                } else {
+                    System.out.println("Noticia principal vacia");
+                }
 
-                 Elements h2 = elemento.getElementsByTag("h2");
-                 String title = h2.text();
+                // Asegúrate de que setOnClickListener se ejecuta en el hilo principal
 
-                 if (!imagen.isEmpty() && !h2.isEmpty() && i < 8) {
-                     newsList.add(new NewsItem(title, img));
-                     this.getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
-                     i++;
-                 }
-            }
+                for (Element elemento : articleElements) {
+                    Elements imagen = elemento.getElementsByTag("source");
+                    String img = imagen.attr("srcset");
+                    Elements h2 = elemento.getElementsByTag("h2");
+                    Elements a = elemento.getElementsByTag("a");
+                    Element a_newHeadline = a.select(".new__headline").first(); // Selecciona por clase
+                    String title = h2.text();
+
+                    // Verifica si el elemento <a> con la clase "new__headline" existe
+                    if (a_newHeadline != null) {
+                        href = a_newHeadline.attr("href"); // Obtiene el atributo href
+                        System.out.println("Href: " + href);
+                    }
+
+                    // Agrega los artículos a la lista si hay imagen y título
+                    if (!imagen.isEmpty() && !h2.isEmpty() && i < 8) {
+                        newsList.add(new NewsItem(title, img, href));
+                        this.getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+                        i++;
+                    }
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
                 this.getActivity().runOnUiThread(() -> {
-                    newsList.add(new NewsItem("Error al cargar noticias", ""));
+                    newsList.add(new NewsItem("Error al cargar noticias", "", ""));
                     adapter.notifyDataSetChanged();
                 });
             }

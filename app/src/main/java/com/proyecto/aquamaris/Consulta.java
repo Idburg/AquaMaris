@@ -39,7 +39,7 @@ public class Consulta extends AppCompatActivity {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
             province = getIntent().getExtras().getString("PROVINCIA");
-            Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%'", null);
+            Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%' and ", null);
             Log.d("ValorProvincia", "Provincia: " + province);
             //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
             if(c != null && c.moveToFirst())

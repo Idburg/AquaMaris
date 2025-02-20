@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.proyecto.aquamaris.NewsAdapter;
+import com.proyecto.aquamaris.NewsItem;
+import com.proyecto.aquamaris.R;
+import com.proyecto.aquamaris.WebNews;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,7 +37,7 @@ public class Noticias extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.prueba1);
 
         recyclerView = findViewById(R.id.recyclerView);
         newsImage = findViewById(R.id.newsImageLarge);  // Imagen
