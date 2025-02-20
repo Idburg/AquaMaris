@@ -1,5 +1,8 @@
 package com.proyecto.aquamaris.Fragmentos;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.proyecto.aquamaris.Login;
 import com.proyecto.aquamaris.NombrePeces;
 import com.proyecto.aquamaris.NombrePecesAdapter;
 import com.proyecto.aquamaris.R;
@@ -92,6 +98,25 @@ public class Prueba3 extends Fragment {
         {
             System.out.println("Error");
         }
+
+        AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
+
+        cerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+
+                SharedPreferences.Editor editor = requireActivity()
+                        .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        .edit();
+                editor.clear();
+                editor.apply();
+
+                Intent intent = new Intent(requireActivity(), Login.class);
+                startActivity(intent);
+                requireActivity().finish();
+            }
+        });
 
     }
 /*

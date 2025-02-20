@@ -55,17 +55,18 @@
         android:background="@color/amarillo"
         />
 
-    <Button
-        android:id="@+id/signout"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/settings_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/marine_blue"
         android:text="@string/cerrar_sesion"
+        android:textColor="@color/white"
         app:cornerRadius="0sp"
         app:layout_constraintEnd_toStartOf="@id/vertical2"
         app:layout_constraintTop_toBottomOf="@id/constraint"
-        tools:ignore="MissingConstraints" />
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vertical"
