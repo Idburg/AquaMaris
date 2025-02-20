@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.proyecto.aquamaris.Consulta;
 import com.proyecto.aquamaris.Consulta2;
+import com.proyecto.aquamaris.MapsActivity;
 import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.Province;
 import com.proyecto.aquamaris.RecyclerViewAdapter;
@@ -140,7 +141,7 @@ public class Prueba2 extends Fragment {
             @Override
             public void onClick(View view) {
                 provincia = et.getText().toString();
-                Intent intent = new Intent(getContext(), Consulta.class);
+                Intent intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra("PROVINCIA",provincia);
                 startActivity(intent);
 
