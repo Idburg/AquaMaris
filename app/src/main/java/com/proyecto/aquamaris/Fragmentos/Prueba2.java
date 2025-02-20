@@ -1,46 +1,43 @@
 package com.proyecto.aquamaris.Fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.proyecto.aquamaris.Consulta;
-import com.proyecto.aquamaris.MainActivity2;
-import com.proyecto.aquamaris.Province;
+import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.R;
+import com.proyecto.aquamaris.Province;
 import com.proyecto.aquamaris.RecyclerViewAdapter;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Prueba2 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    EditText et;
+    Button b3;
+    String provincia;
+    private RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerViewAdapter recyclerViewAdapter;
 
     public Prueba2() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Page2.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Prueba2 newInstance(String param1, String param2) {
         Prueba2 fragment = new Prueba2();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,10 +45,6 @@ public class Prueba2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -59,6 +52,113 @@ public class Prueba2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.prueba2, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        et = view.findViewById(R.id.editTextText);
+        //b3 = findViewById(R.id.button3);
+
+        // Crear una lista de provincias
+        List<Province> provinciaList = new ArrayList<>();
+        provinciaList.add(new Province(R.drawable.alava, "Álava"));
+        provinciaList.add(new Province(R.drawable.albacete, "Albacete"));
+        provinciaList.add(new Province(R.drawable.alicante, "Alicante"));
+        provinciaList.add(new Province(R.drawable.almeria, "Almería"));
+        provinciaList.add(new Province(R.drawable.asturias, "Asturias"));
+        provinciaList.add(new Province(R.drawable.avila, "Ávila"));
+        provinciaList.add(new Province(R.drawable.badajoz, "Badajoz"));
+        provinciaList.add(new Province(R.drawable.barcelona, "Barcelona"));
+        provinciaList.add(new Province(R.drawable.burgos, "Burgos"));
+        provinciaList.add(new Province(R.drawable.cabrera, "Cabrera"));
+        provinciaList.add(new Province(R.drawable.caceres, "Cáceres"));
+        provinciaList.add(new Province(R.drawable.cadiz, "Cádiz"));
+        provinciaList.add(new Province(R.drawable.cantabria, "Cantabria"));
+        provinciaList.add(new Province(R.drawable.castellon, "Castellón"));
+        provinciaList.add(new Province(R.drawable.ciudadreal, "Ciudad Real"));
+        provinciaList.add(new Province(R.drawable.cordoba, "Córdoba"));
+        provinciaList.add(new Province(R.drawable.cuenca, "Cuenca"));
+        provinciaList.add(new Province(R.drawable.elhierro, "El Hierro"));
+        provinciaList.add(new Province(R.drawable.formentera, "Formentera"));
+        provinciaList.add(new Province(R.drawable.fuerteventura, "Fuerteventura"));
+        provinciaList.add(new Province(R.drawable.gerona, "Gerona"));
+        provinciaList.add(new Province(R.drawable.gipuzkoa, "Gipuzkoa"));
+        provinciaList.add(new Province(R.drawable.granada, "Granada"));
+        provinciaList.add(new Province(R.drawable.grancanaria, "Gran Canaria"));
+        provinciaList.add(new Province(R.drawable.guadalajara, "Guadalajara"));
+        provinciaList.add(new Province(R.drawable.huelva, "Huelva"));
+        provinciaList.add(new Province(R.drawable.huesca, "Huesca"));
+        provinciaList.add(new Province(R.drawable.ibiza, "Ibiza"));
+        provinciaList.add(new Province(R.drawable.jaen, "Jaén"));
+        provinciaList.add(new Province(R.drawable.lacorunha, "La Coruña"));
+        provinciaList.add(new Province(R.drawable.lagomera, "La Gomera"));
+        provinciaList.add(new Province(R.drawable.lanzarote, "Lanzarote"));
+        provinciaList.add(new Province(R.drawable.lapalma, "La Palma"));
+        provinciaList.add(new Province(R.drawable.larioja, "La Rioja"));
+        provinciaList.add(new Province(R.drawable.leon, "León"));
+        provinciaList.add(new Province(R.drawable.lerida, "Lérida"));
+        provinciaList.add(new Province(R.drawable.lugo, "Lugo"));
+        provinciaList.add(new Province(R.drawable.madrid, "Madrid"));
+        provinciaList.add(new Province(R.drawable.malaga, "Málaga"));
+        provinciaList.add(new Province(R.drawable.mallorca, "Mallorca"));
+        provinciaList.add(new Province(R.drawable.menorca, "Menorca"));
+        provinciaList.add(new Province(R.drawable.murcia, "Murcia"));
+        provinciaList.add(new Province(R.drawable.navarra, "Navarra"));
+        provinciaList.add(new Province(R.drawable.ourense, "Ourense"));
+        provinciaList.add(new Province(R.drawable.palencia, "Palencia"));
+        provinciaList.add(new Province(R.drawable.pontevedra, "Pontevedra"));
+        provinciaList.add(new Province(R.drawable.salamanca, "Salamanca"));
+        provinciaList.add(new Province(R.drawable.sevilla, "Sevilla"));
+        provinciaList.add(new Province(R.drawable.soria, "Soria"));
+        provinciaList.add(new Province(R.drawable.tarragona, "Tarragona"));
+        provinciaList.add(new Province(R.drawable.tenerife, "Tenerife"));
+        provinciaList.add(new Province(R.drawable.teruel, "Teruel"));
+        provinciaList.add(new Province(R.drawable.toledo, "Toledo"));
+        provinciaList.add(new Province(R.drawable.valencia, "Valencia"));
+        provinciaList.add(new Province(R.drawable.valladolid, "Valladolid"));
+        provinciaList.add(new Province(R.drawable.vizcaya, "Vizcaya"));
+        provinciaList.add(new Province(R.drawable.zamora, "Zamora"));
+        provinciaList.add(new Province(R.drawable.zaragoza, "Zaragoza"));
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        layoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        recyclerViewAdapter = new RecyclerViewAdapter(provinciaList);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setHasFixedSize(true);
+
+
+        BottomAppBar bottomAppBar = view.findViewById(R.id.bottom_app_bar);
+        FloatingActionButton myfab = view.findViewById(R.id.fab);
+
+
+        myfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                provincia = et.getText().toString();
+                Intent intent = new Intent(getContext(), Consulta.class);
+                intent.putExtra("PROVINCIA",provincia);
+                startActivity(intent);
+
+
+            }
+        });
+
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Consulta2.class);
+                intent.putExtra("PROVINCIA", provincia);
+                startActivity(intent);
+            }
+
+
+        });
+
     }
 }
 

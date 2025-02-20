@@ -1,10 +1,13 @@
 package com.proyecto.aquamaris;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +24,9 @@ import java.util.List;
 public class Consulta2 extends AppCompatActivity {
     String prov;
     List<ListarElementos> elements2;
+    List<NombrePeces> peces2;
     TextView resultado2;
+    Button inf;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,11 +59,17 @@ public class Consulta2 extends AppCompatActivity {
                 c2.close();
             }
             init2();
+
+
+
+
         }catch(Exception e)
         {
             System.out.println(e.toString());
             Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show();
         }
+
+
 
     }
     public void init2()

@@ -4,14 +4,14 @@
     xmlns:style="http://schemas.android.com/tools">
     <item
         android:id="@+id/noticias"
-        android:title=""
+        android:title="@string/Noticias"
         android:icon="@drawable/news_selector"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/provincias"
-        android:title=""
+        android:title="@string/Provincias"
         android:icon="@drawable/province_selector"
         app:showAsAction="ifRoom"
         >
@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/ajustes"
-        android:title=""
+        android:title="@string/Ajustes"
         android:icon="@drawable/settings_selector"
         app:showAsAction="always"
         />

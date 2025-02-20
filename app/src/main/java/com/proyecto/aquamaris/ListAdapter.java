@@ -1,11 +1,13 @@
 package com.proyecto.aquamaris;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,11 +15,14 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.checkerframework.checker.units.qual.N;
+
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
 {
     private List<ListarElementos> aData;
     private LayoutInflater mInflater;
     private Context context;
+    String nombrepez;
 
     public ListAdapter(List<ListarElementos> itemList, Context context)
     {
@@ -42,7 +47,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position)
     {
+        ListarElementos le = aData.get(position);
+        //holder.name.setText(le.getName());
         holder.bindData(aData.get(position));
+        holder.status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nombrepez = le.getName();
+                Intent intent = new Intent(view.getContext(), PezIndividual.class);
+                intent.putExtra("PEZ", nombrepez);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     public void setItems(List<ListarElementos> items)
@@ -53,7 +69,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         ImageView iconImage;
-        TextView name, city, status;
+        TextView name, city;
+        Button status;
 
         ViewHolder(View itemView)
         {

@@ -1,42 +1,41 @@
 package com.proyecto.aquamaris.Fragmentos;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.proyecto.aquamaris.NombrePeces;
+import com.proyecto.aquamaris.NombrePecesAdapter;
 import com.proyecto.aquamaris.R;
+import com.proyecto.aquamaris.db.DBHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Prueba3 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String province;
+    TextView resultado2;
+    List<NombrePeces> pecesList;
+    String formato = "";
 
     public Prueba3() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Page3.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Prueba3 newInstance(String param1, String param2) {
         Prueba3 fragment = new Prueba3();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,16 +43,66 @@ public class Prueba3 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.prueba3, container, false);
+        return inflater.inflate(R.layout.activity_pantalla_ajustes, container, false);
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        try {
+            DBHelper db = new DBHelper(getContext());
+            SQLiteDatabase obj = db.getReadableDatabase();
+            Cursor c = obj.rawQuery("SELECT nombre_cientifico FROM peces", null);
+
+            //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
+            if(c != null && c.moveToFirst())
+            {
+                pecesList = new ArrayList<>();
+                do{
+
+                    int indiceN = c.getColumnIndex("nombre_cientifico");
+
+                    String nombrecientifico = c.getString(indiceN);
+
+                    if (nombrecientifico != null && !nombrecientifico.trim().isEmpty()) {
+
+                        nombrecientifico = nombrecientifico.trim();
+
+                        String[] palabras = nombrecientifico.split("\\s+");
+
+                        if (palabras.length > 1) {
+                            String formato = palabras[0]+"_"+palabras[1].toLowerCase();
+                            pecesList.add(new NombrePeces(formato));
+                        }
+                    }
+
+                }while(c.moveToNext());
+                c.close();
+            }
+
+            //init3(view);
+        }catch(Exception e)
+        {
+            System.out.println("Error");
+        }
+
+    }
+/*
+    public void init3(View view)
+    {
+
+        NombrePecesAdapter npa = new NombrePecesAdapter(pecesList, getContext());
+        RecyclerView recyclerView = view.findViewById(R.id.listRecycleView2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(npa);
+    }
+*/
 }
