@@ -19,7 +19,7 @@ import org.checkerframework.checker.units.qual.N;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
 {
-    private List<ListarElementos> aData;
+    private List<ListarElementos> aData = null;
     private LayoutInflater mInflater;
     private Context context;
     String nombrepez;

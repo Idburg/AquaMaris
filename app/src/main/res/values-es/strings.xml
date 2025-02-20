@@ -27,4 +27,7 @@
     <string name="already_have_an_account">¿Ya tienes cuenta?</string>
     <string name="sign_up_with_google">Regístrate con Google</string>
     <string name="spain">spain</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="informacion">Información</string>
+    <string name="profile_email">profile_email</string>
 </resources>

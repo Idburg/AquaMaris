@@ -48,6 +48,9 @@
             android:name="com.proyecto.aquamaris.FirebaseImplementation"
             android:exported="true" />
         <activity
+            android:name="com.proyecto.aquamaris.Pez"
+            android:exported="true" />
+        <activity
             android:name="com.proyecto.aquamaris.Splash"
             android:exported="true">
             <intent-filter>
