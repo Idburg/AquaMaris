@@ -1,42 +1,44 @@
 [versions]
-agp = "8.6.0"
+agp = "8.6.1"
 androidMapsUtils = "2.2.3"
+assetDelivery = "2.3.0"
 cardview = "1.0.0"
-firebaseAuth = "23.1.0"
-firebaseBom = "33.7.0"
-firebaseDatabase = "21.0.0"
+featureDelivery = "2.1.0"
+firebaseAuth = "23.2.0"
+firebaseBom = "33.9.0"
+firebaseDatabase = "21.1.1"
 firebaseDatabaseCollection = "18.0.1"
-firebaseDatabaseVersion = "20.0.0"
-firebaseFirestore = "25.1.1"
+firebaseFirestore = "25.1.2"
 glide = "4.16.0"
-glideVersion = "4.15.1"
 jsoup = "1.16.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.3"
+activity = "1.10.0"
 constraintlayout = "2.2.0"
-materialVersion = "1.5.0"
 playServicesAuth = "21.3.0"
 recyclerviewSelection = "1.1.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
-playServicesMaps = "19.0.0"
-core = "1.10.3"
+playServicesMaps = "19.1.0"
+review = "2.0.2"
+firebaseDatabaseVersion = "21.0.0"
+
 
 [libraries]
 android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
+app-update = { module = "com.google.android.play:app-update", version.ref = "featureDelivery" }
+asset-delivery = { module = "com.google.android.play:asset-delivery", version.ref = "assetDelivery" }
 cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+feature-delivery = { module = "com.google.android.play:feature-delivery", version.ref = "featureDelivery" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-core = { module = "com.google.firebase:firebase-core", version.ref = "firebaseDatabase" }
 firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabase" }
 firebase-database-collection = { module = "com.google.firebase:firebase-database-collection", version.ref = "firebaseDatabaseCollection" }
-firebase-database-v2000 = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabaseVersion" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-glide-v4151 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -45,11 +47,11 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-material-v150 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 recyclerview-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recyclerviewSelection" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
-core = { group = "com.google.android.play", name = "core", version.ref = "core" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+google-firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabaseVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.proyecto.aquamaris.Login;
 import com.proyecto.aquamaris.NombrePeces;
 import com.proyecto.aquamaris.NombrePecesAdapter;
@@ -111,6 +113,8 @@ public class Prueba3 extends Fragment {
                         .edit();
                 editor.clear();
                 editor.apply();
+
+                FirebaseDatabase.getInstance().setPersistenceEnabled(false);
 
                 Intent intent = new Intent(requireActivity(), Login.class);
                 startActivity(intent);

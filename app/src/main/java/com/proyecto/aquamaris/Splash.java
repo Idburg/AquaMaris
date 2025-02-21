@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.animation.ObjectAnimator;
-import android.view.View;
+import android.util.DisplayMetrics;
+import android.view.View; // Asegúrate de tener esta importación
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
@@ -14,19 +15,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.firebase.auth.FirebaseAuth;
-import android.util.DisplayMetrics;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.play.core.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
+import android.content.Intent;
+import android.content.IntentSender;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 
@@ -39,7 +39,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //FirebaseAuth.getInstance().signOut();
         appUpdateManager = AppUpdateManagerFactory.create(this);
         checkForAppUpdate();
 

@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.proyecto.aquamaris"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.proyecto.aquamaris"
         minSdk = 24
         targetSdk = 34
-        versionCode = 6
-        versionName = "0.8"
+        versionCode = 7
+        versionName = "0.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,7 +56,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
-    implementation(libs.core)
+    implementation(libs.google.firebase.database)
     testImplementation(libs.junit)
     implementation(libs.jsoup)
     implementation(libs.glide)
@@ -67,11 +67,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
-    implementation(libs.firebase.database.v2000)
     implementation(libs.play.services.auth)
     implementation(libs.play.services.maps)
     implementation(libs.firebase.core)
-    implementation(libs.material.v150)
     implementation(libs.android.maps.utils)
-    implementation ("com.google.android.play:app-update:2.1.0")
+    implementation(libs.asset.delivery)
+    implementation(libs.feature.delivery)
+    implementation(libs.review)
+    implementation (libs.app.update)
 }
