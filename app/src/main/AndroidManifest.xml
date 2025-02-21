@@ -23,35 +23,38 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name="com.proyecto.aquamaris.MapsActivity"
+            android:name=".MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name="com.proyecto.aquamaris.Register"
+            android:name=".Register"
             android:exported="false" />
         <activity
-            android:name="com.proyecto.aquamaris.Login"
+            android:name=".Login"
             android:exported="false" />
         <activity
-            android:name="com.proyecto.aquamaris.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"/>
         <activity
-            android:name="com.proyecto.aquamaris.Consulta"
+            android:name=".Consulta"
+            android:exported="true"
+            android:parentActivityName=".Noticias"
+            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+        <activity
+            android:name=".Consulta2"
+            android:exported="false"
+            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+        <activity
+            android:name=".MainActivity2"
             android:exported="true" />
         <activity
-            android:name="com.proyecto.aquamaris.Consulta2"
-            android:exported="false" />
-        <activity
-            android:name="com.proyecto.aquamaris.MainActivity2"
+            android:name=".FirebaseImplementation"
             android:exported="true" />
         <activity
-            android:name="com.proyecto.aquamaris.FirebaseImplementation"
+            android:name=".Pez"
             android:exported="true" />
         <activity
-            android:name="com.proyecto.aquamaris.Pez"
-            android:exported="true" />
-        <activity
-            android:name="com.proyecto.aquamaris.Splash"
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,8 +63,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.proyecto.aquamaris.Noticias"
+            android:name=".Noticias"
             android:exported="true"/>
+    <activity
+        android:name=".WebNews"
+        android:exported="true"/>
 
         <meta-data
             android:name="preloaded_fonts"

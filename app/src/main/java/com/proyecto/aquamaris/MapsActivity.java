@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,8 +22,6 @@ import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonMultiPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
-import com.proyecto.aquamaris.Fragmentos.Prueba2;
-import com.proyecto.aquamaris.Fragmentos.Prueba3;
 import com.proyecto.aquamaris.databinding.ActivityMapsBinding;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
 
@@ -41,7 +40,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private final LatLng defaultCoords = new LatLng(40.4168, -3.7038); // Madrid
     private final float defaultZoom = 5.75f;
-    private GeoJsonFeature selectedFeature = null;
     private GeoJsonFeature lastFeature = null;
     private LatLngBounds selectedBounds = null;
     private Marker currentMarker = null;
@@ -55,72 +53,73 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
 
-        loadGeoJson();
+        try {
+            loadGeoJson();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadGeoJson() {
-        try {
-            JSONObject jsonObject = getJsonObject();
+    private void loadGeoJson() throws Exception {
+        JSONObject jsonObject = getJsonObject();
 
-            GeoJsonLayer layer = new GeoJsonLayer(mMap, jsonObject);
+        GeoJsonLayer layer = new GeoJsonLayer(mMap, jsonObject);
 
-            for (GeoJsonFeature feature : layer.getFeatures()) {
-                GeoJsonPolygonStyle polygonStyle = new GeoJsonPolygonStyle();
+        for (GeoJsonFeature feature : layer.getFeatures()) {
+            GeoJsonPolygonStyle polygonStyle = new GeoJsonPolygonStyle();
 
-                polygonStyle.setStrokeColor(0xEE000000);
-                polygonStyle.setStrokeWidth(2.5f);
+            polygonStyle.setStrokeColor(0xEE000000);
+            polygonStyle.setStrokeWidth(2.5f);
 
-                feature.setPolygonStyle(polygonStyle);
+            feature.setPolygonStyle(polygonStyle);
+        }
+
+        layer.setOnFeatureClickListener(feature -> {
+
+            String provincia = feature.getProperty("name");
+            Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
+
+            if (lastFeature != null && lastFeature.equals(feature)) {
+                // Si es la misma provincia, abrir la Activity
+                abrirDetalleProvincia(provincia);
+                return; // Salimos para evitar recargar la vista
             }
 
-            layer.setOnFeatureClickListener(feature -> {
+            lastFeature = (GeoJsonFeature) feature;
 
-                String provincia = feature.getProperty("name");
-                Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
+            LatLngBounds.Builder boundsBuilder = getBounds(feature);
 
-                if (lastFeature != null && lastFeature.equals(feature)) {
-                    // Si es la misma provincia, abrir la Activity
-                    abrirDetalleProvincia(provincia);
-                    return; // Salimos para evitar recargar la vista
-                }
+            selectedBounds = boundsBuilder.build();
 
-                selectedFeature = (GeoJsonFeature) feature;
-                lastFeature = (GeoJsonFeature) feature;
+            if (currentMarker != null) {
+                currentMarker.remove();
+            }
 
-                LatLngBounds.Builder boundsBuilder = getBounds(feature);
+            centrarMapa(selectedBounds,provincia);
 
-                selectedBounds = boundsBuilder.build();
-
-                if (currentMarker != null) {
-                    currentMarker.remove();
-                }
-
-                centrarMapa(selectedBounds,provincia);
-
-                mMap.setOnMapClickListener(latLng -> {
-                    if (selectedBounds != null && !selectedBounds.contains(latLng)) {
-                        // Si el clic está fuera de la provincia, descentrar
-                        descentrarMapa();
-                        if (currentMarker != null) {
-                            currentMarker.remove();
-                        }
+            mMap.setOnMapClickListener(latLng -> {
+                if (selectedBounds != null && !selectedBounds.contains(latLng)) {
+                    // Si el clic está fuera de la provincia, descentrar
+                    descentrarMapa();
+                    if (currentMarker != null) {
+                        currentMarker.remove();
                     }
-                });
-
+                }
             });
 
-            layer.addLayerToMap();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
+
+        layer.addLayerToMap();
+
     }
 
     private static LatLngBounds.Builder getBounds(Feature feature) {
@@ -160,8 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         reader.close();
         inputStream.close();
 
-        JSONObject jsonObject = new JSONObject(jsonString.toString());
-        return jsonObject;
+        return new JSONObject(jsonString.toString());
     }
 
     private void centrarMapa(LatLngBounds bob, String provincia) {
@@ -192,5 +190,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("PROVINCIA", provincia);
         startActivity(intent);
     }
+
+
 
 }
