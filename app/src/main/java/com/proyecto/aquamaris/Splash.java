@@ -111,4 +111,38 @@ public class Splash extends AppCompatActivity {
             startActivity(intent);
         }, 4000); // Retraso de 4 segundos
     }
+
+    private void checkForAppUpdate() {
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) { // Forzar actualización inmediata
+                startUpdateFlow(appUpdateInfo);
+            }
+        });
+    }
+
+    private void startUpdateFlow(AppUpdateInfo appUpdateInfo) {
+        try {
+            appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.IMMEDIATE, // Flujo de actualización inmediata (pantalla completa)
+                    this,
+                    APP_UPDATE_REQUEST_CODE);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) { // Si el usuario cancela o falla
+                finish(); // Cierra la app para forzar la actualización
+            }
+        }
+    }
+
 }
