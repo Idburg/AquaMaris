@@ -79,6 +79,4 @@ public class Consulta extends AppCompatActivity {
         recyclerView.setAdapter(listAdapter);
     }
 
-
-
 }

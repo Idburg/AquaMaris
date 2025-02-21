@@ -88,11 +88,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String provincia = feature.getProperty("name");
             Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
 
-            if (lastFeature != null && lastFeature.equals(feature)) {
-                // Si es la misma provincia, abrir la Activity
+            if (lastFeature != null && lastFeature.equals(feature))
                 abrirDetalleProvincia(provincia);
-                return; // Salimos para evitar recargar la vista
-            }
 
             lastFeature = (GeoJsonFeature) feature;
 
@@ -100,22 +97,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             selectedBounds = boundsBuilder.build();
 
-            if (currentMarker != null) {
+            if (currentMarker != null)
                 currentMarker.remove();
-            }
 
             centrarMapa(selectedBounds,provincia);
 
             mMap.setOnMapClickListener(latLng -> {
                 if (selectedBounds != null && !selectedBounds.contains(latLng)) {
-                    // Si el clic está fuera de la provincia, descentrar
                     descentrarMapa();
                     if (currentMarker != null) {
                         currentMarker.remove();
                     }
                 }
             });
-
         });
 
         layer.addLayerToMap();
@@ -126,23 +120,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtener los límites de la provincia seleccionada para usar más tarde
         LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
-        if (feature.getGeometry() instanceof GeoJsonPolygon) {
-            GeoJsonPolygon polygon = (GeoJsonPolygon) feature.getGeometry();
+        GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
+        for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
             for (List<LatLng> coordinates : polygon.getCoordinates()) {
                 for (LatLng point : coordinates) {
                     boundsBuilder.include(point);
                 }
             }
-        } else if (feature.getGeometry() instanceof GeoJsonMultiPolygon) {
-            GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
-            for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
-                for (List<LatLng> coordinates : polygon.getCoordinates()) {
-                    for (LatLng point : coordinates) {
-                        boundsBuilder.include(point);
-                    }
-                }
-            }
         }
+
         return boundsBuilder;
     }
 

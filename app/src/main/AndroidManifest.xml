@@ -43,6 +43,7 @@
         <activity
             android:name=".Consulta2"
             android:exported="false"
+            android:parentActivityName=".Noticias"
             android:theme="@style/Theme.AquaMaris.ActionBar"/>
         <activity
             android:name=".MainActivity2"

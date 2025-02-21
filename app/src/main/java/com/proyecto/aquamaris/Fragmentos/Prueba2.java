@@ -142,9 +142,9 @@ public class Prueba2 extends Fragment {
             public void onClick(View view) {
                 provincia = et.getText().toString();
                 Intent intent = new Intent(getContext(), MapsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.putExtra("PROVINCIA",provincia);
                 startActivity(intent);
-
 
             }
         });
