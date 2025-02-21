@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
+    implementation(libs.core)
     testImplementation(libs.junit)
     implementation(libs.jsoup)
     implementation(libs.glide)
@@ -72,4 +73,5 @@ dependencies {
     implementation(libs.firebase.core)
     implementation(libs.material.v150)
     implementation(libs.android.maps.utils)
+    implementation ("com.google.android.play:app-update:2.1.0")
 }

@@ -14,13 +14,25 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.firebase.auth.FirebaseAuth;
-
 import android.util.DisplayMetrics;
+import android.content.Intent;
+import android.content.IntentSender;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 
 public class Splash extends AppCompatActivity {
 
     private ImageView pez;
+    private AppUpdateManager appUpdateManager;
+    private static final int APP_UPDATE_REQUEST_CODE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +40,8 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         //FirebaseAuth.getInstance().signOut();
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        checkForAppUpdate();
 
         ImageView fondo = findViewById(R.id.fondo);
         ImageView logo = findViewById(R.id.logo);
@@ -43,6 +57,7 @@ public class Splash extends AppCompatActivity {
                 .load(R.drawable.logo)
                 .dontTransform() // Evita transformaciones que podrían alterar la imagen
                 .into(logo);
+
 
         // Animar el pez
         animateFish();
