@@ -75,7 +75,7 @@ public class Prueba1 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
         newsImage = view.findViewById(R.id.newsImageLarge);  // Imagen
-        newsTitle = view.findViewById(R.id.newsTitleLarge);  // Título
+        newsTitle = view.findViewById(R.id.newsTitleLarge);// Título
         NoticiaPrincipal = view.findViewById(R.id.imageContainer);
         newsList = new ArrayList<>();
 
