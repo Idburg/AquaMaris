@@ -14,11 +14,25 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.firebase.auth.FirebaseAuth;
+
+import android.content.Intent;
+import android.content.IntentSender;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 
 public class Splash extends AppCompatActivity {
 
     private ImageView pez;
+    private AppUpdateManager appUpdateManager;
+    private static final int APP_UPDATE_REQUEST_CODE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +40,8 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         //FirebaseAuth.getInstance().signOut();
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        checkForAppUpdate();
 
         ImageView fondo = findViewById(R.id.fondo);
         ImageView logo = findViewById(R.id.logo);
@@ -88,5 +104,38 @@ public class Splash extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }, 4000); // Retraso de 4 segundos
+    }
+
+    private void checkForAppUpdate() {
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) { // Forzar actualización inmediata
+                startUpdateFlow(appUpdateInfo);
+            }
+        });
+    }
+
+    private void startUpdateFlow(AppUpdateInfo appUpdateInfo) {
+        try {
+            appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.IMMEDIATE, // Flujo de actualización inmediata (pantalla completa)
+                    this,
+                    APP_UPDATE_REQUEST_CODE);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) { // Si el usuario cancela o falla
+                finish(); // Cierra la app para forzar la actualización
+            }
+        }
     }
 }
