@@ -1,25 +1,19 @@
-package com.proyecto.aquamaris.Fragmentos;
+package com.example.aquamaris;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.proyecto.aquamaris.NewsAdapter;
 import com.proyecto.aquamaris.NewsItem;
-import com.proyecto.aquamaris.Noticias;
 import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.WebNews;
 
@@ -32,62 +26,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ui.main.SectionsPagerAdapter;
-
-public class Prueba1 extends Fragment {
-
+public class Noticias extends AppCompatActivity {
     private ImageView newsImage;
     private TextView newsTitle;
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private List<NewsItem> newsList;
-    private SectionsPagerAdapter sectionsPagerAdapter;
-    private MenuItem prevMenuItem;
     private FrameLayout NoticiaPrincipal;
 
-    public Prueba1() {
-        // Required empty public constructor
-    }
-
-    public static Prueba1 newInstance() {
-        Prueba1 fragment = new Prueba1();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.prueba1);
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.prueba1, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view,@Nullable Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        newsImage = view.findViewById(R.id.newsImageLarge);  // Imagen
-        newsTitle = view.findViewById(R.id.newsTitleLarge);  // Título
-        NoticiaPrincipal = view.findViewById(R.id.imageContainer);
+        recyclerView = findViewById(R.id.recyclerView);
+        newsImage = findViewById(R.id.newsImageLarge);  // Imagen
+        newsTitle = findViewById(R.id.newsTitleLarge);  // Título
+        NoticiaPrincipal = findViewById(R.id.imageContainer);
         newsList = new ArrayList<>();
 
-
-        // Configurar RecyclerView con un LinearLayoutManager (una sola columna)
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 columnas
-        adapter = new NewsAdapter(newsList, getContext());
+        // Configurar RecyclerView con un LinearLayoutManager (dos columnas)
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columnas
+        adapter = new NewsAdapter(newsList, this);
         recyclerView.setAdapter(adapter);
 
+        // Cargar noticias mediante scraping
         loadNewsFromScraping();
     }
-
 
     private void loadNewsFromScraping() {
         new Thread(() -> {
@@ -123,14 +88,14 @@ public class Prueba1 extends Fragment {
 
                     // Asignamos los datos al UI (en el hilo principal)
                     String finalHrefPrincipal = HrefPrincipal;
-                    this.getActivity().runOnUiThread(() -> {
+                    runOnUiThread(() -> {
                         newsTitle.setText(title);  // Asignamos el título
-                        Glide.with(getContext()).load(img).into(newsImage);
+                        Glide.with(Noticias.this).load(img).into(newsImage);
                         NoticiaPrincipal.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 // Aquí, pasar el href al WebNews Activity
-                                Intent intent = new Intent(getContext(), WebNews.class);
+                                Intent intent = new Intent(Noticias.this, WebNews.class);
                                 intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
                                 startActivity(intent);
                             }
@@ -138,7 +103,7 @@ public class Prueba1 extends Fragment {
                     });
 
                 } else {
-                    System.out.println("Noticia principal vacia");
+                   System.out.println("Noticia principal vacia");
                 }
 
                 // Asegúrate de que setOnClickListener se ejecuta en el hilo principal
@@ -160,14 +125,14 @@ public class Prueba1 extends Fragment {
                     // Agrega los artículos a la lista si hay imagen y título
                     if (!imagen.isEmpty() && !h2.isEmpty() && i < 8) {
                         newsList.add(new NewsItem(title, img, href));
-                        this.getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+                        runOnUiThread(() -> adapter.notifyDataSetChanged());
                         i++;
                     }
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
-                this.getActivity().runOnUiThread(() -> {
+                runOnUiThread(() -> {
                     newsList.add(new NewsItem("Error al cargar noticias", "", ""));
                     adapter.notifyDataSetChanged();
                 });
@@ -175,4 +140,3 @@ public class Prueba1 extends Fragment {
         }).start();
     }
 }
-

@@ -84,7 +84,7 @@ public class Splash extends AppCompatActivity {
 
     private void openApp() {
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(Splash.this, Login.class);
+            Intent intent = new Intent(Splash.this, Noticias.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }, 4000); // Retraso de 4 segundos
