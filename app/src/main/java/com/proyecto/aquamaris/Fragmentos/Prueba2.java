@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class Prueba2 extends Fragment {
     EditText et;
-    Button b3;
+    ImageButton b3;
     String provincia;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;

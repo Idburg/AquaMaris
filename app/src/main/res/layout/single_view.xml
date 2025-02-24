@@ -2,58 +2,72 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginLeft="20dp"
-    android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="@id/imagen"
         app:layout_constraintEnd_toEndOf="@id/imagen"
         app:layout_constraintStart_toStartOf="@id/imagen"
         app:layout_constraintTop_toTopOf="@id/imagen"
         android:id="@+id/constr">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="1dp"
+        app:cardPreventCornerOverlap="true"
+        tools:ignore="MissingConstraints">
+
         <LinearLayout
+            android:id="@+id/linlayout"
+            android:layout_width="140dp"
+            android:layout_height="170dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             tools:ignore="MissingConstraints">
+
             <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_marginTop="5dp"
-                android:id="@+id/imagen" />
+                android:id="@+id/imagen"
+                android:layout_width="130dp"
+                android:layout_height="130dp" />
+
+            <Button
+                android:id="@+id/botonProvincias"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/transparente"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:cornerRadius="0sp"
+                app:layout_constraintEnd_toEndOf="@id/imagen"
+                app:layout_constraintStart_toStartOf="@id/linlayout"
+                app:layout_constraintTop_toBottomOf="@id/imagen"
+                tools:ignore="NotSibling" />
+
         </LinearLayout>
 
 
-    <Button
-        android:id="@+id/texto"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/transparente"
-        android:textColor="@color/transparente"
-        app:cornerRadius="0sp"
-        app:layout_constraintBottom_toBottomOf="@id/constr"
-        app:layout_constraintEnd_toEndOf="@id/constr"
-        app:layout_constraintStart_toStartOf="@id/constr"
-        app:layout_constraintTop_toTopOf="@id/constr"
-        tools:ignore="NotSibling" />
-
-    <Button
-        android:id="@+id/botonProvincias"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        app:cornerRadius="0sp"
-        app:layout_constraintStart_toStartOf="@id/imagen"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/imagen"
-        app:layout_constraintEnd_toEndOf="@id/imagen"
-        android:layout_marginTop="20dp"
-        tools:ignore="NotSibling" />
+        <Button
+            android:id="@+id/texto"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@color/transparente"
+            android:gravity="center"
+            android:textColor="@color/transparente"
+            app:cornerRadius="0sp"
+            app:layout_constraintBottom_toBottomOf="@id/linlayout"
+            app:layout_constraintEnd_toEndOf="@id/linlayout"
+            app:layout_constraintStart_toStartOf="@id/linlayout"
+            app:layout_constraintTop_toTopOf="@id/linlayout"
+            tools:ignore="NotSibling" />
+    </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

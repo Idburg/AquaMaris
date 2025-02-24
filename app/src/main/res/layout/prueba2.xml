@@ -41,7 +41,7 @@
         tools:ignore="NotSibling"
         android:src="@drawable/lupa_foreground"
         android:background="@color/transparente"
-        android:layout_marginRight="60dp"
+        android:layout_marginRight="40dp"
         />
 
 
@@ -65,13 +65,11 @@
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="47dp"
             android:layout_gravity="bottom"
             app:fabAlignmentMode="center"
+            android:gravity="top"
             app:menu="@menu/bottom_app_bar_menu"
-            app:fabAnchorMode="cradle"
-            app:fabCradleRoundedCornerRadius="20dp"
-            app:fabCradleMargin="5dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/marine_blue"/>
 
@@ -83,7 +81,7 @@
                 app:fabSize="normal"
                 app:layout_anchor="@+id/bottom_app_bar"
                 android:backgroundTint="@color/white"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="70dp"
                 />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
