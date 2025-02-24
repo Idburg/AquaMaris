@@ -123,19 +123,23 @@ public class Prueba1 extends Fragment {
 
                     // Asignamos los datos al UI (en el hilo principal)
                     String finalHrefPrincipal = HrefPrincipal;
-                    this.getActivity().runOnUiThread(() -> {
-                        newsTitle.setText(title);  // Asignamos el título
-                        Glide.with(getContext()).load(img).into(newsImage);
-                        NoticiaPrincipal.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // Aquí, pasar el href al WebNews Activity
-                                Intent intent = new Intent(getContext(), WebNews.class);
-                                intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
-                                startActivity(intent);
-                            }
+                    try {
+                        this.getActivity().runOnUiThread(() -> {
+                            newsTitle.setText(title);  // Asignamos el título
+                            Glide.with(getContext()).load(img).into(newsImage);
+                            NoticiaPrincipal.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    // Aquí, pasar el href al WebNews Activity
+                                    Intent intent = new Intent(getContext(), WebNews.class);
+                                    intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
+                                    startActivity(intent);
+                                }
+                            });
                         });
-                    });
+                    } catch (NullPointerException npe) {
+                        npe.printStackTrace();
+                    }
 
                 } else {
                     System.out.println("Noticia principal vacia");
@@ -159,18 +163,27 @@ public class Prueba1 extends Fragment {
 
                     // Agrega los artículos a la lista si hay imagen y título
                     if (!imagen.isEmpty() && !h2.isEmpty() && i < 8) {
-                        newsList.add(new NewsItem(title, img, href));
-                        this.getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
-                        i++;
+                        try {
+                            newsList.add(new NewsItem(title, img, href));
+                            this.getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+                            i++;
+                        }
+                        catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                        }
                     }
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
-                this.getActivity().runOnUiThread(() -> {
-                    newsList.add(new NewsItem("Error al cargar noticias", "", ""));
-                    adapter.notifyDataSetChanged();
-                });
+                try {
+                    this.getActivity().runOnUiThread(() -> {
+                        newsList.add(new NewsItem("Error al cargar noticias", "", ""));
+                        adapter.notifyDataSetChanged();
+                    });
+                } catch (NullPointerException npe) {
+                    npe.printStackTrace();
+                }
             }
         }).start();
     }

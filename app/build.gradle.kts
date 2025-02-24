@@ -12,8 +12,8 @@ android {
         applicationId = "com.proyecto.aquamaris"
         minSdk = 24
         targetSdk = 34
-        versionCode = 7
-        versionName = "0.9"
+        versionCode = 9
+        versionName = "0.96"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
