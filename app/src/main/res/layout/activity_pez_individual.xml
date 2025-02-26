@@ -8,6 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".PezIndividual">
 
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar3"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      android:background="@color/marine_blue"
+      app:titleTextColor="@android:color/white"
+      tools:ignore="MissingConstraints"
+      />
+
   <WebView
       android:id="@+id/vistaWeb"
       android:layout_width="match_parent"

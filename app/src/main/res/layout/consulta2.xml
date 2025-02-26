@@ -13,7 +13,9 @@
         android:layout_height="56dp"
         android:background="@color/marine_blue"
         app:titleTextColor="@android:color/white"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRecycleView"
