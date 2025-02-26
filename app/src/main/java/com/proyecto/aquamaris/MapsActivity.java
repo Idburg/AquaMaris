@@ -61,6 +61,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
+        currentMarker = mMap.addMarker(new MarkerOptions()
+                .position(defaultCoords)
+                        .title("Madrid")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
         try {
             loadGeoJson();
@@ -74,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         GeoJsonLayer layer = new GeoJsonLayer(mMap, jsonObject);
 
+
         for (GeoJsonFeature feature : layer.getFeatures()) {
             GeoJsonPolygonStyle polygonStyle = new GeoJsonPolygonStyle();
 
@@ -82,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             feature.setPolygonStyle(polygonStyle);
         }
+
 
         layer.setOnFeatureClickListener(feature -> {
 
@@ -97,8 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             selectedBounds = boundsBuilder.build();
 
-            if (currentMarker != null)
-                currentMarker.remove();
+
 
             centrarMapa(selectedBounds,provincia);
 
@@ -106,7 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (selectedBounds != null && !selectedBounds.contains(latLng)) {
                     descentrarMapa();
                     if (currentMarker != null) {
-                        currentMarker.remove();
+                        currentMarker.setAlpha(0f);
                     }
                 }
             });
@@ -120,11 +125,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtener los límites de la provincia seleccionada para usar más tarde
         LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
-        GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
-        for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
+        if (feature.getGeometry() instanceof GeoJsonPolygon) {
+            GeoJsonPolygon polygon = (GeoJsonPolygon) feature.getGeometry();
             for (List<LatLng> coordinates : polygon.getCoordinates()) {
                 for (LatLng point : coordinates) {
                     boundsBuilder.include(point);
+                }
+            }
+        } else if (feature.getGeometry() instanceof GeoJsonMultiPolygon) {
+            GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
+            for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
+                for (List<LatLng> coordinates : polygon.getCoordinates()) {
+                    for (LatLng point : coordinates) {
+                        boundsBuilder.include(point);
+                    }
                 }
             }
         }
@@ -133,7 +147,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private @NonNull JSONObject getJsonObject() throws IOException, JSONException {
-        InputStream inputStream = getResources().openRawResource(R.raw.spain_provinces);
+        InputStream inputStream = getResources().openRawResource(R.raw.spain_provinces2);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder jsonString = new StringBuilder();
         String line;
@@ -153,11 +167,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             LatLng center = bob.getCenter();
 
-            currentMarker = mMap.addMarker(new MarkerOptions()
-                            .position(center)
-                            .title(provincia)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 120),1200,null);
+            currentMarker.setPosition(center);
+            currentMarker.setTitle(provincia);
+            currentMarker.setAlpha(1f);
+
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 120),2000,null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,7 +179,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void descentrarMapa() {
         try {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom),1000,null);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom),2000,null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -176,7 +190,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("PROVINCIA", provincia);
         startActivity(intent);
     }
-
 
 
 }

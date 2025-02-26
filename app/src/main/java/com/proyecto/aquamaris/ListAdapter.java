@@ -11,15 +11,142 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.checkerframework.checker.units.qual.N;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
 {
-    private List<ListarElementos> aData = null;
+    private List<ListarElementos> aData = new List<ListarElementos>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(@Nullable Object o) {
+            return false;
+        }
+
+        @NonNull
+        @Override
+        public Iterator<ListarElementos> iterator() {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @NonNull
+        @Override
+        public <T> T[] toArray(@NonNull T[] a) {
+            return null;
+        }
+
+        @Override
+        public boolean add(ListarElementos listarElementos) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(@Nullable Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(@NonNull Collection<? extends ListarElementos> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(int index, @NonNull Collection<? extends ListarElementos> c) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+
+        @Override
+        public ListarElementos get(int index) {
+            return null;
+        }
+
+        @Override
+        public ListarElementos set(int index, ListarElementos element) {
+            return null;
+        }
+
+        @Override
+        public void add(int index, ListarElementos element) {
+
+        }
+
+        @Override
+        public ListarElementos remove(int index) {
+            return null;
+        }
+
+        @Override
+        public int indexOf(@Nullable Object o) {
+            return 0;
+        }
+
+        @Override
+        public int lastIndexOf(@Nullable Object o) {
+            return 0;
+        }
+
+        @NonNull
+        @Override
+        public ListIterator<ListarElementos> listIterator() {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public ListIterator<ListarElementos> listIterator(int index) {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public List<ListarElementos> subList(int fromIndex, int toIndex) {
+            return Collections.emptyList();
+        }
+    };
     private LayoutInflater mInflater;
     private Context context;
     String nombrepez;

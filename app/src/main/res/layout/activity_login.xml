@@ -65,15 +65,15 @@
 
     <TextView
         android:id="@+id/login_message"
-        android:layout_marginTop="-42dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-42dp"
         android:fontFamily="@font/inter_bold"
+        android:gravity="center"
         android:text="@string/sign_in_text"
         android:textColor="@color/pasty_white"
-        android:textStyle="bold"
         android:textSize="28sp"
-        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/guideEnd"
         app:layout_constraintStart_toEndOf="@id/guideStart"
         app:layout_constraintTop_toBottomOf="@id/logo_img" />
