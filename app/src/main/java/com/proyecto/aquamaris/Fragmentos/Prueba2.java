@@ -3,17 +3,18 @@ package com.proyecto.aquamaris.Fragmentos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.proyecto.aquamaris.Consulta;
 import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.MapsActivity;
 import com.proyecto.aquamaris.R;
@@ -59,6 +60,7 @@ public class Prueba2 extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
         et = view.findViewById(R.id.editTextText);
         b3 = view.findViewById(R.id.button3);
 
@@ -145,7 +147,6 @@ public class Prueba2 extends Fragment {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.putExtra("PROVINCIA",provincia);
                 startActivity(intent);
-
             }
         });
 

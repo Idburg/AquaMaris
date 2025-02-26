@@ -96,10 +96,7 @@ public class Consulta2 extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Al presionar la flecha, vuelve a la actividad Noticias
-            Intent intent = new Intent(Consulta2.this, Prueba2.class);
-            startActivity(intent);  // Inicia la actividad de Noticias
-            finish();  // Finaliza la actividad actual para que no quede en el stack
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -39,14 +39,10 @@
             android:exported="true"/>
         <activity
             android:name=".Consulta"
-            android:exported="true"
-            android:parentActivityName=".Noticias"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+            android:exported="true" />
         <activity
             android:name=".Consulta2"
-            android:exported="false"
-            android:parentActivityName=".Noticias"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity2"
             android:exported="true" />
