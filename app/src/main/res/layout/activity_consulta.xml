@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.proyecto.aquamaris.Consulta">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/marine_blue"
+        app:titleTextColor="@android:color/white"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRecycleView"
         android:layout_width="409dp"

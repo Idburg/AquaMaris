@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,25 +19,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.064"
         android:hint="Introduzca provincia..">
+
         <EditText
             android:id="@+id/editTextText"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
             android:background="@color/white"
+            android:fontFamily="@font/oswald"
 
-            />
-
+            android:gravity="center" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/button3"
+        app:layout_constraintStart_toEndOf="@id/editTextText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/til1"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        tools:ignore="NotSibling"
+        android:src="@drawable/lupa_foreground"
+        android:background="@color/transparente"
+        android:layout_marginRight="40dp"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="70dp"
-        android:scrollbars="vertical"/>
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="60dp"
+        android:scrollbars="vertical" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
@@ -50,25 +66,23 @@
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="47dp"
             android:layout_gravity="bottom"
             app:fabAlignmentMode="center"
+            android:gravity="top"
             app:menu="@menu/bottom_app_bar_menu"
-            app:fabAnchorMode="cradle"
-            app:fabCradleRoundedCornerRadius="20dp"
-            app:fabCradleMargin="5dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/marine_blue"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/map_icon_foreground"
-                app:tint="@color/black"
-                app:fabSize="mini"
+                android:src="@drawable/lupablanca_foreground"
+                app:fabSize="normal"
                 app:layout_anchor="@+id/bottom_app_bar"
                 android:backgroundTint="@color/white"
+                android:layout_marginBottom="70dp"
                 />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

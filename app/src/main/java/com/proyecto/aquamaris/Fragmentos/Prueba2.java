@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class Prueba2 extends Fragment {
     EditText et;
-    Button b3;
+    ImageButton b3;
     String provincia;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -51,7 +52,6 @@ public class Prueba2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.prueba2, container, false);
     }
 
@@ -60,7 +60,7 @@ public class Prueba2 extends Fragment {
     {
         super.onViewCreated(view, savedInstanceState);
         et = view.findViewById(R.id.editTextText);
-        //b3 = findViewById(R.id.button3);
+        b3 = view.findViewById(R.id.button3);
 
         // Crear una lista de provincias
         List<Province> provinciaList = new ArrayList<>();
@@ -84,8 +84,8 @@ public class Prueba2 extends Fragment {
         provinciaList.add(new Province(R.drawable.elhierro, "El Hierro"));
         provinciaList.add(new Province(R.drawable.formentera, "Formentera"));
         provinciaList.add(new Province(R.drawable.fuerteventura, "Fuerteventura"));
-        provinciaList.add(new Province(R.drawable.gerona, "Gerona"));
-        provinciaList.add(new Province(R.drawable.gipuzkoa, "Gipuzkoa"));
+        provinciaList.add(new Province(R.drawable.gerona, "Girona"));
+        provinciaList.add(new Province(R.drawable.gipuzkoa, "Gipúzcoa"));
         provinciaList.add(new Province(R.drawable.granada, "Granada"));
         provinciaList.add(new Province(R.drawable.grancanaria, "Gran Canaria"));
         provinciaList.add(new Province(R.drawable.guadalajara, "Guadalajara"));
@@ -137,7 +137,7 @@ public class Prueba2 extends Fragment {
         FloatingActionButton myfab = view.findViewById(R.id.fab);
 
 
-        myfab.setOnClickListener(new View.OnClickListener() {
+        b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 provincia = et.getText().toString();

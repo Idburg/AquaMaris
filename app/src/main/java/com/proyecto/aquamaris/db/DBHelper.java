@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public DBHelper(@Nullable Context context) {
-        super(context, "TablaAquaMaris.db", null, 1);
+        super(context, "PecesAquaMaris.db", null, 1);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Serranus atricauda','Serranidae','Islas Canarias','Tenerife')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Scorpaena teneriffea','Scorpaenidae','Islas Canarias','La Palma')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pagellus bogaraveo','Sparidae','Islas Canarias','La Gomera')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Box boops','Sparidae','Islas Canarias','El Hierro')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Boops boops','Sparidae','Islas Canarias','El Hierro')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Epinephelus gigas','Serranidae','Islas Canarias','Gran Canaria')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Muraena augusti','Muraenidae','Islas Canarias','Lanzarote')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Mullus surmuletus','Mullidae','Islas Canarias','Tenerife')");
@@ -102,29 +102,29 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Benthosema suborbitale','Myctophidae','Islas Canarias','Gran Canaria')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Fundulus heteroclitus','Fundulidae','Islas Canarias','Lanzarote')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gymnothorax bacalladoi','Muraenidae','Islas Canarias','Fuerteventura')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Argentina sphyraena','Argentinidae','Peninsula','Murcia, Valencia, Cádiz')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gobiidae','Gobiidae','Peninsula','Barcelona, Alicante, Castellón, Vizcaya, Asturias')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Thalassoma','Labridae','Peninsula','Valencia, Málaga, Alicante')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Apogon imberbis','Apogonidae','Peninsula','Tarragona, Valencia, Cádiz')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Scorpaena maderensis','Scorpaenidae','Peninsula','Huelva, Cádiz')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Argentina sphyraena','Argentinidae','Península','Murcia, Valencia, Cádiz')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gobiidae','Gobiidae','Península','Barcelona, Alicante, Castellón, Vizcaya, Asturias')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Thalassoma','Labridae','Península','Valencia, Málaga, Alicante')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Apogon imberbis','Apogonidae','Península','Tarragona, Valencia, Cádiz')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Scorpaena maderensis','Scorpaenidae','Península','Huelva, Cádiz')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Canthigaster rostrata','Tetraodontidae','Islas Canarias','Fuerteventura, Lanzarote')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Bothus podas','Bothidae','Peninsula','Cádiz, Huelva, Valencia, Murcia, Barcelona')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Sparisoma cretense','Scaridae','Peninsula','Tarragona, Valencia, Granada')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Mullus surmuletus','Mullidae','Peninsula','Murcia, Valencia, Alicante')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Tripterygion delaisi','Tripterygiidae','Peninsula','Girona, Castellón, Mallorca, Formentera')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Ophioblennius atlanticus','Blenniidae','Peninsula','Huelva, Cádiz, Murcia')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Parablennius parvicornis','Blenniidae','Peninsula','Ibiza, Menorca, Valencia, Castellón')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Bothus podas','Bothidae','Península','Cádiz, Huelva, Valencia, Murcia, Barcelona')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Sparisoma cretense','Scaridae','Península','Tarragona, Valencia, Granada')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Mullus surmuletus','Mullidae','Península','Murcia, Valencia, Alicante')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Tripterygion delaisi','Tripterygiidae','Península','Girona, Castellón, Mallorca, Formentera')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Ophioblennius atlanticus','Blenniidae','Península','Huelva, Cádiz, Murcia')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Parablennius parvicornis','Blenniidae','Península','Ibiza, Menorca, Valencia, Castellón')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Labrisomus cricota','Labrisomidae','Islas Canarias','Tenerife, Gran Canaria, Lanzarote, Fuerteventura')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Canthigaster','Tetraodontidae','Islas Canarias','Gran Canaria, Lanzarote')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lutjanidae','Lutjanidae','Peninsula','Valencia, Málaga, Baleares')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Aphanius iberus','Cyprinodontidae','Peninsula','Valencia, Murcia, Castellón')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Valencia hispanica','Cyprinodontidae','Peninsula','Teruel, Huesca, Soria, Valencia')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Salaria fluviatilis','Blenniidae','Peninsula','Zaragoza, Teruel, ,Madrid, Guadalajara, Cuenca, Segovia, Cáceres')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gobiusculus flavescens','Gobiidae','Peninsula','Galicia, Asturias, Cantabria, Vizcaya, Gipúzcoa')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Coryphoblennius galerita','Blenniidae','Peninsula','Galicia, Asturias, Cantabria, Gipúzcoa')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lutjanidae','Lutjanidae','Península','Valencia, Málaga, Baleares')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Aphanius iberus','Cyprinodontidae','Península','Valencia, Murcia, Castellón')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Valencia hispanica','Cyprinodontidae','Península','Teruel, Huesca, Soria, Valencia')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Salaria fluviatilis','Blenniidae','Península','Zaragoza, Teruel, Madrid, Guadalajara, Cuenca, Segovia, Cáceres')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gobiusculus flavescens','Gobiidae','Península','Galicia, Asturias, Cantabria, Vizcaya, Gipúzcoa')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Coryphoblennius galerita','Blenniidae','Península','Galicia, Asturias, Cantabria, Gipúzcoa')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Sphoeroides spengleri','Tetraodontidae','Islas Canarias','La Palma, Gran Canaria, Fuerteventura')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Brama brama','Bramidae','Peninsula','A Coruña, Pontevedra, Cantabria, Murcia, Almería')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Centroscymnus coelolepis','Somniosidae','Peninsula','Galicia, Asturias, Alicante')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Brama brama','Bramidae','Península','A Coruña, Pontevedra, Cantabria, Murcia, Almería')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Centroscymnus coelolepis','Somniosidae','Península','Galicia, Asturias, Alicante')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Centrophorus granulosus','Centrophoridae','Peninsula','Barcelona, Valencia, Galicia, Cantabria, Asturias')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Etmopterus princeps','Etmopteridae','Peninsula','Galicia, Asturias, Cantabria')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Hydrolagus affinis','Chimaeridae','Peninsula','Lleida, Girona, Murcia')");
@@ -208,7 +208,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Halobatrachus didactylus','Batrachoididae','Península','Alicante, Valencia, Málaga, Cádiz, Tarragona')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Plectorhinchus mediterraneus','Haemulidae','Península','Girona, Tarragona, Valencia, Barcelona, Alicante')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Plectorhynchus','Haemulidae','Península','Valencia, Cádiz, Málaga, Alicante, Tarragona')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Dicentrarchus punctatus','Moronidae','Península','Cádiz, Málaga, Valencia, Alicante, Tarragona')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Dicentrarchus punctatus','Moronidae','Península','Vizcaya, Gipúzcoa, Álava, Navarra, La Rioja')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Anguilla anguilla','Anguillidae','Península','Huelva, Cádiz, Valencia, Alicante, Tarragona')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pagellus erythrinus','Sparidae','Península','Valencia, Tarragona, Málaga, Alicante, Cádiz')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Diplodus puntazzo','Sparidae','Península','Alicante, Valencia, Cádiz, Málaga, Tarragona')");
@@ -448,7 +448,32 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lepidorhombus boscii','Scophthalmidae','Peninsula','Málaga, Cádiz, Valencia')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lepidopus caudatus','Trichiuridae','Peninsula','Alicante, Valencia, Cádiz')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Aphanopus carbo','Trichiuridae','Peninsula','Valencia, Barcelona, Cádiz')");
-
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Barbus barbus','Cyprinidae','Peninsula','Madrid, Segovia, Toledo')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Cyprinus carpio','Cyprinidae','Ávila','Madrid, Soria, Guadalajara')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Salmo trutta','Salmonidae','Burgos','Segovia, Soria, Gipúzcoa, Vizcaya, Álava')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Esox Lucius','Esocidae','Peninsula','Zamora, Salamanca, Cuenca, Toledo, Zaragoza')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Perca Fluviatilis','Percidae','Peninsula','Zamora, Soria, Ciudad Real, Huesca, Zaragoza, La Rioja')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Tinca Tinca','Cyprinidae','Peninsula','Madrid, Segovia, Huesca')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Squalius cephalus','Cyprinidae','Peninsula','Madrid, Valladolid, La Rioja, Toledo')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Oncorhynchus mykiss','Salmonidae','Peninsula','Madrid, Palencia, Valladolid, Teruel, La Rioja')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Alburnus Alburnus','Cyprinidae','Peninsula','Badajoz, Cáceres, Guadalajara')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Micropterus salmoides','Centrarchidae','Peninsula','Badajoz, Cáceres, Guadalajara, Madrid')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Perca flavescens','Percidae','Peninsula','Badajoz, Cáceres, Ciudad Real, Guadalajara')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Luciobarbus sclateri','Cyprinidae','Peninsula','Jaén, Granada, Córdoba')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Squalius pyrenaicus','Cyprinidae','Peninsula','Jaén, Granada, Guadalajara')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pseudochondrostoma willkommii','Cyprinidae','Peninsula','Jaén, Córdoba, Granada')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Cobitis paludica','Cobitidae','Peninsula','Huelva, Sevilla, Jaén, Córdoba, Granada')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Achondrostoma oligolepis','Cyprinidae','Peninsula','Sevilla, Jaén, Córdoba, Granada')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lepomis gibbosus','Centrarchidae','Peninsula','Cáceres, Valladolid, Palencia, Salamanca')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Squalius pyrenaicus','Centrarchidae','Peninsula','Huesca, Zaragoza, Lérida, Albacete, Jaén, Granada')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Gambusia holbrook','Centrarchidae','Peninsula','Sevilla, Córdoba, Jaén, Albacete, Murcia')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Chondrostoma toxostoma','Centrarchidae','Peninsula','Sevilla, Córdoba, Jaén, Albacete, Granada')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Phoxinus bigerri','Centrarchidae','Peninsula','Álava, Gipúzcoa, Vizcaya, Lérida')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Cyprinus carpio','Centrarchidae','Peninsula','Álava, Gipúzcoa, Vizcaya, Navarra')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Platichthys flesus','Centrarchidae','Peninsula','Álava, Gipúzcoa, Vizcaya, Cantabria, Asturias')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Luciobarbus bocagei','Centrarchidae','Peninsula','Ourense, A Coruña, Pontevedra')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Pseudochondrostoma duriense','Centrarchidae','Peninsula','Pontevedra, Ourense, Lugo, Asturias')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Squalius carolitertii','Centrarchidae','Peninsula','Ourense, Lugo')");
 
 
     }

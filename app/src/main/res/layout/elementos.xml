@@ -45,31 +45,30 @@
 
                 <TextView
                     android:id="@+id/nameTextView"
-                    android:layout_width="220dp"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:text="CodeLia"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/cityTextView"
-                    android:layout_width="220dp"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:text="Mexico"
-                    android:textSize="12sp"/>
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <Button
                 android:id="@+id/statusTextView"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:backgroundTint="@color/grey"
-                android:text="Ver"
-                android:textSize="15sp"
+                android:backgroundTint="@color/transparente"
+                android:textColor="@color/transparente"
                 app:cornerRadius="90sp" />
             
         </RelativeLayout>
