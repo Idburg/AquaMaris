@@ -18,9 +18,7 @@
             android:exported="false"/>
         <activity
             android:name=".PezIndividual"
-            android:exported="true"
-            android:parentActivityName=".Consulta2"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+            android:exported="true" />
         <activity
             android:name=".PantallaAjustes"
             android:exported="false" />
@@ -42,14 +40,10 @@
 
         <activity
             android:name=".Consulta"
-            android:exported="true"
-            android:parentActivityName=".MainActivity2"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+            android:exported="true" />
         <activity
             android:name=".Consulta2"
-            android:exported="true"
-            android:parentActivityName=".MainActivity2"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+            android:exported="true"/>
         <activity
             android:name=".MainActivity2"
             android:exported="true" />

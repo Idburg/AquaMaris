@@ -16,5 +16,7 @@
         <item>@font/inter_semibold</item>
         <item>@font/inter_thin</item>
 
+        <item>@font/oswald</item>
+
     </array>
 </resources>

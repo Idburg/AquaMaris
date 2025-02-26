@@ -19,14 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.064"
         android:hint="Introduzca provincia..">
+
         <EditText
             android:id="@+id/editTextText"
             android:layout_width="250dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:background="@color/white"
+            android:fontFamily="@font/oswald"
 
-            />
+            android:gravity="center" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
@@ -51,7 +52,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="130dp"
         android:layout_marginBottom="60dp"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"

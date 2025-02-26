@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,9 +14,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.proyecto.aquamaris.Fragmentos.Prueba2;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import java.util.ArrayList;
@@ -34,6 +38,17 @@ public class Consulta2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.consulta2);
+
+        Toolbar toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);  // Establece el Toolbar como ActionBar
+
+// Configura la ActionBar y habilita la flecha "volver"
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // Habilita la flecha de "volver"
+            getSupportActionBar().setDisplayShowHomeEnabled(true);  // Asegúrate de que el ícono de la home se vea
+        }
+
+
 
         try{
             DBHelper db2 = new DBHelper(this);
@@ -60,9 +75,6 @@ public class Consulta2 extends AppCompatActivity {
             }
             init2();
 
-
-
-
         }catch(Exception e)
         {
             System.out.println(e.toString());
@@ -80,5 +92,16 @@ public class Consulta2 extends AppCompatActivity {
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         recyclerView2.setAdapter(listAdapter2);
 
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Al presionar la flecha, vuelve a la actividad Noticias
+            Intent intent = new Intent(Consulta2.this, Prueba2.class);
+            startActivity(intent);  // Inicia la actividad de Noticias
+            finish();  // Finaliza la actividad actual para que no quede en el stack
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
