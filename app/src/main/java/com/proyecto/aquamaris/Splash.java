@@ -1,10 +1,12 @@
 package com.proyecto.aquamaris;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.Handler;
 import android.animation.ObjectAnimator;
-import android.view.View; // Asegúrate de tener esta importación
+import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
@@ -14,19 +16,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.firebase.auth.FirebaseAuth;
-
-import android.content.Intent;
-import android.content.IntentSender;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Splash extends AppCompatActivity {
 
@@ -39,7 +35,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //FirebaseAuth.getInstance().signOut();
         appUpdateManager = AppUpdateManagerFactory.create(this);
         checkForAppUpdate();
 
@@ -76,31 +71,37 @@ public class Splash extends AppCompatActivity {
     private void animateFish() {
         pez.setVisibility(View.VISIBLE);
 
+        // Obtener el tamaño de la pantalla
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        float screenWidth = displayMetrics.widthPixels; // Ancho de la pantalla en píxeles
+        float screenHeight = displayMetrics.heightPixels; // Alto de la pantalla en píxeles
+
+        // Ajustar las posiciones en función del tamaño de la pantalla
+        float finalPositionX = screenWidth * 0.04f; // 70% del ancho de la pantalla
+        float initialPositionX = -screenWidth * 0.5f;
+
+        // Posición Y ajustada a un valor fijo, puedes modificarla si es necesario
+        float finalPositionY = screenHeight * 0.1f; // Ajustar a la mitad de la pantalla
+
         // Animación de movimiento horizontal (de izquierda a derecha)
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(pez, "translationX", -600f, 20f); // Ajusta el valor final según tu necesidad
-        animatorX.setDuration(3000);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(pez, "translationX", initialPositionX, finalPositionX);
+        animatorX.setDuration(3000); // Duración de la animación
         animatorX.setInterpolator(new LinearInterpolator());
 
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(pez, "translationY", 220f, 220f);
-        animatorY.setDuration(3000);
+        // Animación de movimiento vertical (opcional, puedes ajustarla según tus necesidades)
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(pez, "translationY", finalPositionY, finalPositionY);
+        animatorY.setDuration(3000); // Duración de la animación
         animatorY.setInterpolator(new LinearInterpolator());
 
-        // No se usa animación vertical, ya que el pez no debe moverse hacia abajo
-        // Si es necesario que el pez se posicione encima de la "M", ajusta la posición en "translationY" previamente
-
-        // Dibujar sombra mientras el pez se mueve
-
-
-        // Iniciar la animación
+        // Iniciar las animaciones
         animatorY.start();
         animatorX.start();
     }
 
-
-
     private void openApp() {
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(Splash.this, Login.class);
+            Intent intent = new Intent(Splash.this, Noticias.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }, 4000); // Retraso de 4 segundos
@@ -138,4 +139,5 @@ public class Splash extends AppCompatActivity {
             }
         }
     }
+
 }
