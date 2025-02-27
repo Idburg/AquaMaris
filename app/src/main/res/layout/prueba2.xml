@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/til1"
         android:gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         tools:ignore="NotSibling"
         android:src="@drawable/lupa_foreground"
         android:background="@color/transparente"
