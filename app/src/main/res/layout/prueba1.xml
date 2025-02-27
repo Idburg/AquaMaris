@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/prueba1">
+    android:id="@+id/prueba1"
+    android:background="@color/super_light_green">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -89,9 +90,10 @@
         android:theme="@style/Theme.First.AppBarOverlay"
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="@id/view_pager"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:id="@+id/appbar">
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +101,7 @@
             android:minHeight="?actionBarSize"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
-
+-->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
@@ -123,7 +125,7 @@
         tools:ignore="MissingConstraints"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-        app:layout_constraintBottom_toBottomOf="@id/view_pager" />
+        app:layout_constraintBottom_toBottomOf="@id/view_pager"
+        app:layout_constraintTop_toTopOf="@id/appbar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

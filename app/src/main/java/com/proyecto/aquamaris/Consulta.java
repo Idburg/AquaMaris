@@ -51,30 +51,51 @@ public class Consulta extends AppCompatActivity {
         try {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
-            province = getIntent().getExtras().getString("PROVINCIA");
-            Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%'", null);
-            Log.d("ValorProvincia", "Provincia: " + province);
-            //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
-            if(c != null && c.moveToFirst())
+            province = getIntent().getExtras().getString("PROVINCIA").toLowerCase();
+            assert province != null;
+            if(province.contains("alava") || province.contains("almeria") || province.contains("avila")|| province.contains("caceres")
+            || province.contains("cadiz") || province.contains("castellon") || province.contains("cordoba") || province.contains("gipuzcoa")
+            || province.contains("jaen") || province.contains("leon") || province.contains("lerida") || province.contains("malaga"))
             {
-                elements = new ArrayList<>();
-                do{
+                province = province.replace("alava","Álava");
+                province = province.replace("almeria","Almería");
+                province = province.replace("avila","Ávila");
+                province = province.replace("caceres","Cáceres");
+                province = province.replace("cadiz","Cádiz");
+                province = province.replace("castellon","Castellón");
+                province = province.replace("cordoba","Córdoba");
+                province = province.replace("gipuzcoa","Gipúzcoa");
+                province = province.replace("jaen","Jaén");
+                province = province.replace("leon","León");
+                province = province.replace("lerida","Lérida");
+                province = province.replace("malaga","Málaga");
 
-                    int indiceN = c.getColumnIndex("nombre_cientifico");
-                    int indicePV = c.getColumnIndex("provincias");
 
-                    String nombrecientifico = c.getString(indiceN);
-                    String provinciass = c.getString(indicePV);
+                Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province.trim()+"%'", null);
+                Log.d("ValorProvincia", "Provincia: " + province);
+                //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
+                if(c != null && c.moveToFirst())
+                {
+                    elements = new ArrayList<>();
+                    do{
 
-                    //contador++;
+                        int indiceN = c.getColumnIndex("nombre_cientifico");
+                        int indicePV = c.getColumnIndex("provincias");
 
-                    Log.d("Consulta", "Provincia encontrada: " + provinciass);
-                    elements.add(new ListarElementos("#775447", nombrecientifico, provinciass, "Ver"));
-                }while(c.moveToNext());
-                c.close();
+                        String nombrecientifico = c.getString(indiceN);
+                        String provinciass = c.getString(indicePV);
+
+                        //contador++;
+
+                        Log.d("Consulta", "Provincia encontrada: " + provinciass);
+                        elements.add(new ListarElementos("#775447", nombrecientifico, provinciass, "Ver"));
+                    }while(c.moveToNext());
+                    c.close();
+                }
+
+                init();
             }
 
-            init();
         }catch(Exception e)
         {
            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
@@ -99,6 +120,7 @@ public class Consulta extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 

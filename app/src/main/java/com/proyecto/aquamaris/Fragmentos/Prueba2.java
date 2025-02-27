@@ -93,7 +93,6 @@ public class Prueba2 extends Fragment {
         provinciaList.add(new Province(R.drawable.badajoz, "Badajoz"));
         provinciaList.add(new Province(R.drawable.barcelona, "Barcelona"));
         provinciaList.add(new Province(R.drawable.burgos, "Burgos"));
-        provinciaList.add(new Province(R.drawable.cabrera, "Cabrera"));
         provinciaList.add(new Province(R.drawable.caceres, "Cáceres"));
         provinciaList.add(new Province(R.drawable.cadiz, "Cádiz"));
         provinciaList.add(new Province(R.drawable.cantabria, "Cantabria"));

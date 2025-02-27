@@ -16,11 +16,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.proyecto.aquamaris.Fragmentos.Prueba2;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -120,4 +122,5 @@ public class Noticias extends AppCompatActivity {
             return insets;
         });
     }
+
 }

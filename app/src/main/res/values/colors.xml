@@ -9,13 +9,18 @@
     <color name="lima">#B8FA00</color>
     <color name="rojo">#FF0000</color>
     <color name="amarillo">#FFD300</color>
-    <color name="azul">#2567E8</color>
+    <!--<color name="azul">#2567E8</color>-->
+    <color name="azul">#45C4B0</color>
     <color name="teal_200">#FF03DAC5</color>
 
-    <color name="marine_blue">#2567E8</color>
+    <!--<color name="marine_blue">#2567E8</color>-->
+    <color name="marine_blue">#45C4B0</color>
     <color name="pasty_white">#EEEDEC</color>
     <color name="pale_grey">#EDF1F3</color>
     <color name="grey">#6C7278</color>
+    <color name="light_green">#9AEBA3</color>
+    <color name="very_light_green">#DAFDBA</color>
+    <color name="super_light_green">#E8FFD3</color>
 
     <color name="transparente">#00000000</color>
 
