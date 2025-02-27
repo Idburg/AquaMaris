@@ -17,12 +17,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRecycleView"
-        android:layout_width="409dp"
-        android:layout_height="728dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="56dp"/>
 
     <TextView
         android:id="@+id/textView2"

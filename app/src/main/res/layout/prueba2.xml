@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/prueba2"
-    android:background="@color/very_light_green">
+    android:background="@color/super_light_green">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til1"
@@ -23,23 +23,20 @@
 
         <EditText
             android:id="@+id/editTextText"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fontFamily="@font/oswald"
-
-            android:gravity="center" />
+            android:background="@drawable/edit_text_border"/>/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/button3"
         app:layout_constraintStart_toEndOf="@id/editTextText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/til1"
         android:gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         tools:ignore="NotSibling"
         android:src="@drawable/lupa_foreground"
         android:background="@color/transparente"

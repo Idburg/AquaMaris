@@ -49,49 +49,13 @@ public class Prueba3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_pantalla_ajustes, container, false);
+        return inflater.inflate(R.layout.prueba3, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        try {
-            DBHelper db = new DBHelper(getContext());
-            SQLiteDatabase obj = db.getReadableDatabase();
-            Cursor c = obj.rawQuery("SELECT nombre_cientifico FROM peces", null);
-
-            //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
-            if(c != null && c.moveToFirst())
-            {
-                pecesList = new ArrayList<>();
-                do{
-
-                    int indiceN = c.getColumnIndex("nombre_cientifico");
-
-                    String nombrecientifico = c.getString(indiceN);
-
-                    if (nombrecientifico != null && !nombrecientifico.trim().isEmpty()) {
-
-                        nombrecientifico = nombrecientifico.trim();
-
-                        String[] palabras = nombrecientifico.split("\\s+");
-
-                        if (palabras.length > 1) {
-                            String formato = palabras[0]+"_"+palabras[1].toLowerCase();
-                            pecesList.add(new NombrePeces(formato));
-                        }
-                    }
-
-                }while(c.moveToNext());
-                c.close();
-            }
-
-            //init3(view);
-        }catch(Exception e)
-        {
-            System.out.println("Error");
-        }
 
     }
 /*
