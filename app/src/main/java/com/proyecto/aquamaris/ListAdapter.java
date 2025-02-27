@@ -10,45 +10,40 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
+
+
 
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.checkerframework.checker.units.qual.N;
-
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
-{
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<ListarElementos> aData;
     private LayoutInflater mInflater;
     private Context context;
     String nombrepez;
 
-    public ListAdapter(List<ListarElementos> itemList, Context context)
-    {
+    public ListAdapter(List<ListarElementos> itemList, Context context) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.aData = itemList;
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return aData.size();
     }
 
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.elementos, null);
         return new ListAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position)
-    {
+    public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position) {
         ListarElementos le = aData.get(position);
-        //holder.name.setText(le.getName());
         holder.bindData(aData.get(position));
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,19 +56,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
         });
     }
 
-    public void setItems(List<ListarElementos> items)
-    {
+    public void setItems(List<ListarElementos> items) {
         aData = items;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
         TextView name, city;
         Button status;
 
-        ViewHolder(View itemView)
-        {
+        ViewHolder(View itemView) {
             super(itemView);
             iconImage = itemView.findViewById(R.id.iconImageView);
             name = itemView.findViewById(R.id.nameTextView);
@@ -81,9 +73,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
             status = itemView.findViewById(R.id.statusTextView);
         }
 
-        void bindData(final ListarElementos item)
-        {
-            iconImage.setColorFilter(Color.parseColor(item.getColor()), PorterDuff.Mode.SRC_IN);
+        void bindData(final ListarElementos item) {
+            // Load the image using Glide
+            Glide.with(context)
+                    .load(item.getImagen()) // URL of the image to load
+                    .into(iconImage); // ImageView where the image will be loaded
+
             name.setText(item.getName());
             city.setText(item.getCity());
             status.setText(item.getStatus());

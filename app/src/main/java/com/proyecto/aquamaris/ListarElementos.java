@@ -2,25 +2,25 @@ package com.proyecto.aquamaris;
 
 public class ListarElementos
 {
-    public String color;
+    public String imagen;
     public String name;
     public String city;
     public String status;
 
-    public ListarElementos(String color, String name, String city, String status)
+    public ListarElementos(String imagen, String name, String city, String status)
     {
-        this.color = color;
+        this.imagen = imagen;
         this.name = name;
         this.city = city;
         this.status = status;
     }
 
-    public String getColor() {
-        return color;
+    public String getImagen() {
+        return imagen;
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.imagen = imagen;
     }
 
     public String getName() {
