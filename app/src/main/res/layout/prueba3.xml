@@ -56,7 +56,7 @@
         />
 
     <Button
-        android:id="@+id/signout"
+        android:id="@+id/settings_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -102,7 +102,7 @@
         android:id="@+id/nombreuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/correo"
+        android:text="@string/profile_email"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@id/vertical"
         app:layout_constraintTop_toBottomOf="@id/infpersonal"

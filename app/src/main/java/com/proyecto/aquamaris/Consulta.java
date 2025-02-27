@@ -51,25 +51,24 @@ public class Consulta extends AppCompatActivity {
         try {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
-            province = getIntent().getExtras().getString("PROVINCIA").toLowerCase();
+            province = getIntent().getExtras().getString("PROVINCIA");
             assert province != null;
             if(province.contains("alava") || province.contains("almeria") || province.contains("avila")|| province.contains("caceres")
-            || province.contains("cadiz") || province.contains("castellon") || province.contains("cordoba") || province.contains("gipuzcoa")
-            || province.contains("jaen") || province.contains("leon") || province.contains("lerida") || province.contains("malaga"))
-            {
-                province = province.replace("alava","Álava");
-                province = province.replace("almeria","Almería");
-                province = province.replace("avila","Ávila");
-                province = province.replace("caceres","Cáceres");
-                province = province.replace("cadiz","Cádiz");
-                province = province.replace("castellon","Castellón");
-                province = province.replace("cordoba","Córdoba");
-                province = province.replace("gipuzcoa","Gipúzcoa");
-                province = province.replace("jaen","Jaén");
-                province = province.replace("leon","León");
-                province = province.replace("lerida","Lérida");
-                province = province.replace("malaga","Málaga");
-
+                    || province.contains("cadiz") || province.contains("castellon") || province.contains("cordoba") || province.contains("gipuzcoa")
+                    || province.contains("jaen") || province.contains("leon") || province.contains("lerida") || province.contains("malaga")) {
+                province = province.replace("alava", "Álava");
+                province = province.replace("almeria", "Almería");
+                province = province.replace("avila", "Ávila");
+                province = province.replace("caceres", "Cáceres");
+                province = province.replace("cadiz", "Cádiz");
+                province = province.replace("castellon", "Castellón");
+                province = province.replace("cordoba", "Córdoba");
+                province = province.replace("gipuzcoa", "Gipúzcoa");
+                province = province.replace("jaen", "Jaén");
+                province = province.replace("leon", "León");
+                province = province.replace("lerida", "Lérida");
+                province = province.replace("malaga", "Málaga");
+            }
 
                 Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province.trim()+"%'", null);
                 Log.d("ValorProvincia", "Provincia: " + province);
@@ -94,7 +93,6 @@ public class Consulta extends AppCompatActivity {
                 }
 
                 init();
-            }
 
         }catch(Exception e)
         {
@@ -120,7 +118,6 @@ public class Consulta extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 

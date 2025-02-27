@@ -55,11 +55,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        Toolbar mapToolbar = findViewById(R.id.mapToolbar);
-        FragmentManager fm = getSupportFragmentManager();
-         */
-
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -67,6 +62,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+        Toolbar toolbar = findViewById(R.id.mapToolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // Habilita la flecha de "volver"
+            getSupportActionBar().setDisplayShowHomeEnabled(true);  // Asegúrate de que el ícono de la home se vea
+        }
+
     }
 
     @Override
@@ -114,8 +118,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             LatLngBounds.Builder boundsBuilder = getBounds(feature);
 
             selectedBounds = boundsBuilder.build();
-
-
 
             centrarMapa(selectedBounds,provincia);
 
@@ -199,15 +201,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void abrirDetalleProvincia(String provincia) {
         Intent intent = new Intent(MapsActivity.this, Consulta.class);
-        intent.putExtra("PROVINCIA", provincia);
+        intent.putExtra("PROVINCIA", provincia.trim());
         startActivity(intent);
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Acción al presionar el botón de retroceso en la Toolbar
-            onBackPressed();
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.proyecto.aquamaris.Consulta;
 import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.MapsActivity;
 import com.proyecto.aquamaris.R;
@@ -158,11 +159,18 @@ public class Prueba2 extends Fragment {
 
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 provincia = et.getText().toString();
+                Intent intent = new Intent(getContext(), Consulta.class);
+                intent.putExtra("PROVINCIA", provincia);
+                startActivity(intent);
+            }
+        });
+
+        myfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(getContext(), MapsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra("PROVINCIA",provincia);
                 startActivity(intent);
             }
         });
@@ -174,7 +182,6 @@ public class Prueba2 extends Fragment {
                 intent.putExtra("PROVINCIA", provincia);
                 startActivity(intent);
             }
-
 
         });
 

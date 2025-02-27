@@ -26,10 +26,7 @@
             android:exported="true"/>
         <activity
             android:name=".MapsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_maps"
-            android:parentActivityName=".Noticias"
-            android:theme="@style/Theme.AquaMaris.ActionBar"/>
+            android:exported="true" />
         <activity
             android:name=".Register"
             android:exported="false" />
