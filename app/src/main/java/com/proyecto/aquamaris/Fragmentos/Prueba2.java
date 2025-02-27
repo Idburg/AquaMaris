@@ -11,7 +11,9 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Prueba2 extends Fragment {
     EditText et;
@@ -48,6 +51,21 @@ public class Prueba2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
+        try {
+            Toolbar mapToolBar = requireActivity().findViewById(R.id.mapToolbar);
+            ((AppCompatActivity)getActivity()).setSupportActionBar(mapToolBar);
+            if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            }
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        } catch (IllegalStateException ise) {
+            ise.printStackTrace();
+        }
+
+         */
     }
 
     @Override

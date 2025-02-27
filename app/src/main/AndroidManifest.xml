@@ -27,7 +27,9 @@
         <activity
             android:name=".MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".Noticias"
+            android:theme="@style/Theme.AquaMaris.ActionBar"/>
         <activity
             android:name=".Register"
             android:exported="false" />
@@ -52,7 +54,6 @@
         <activity
             android:name=".Pez"
             android:exported="true" />
-
         <activity
             android:name=".Splash"
             android:exported="true">
