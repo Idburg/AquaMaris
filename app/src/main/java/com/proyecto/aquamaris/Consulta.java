@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +28,7 @@ public class Consulta extends AppCompatActivity {
 
     TextView resultado;
     List<ListarElementos> elements;
-    int contador = 0;
     String province;
-
-    public Consulta () {}
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -39,7 +36,16 @@ public class Consulta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_consulta);
-        resultado = findViewById(R.id.textView2);
+
+        // Configurar el Toolbar como la barra de acción
+        Toolbar toolbar = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
+
+        // Habilitar el botón de retroceso
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Flecha de retroceso
+            getSupportActionBar().setTitle("AquaMaris"); // Título de la aplicación
+        }
 
         try {
             DBHelper db = new DBHelper(this);
@@ -47,28 +53,41 @@ public class Consulta extends AppCompatActivity {
             province = getIntent().getExtras().getString("PROVINCIA");
             Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%" + province + "%'", null);
             Log.d("ValorProvincia", "Provincia: " + province);
+
             if (c != null && c.moveToFirst()) {
                 elements = new ArrayList<>();
                 do {
-
                     int indiceN = c.getColumnIndex("nombre_cientifico");
                     int indicePV = c.getColumnIndex("provincias");
 
                     String nombrecientifico = c.getString(indiceN);
                     String provinciass = c.getString(indicePV);
-                    String urlImagen = getUrlImagen(nombrecientifico);
+
+                    // Llamada al método getUrlImagen con un listener
+                    getUrlImagen(nombrecientifico, new OnImageUrlFetchedListener() {
+                        @Override
+                        public void onImageUrlFetched(String imagenUrl) {
+                            // Si la imagen está vacía, usar la imagen predeterminada
+                            if (imagenUrl.equals("vacio")) {
+                            } else {
+                                // Agregar el elemento con la URL de la imagen al listado de elementos
+                                elements.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
+                            }
+
+                            // Actualiza el RecyclerView después de agregar los elementos
+                            init();
+                        }
+                    });
 
                     Log.d("Consulta", "Provincia encontrada: " + provinciass);
-                    elements.add(new ListarElementos(urlImagen, nombrecientifico, provinciass, "Ver"));
+
                 } while (c.moveToNext());
                 c.close();
             }
-
-            init();
         } catch (Exception e) {
+            Log.e("Consulta", "Error: " + e.toString());
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
-
     }
 
     public void init() {
@@ -79,40 +98,112 @@ public class Consulta extends AppCompatActivity {
         recyclerView.setAdapter(listAdapter);
     }
 
-    public String getUrlImagen(String indiceN) {
-        final String[] imagenUrl = {""}; // Usamos un array para modificarlo dentro del hilo
-
+    public void getUrlImagen(String indiceN, OnImageUrlFetchedListener listener) {
         // Hacer la solicitud en un hilo para evitar bloquear el hilo principal
         new Thread(() -> {
+            String imagenUrl = "";  // La URL de la imagen a obtener
+
             try {
                 // Conectar a la página de Wikipedia del pez
                 String urlWiki = "https://es.wikipedia.org/wiki/" + indiceN.replace(" ", "_");
                 Document doc = Jsoup.connect(urlWiki).get();
 
-                Elements images = doc.select("mw-file-element");
+                Elements images = doc.select(".mw-file-element");
                 String imgUrl = "";
-                System.out.println("Imagenes: "+images.size());
+                Log.d("Consulta", "Imagenes: " + images.size());
 
                 // Buscamos la imagen
                 for (Element image : images) {
                     String imageSrc = "https:" + image.attr("src");
-                    imgUrl = imageSrc; // Asignamos el URL de la imagen encontrada
-                    System.out.println(imageSrc);
+                    if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                        imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
+                        break;  // Salir del bucle si encontramos la imagen
+                    }
+                    Log.d("Consulta", imageSrc);
                 }
 
                 // Si se encontró una imagen válida, la cargamos
                 if (!imgUrl.isEmpty()) {
-                    imagenUrl[0] = imgUrl;
+                    imagenUrl = imgUrl;
                 } else {
-                    System.out.println("Imagen: noImage");
+                    // Si no se encuentra la imagen, intentamos usar un nombre alternativo
+                    Log.d("Consulta", "Imagen no encontrada en Wikipedia, creando URL alternativo");
+
+                    // Construir la URL alternativa usando solo la primera parte de indiceN
+                    String[] nombres = indiceN.split(" ");  // Separar por espacio
+                    if (nombres.length > 0) {
+                        // Usamos solo la primera palabra del nombre científico
+                        String alternativeUrl = "https://es.wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
+
+                        // Ahora intentamos conectarnos a esa nueva URL y obtener la imagen
+                        Document docAlternative = Jsoup.connect(alternativeUrl).get();
+                        Elements imagesAlternative = docAlternative.select(".mw-file-element");
+                        for (Element image : imagesAlternative) {
+                            String imageSrc = "https:" + image.attr("src");
+                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                                imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
+                                break;  // Salir del bucle si encontramos la imagen
+                            }
+                        }
+
+                        // Si se encontró una imagen válida, la cargamos
+                        if (!imgUrl.isEmpty()) {
+                            imagenUrl = imgUrl;
+                        } else {
+                            imagenUrl = "vacio";  // Si no se encuentra imagen, asignamos "vacio"
+                        }
+                        Log.d("Consulta", "Imagen URL alternativa: " + imagenUrl);
+                    } else {
+                        imagenUrl = "vacio";  // Si no se puede obtener una URL alternativa, asignamos "vacio"
+                    }
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+                // Si hay un error, intentamos con la primera parte del nombre
+                String[] pez1 = indiceN.split("_");
+                if (pez1.length > 0) {
+                    try {
+                        String urlWiki = "https://es.wikipedia.org/wiki/" + pez1[0];
+                        Document doc = Jsoup.connect(urlWiki).get();
 
-        // Retornar la URL de la imagen (en este caso, estará vacía al principio)
-        return imagenUrl[0];
+                        Elements images = doc.select(".mw-file-element");
+                        String imgUrl = "";
+                        Log.d("Consulta", "Imagenes: " + images.size());
+
+                        // Buscamos la imagen
+                        for (Element image : images) {
+                            String imageSrc = "https:" + image.attr("src");
+                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                                imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
+                                break;  // Salir del bucle si encontramos la imagen
+                            }
+                            Log.d("Consulta", imageSrc);
+                        }
+
+                        // Si se encontró una imagen válida, la cargamos
+                        if (!imgUrl.isEmpty()) {
+                            imagenUrl = imgUrl;
+                        } else {
+                            imagenUrl = "vacio";  // Si no se encuentra imagen, asignamos "vacio"
+                        }
+                    } catch (Exception ex) {
+                        imagenUrl = "vacio";  // Si hay un error, asignamos "vacio"
+                    }
+                } else {
+                    imagenUrl = "vacio";  // Si no se puede obtener una URL alternativa, asignamos "vacio"
+                }
+            }
+
+            // Utiliza runOnUiThread para actualizar la UI en el hilo principal
+            String finalImagenUrl = imagenUrl;
+            runOnUiThread(() -> {
+                listener.onImageUrlFetched(finalImagenUrl);  // Llamamos al listener en el hilo principal
+            });
+        }).start();
+    }
+
+    // Interfaz Callback para notificar al hilo principal
+    public interface OnImageUrlFetchedListener {
+        void onImageUrlFetched(String imagenUrl);
     }
 }

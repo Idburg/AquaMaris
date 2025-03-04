@@ -1,18 +1,15 @@
 package com.proyecto.aquamaris;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,8 +26,6 @@ import java.util.List;
 public class Consulta2 extends AppCompatActivity {
     String prov;
     List<ListarElementos> elements2;
-    TextView resultado2;
-    Button inf;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -39,6 +34,15 @@ public class Consulta2 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.consulta2);
 
+        // Configurar el Toolbar como la barra de acción
+        Toolbar toolbar = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
+
+        // Habilitar el botón de retroceso
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Flecha de retroceso
+            getSupportActionBar().setTitle("AquaMaris"); // Título de la aplicación
+        }
         try {
             DBHelper db2 = new DBHelper(this);
             SQLiteDatabase obj = db2.getReadableDatabase();
@@ -57,11 +61,12 @@ public class Consulta2 extends AppCompatActivity {
                     getUrlImagen(nombrecientifico, new OnImageUrlFetchedListener() {
                         @Override
                         public void onImageUrlFetched(String imagenUrl) {
-                            // Se ejecuta cuando el hilo termina y se obtiene la URL de la imagen
-                            Log.d("Consulta2", "URL de la imagen: " + imagenUrl);
-
-                            // Agregar el elemento con la URL de la imagen al listado de elementos
-                            elements2.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
+                            // Si la imagen está vacía, usar la imagen predeterminada
+                            if (imagenUrl.equals("vacio")) {
+                            } else {
+                                // Agregar el elemento con la URL de la imagen al listado de elementos
+                                elements2.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
+                            }
 
                             // Actualiza el RecyclerView después de agregar los elementos
                             init2();
@@ -77,6 +82,13 @@ public class Consulta2 extends AppCompatActivity {
             Log.e("Consulta2", "Error: " + e.toString());
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    // Manejar el clic en el botón de retroceso
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed(); // Vuelve a la actividad anterior
+        return true;
     }
 
     public void init2() {
@@ -148,8 +160,39 @@ public class Consulta2 extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-                Log.e("Consulta2", "Error al obtener la imagen: " + e.toString());
-                imagenUrl = "vacio";  // En caso de excepción, asignar "vacio"
+                // Si hay un error, intentamos con la primera parte del nombre
+                String[] pez1 = indiceN.split("_");
+                if (pez1.length > 0) {
+                    try {
+                        String urlWiki = "https://es.wikipedia.org/wiki/" + pez1[0];
+                        Document doc = Jsoup.connect(urlWiki).get();
+
+                        Elements images = doc.select(".mw-file-element");
+                        String imgUrl = "";
+                        Log.d("Consulta2", "Imagenes: " + images.size());
+
+                        // Buscamos la imagen
+                        for (Element image : images) {
+                            String imageSrc = "https:" + image.attr("src");
+                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                                imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
+                                break;  // Salir del bucle si encontramos la imagen
+                            }
+                            Log.d("Consulta2", imageSrc);
+                        }
+
+                        // Si se encontró una imagen válida, la cargamos
+                        if (!imgUrl.isEmpty()) {
+                            imagenUrl = imgUrl;
+                        } else {
+                            imagenUrl = "vacio";  // Si no se encuentra imagen, asignamos "vacio"
+                        }
+                    } catch (Exception ex) {
+                        imagenUrl = "vacio";  // Si hay un error, asignamos "vacio"
+                    }
+                } else {
+                    imagenUrl = "vacio";  // Si no se puede obtener una URL alternativa, asignamos "vacio"
+                }
             }
 
             // Utiliza runOnUiThread para actualizar la UI en el hilo principal
@@ -160,9 +203,16 @@ public class Consulta2 extends AppCompatActivity {
         }).start();
     }
 
-
     // Interfaz Callback para notificar al hilo principal
     public interface OnImageUrlFetchedListener {
         void onImageUrlFetched(String imagenUrl);
+    }
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

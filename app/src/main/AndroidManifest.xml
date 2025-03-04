@@ -46,12 +46,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Consulta"
+            android:exported="true"
+            android:parentActivityName=".Comunidades" /> <!-- Actividad padre: Comunidades -->
+        <activity
             android:name=".Consulta2"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Comunidades" /> <!-- Actividad padre: Comunidades -->
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>

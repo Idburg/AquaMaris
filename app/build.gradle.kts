@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation("org.jsoup:jsoup:1.10.3")
+    implementation ("com.github.bumptech.glide:glide:4.13.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

@@ -2,21 +2,18 @@ package com.proyecto.aquamaris;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 
-
-
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<ListarElementos> aData;
@@ -45,7 +42,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(final ListAdapter.ViewHolder holder, final int position) {
         ListarElementos le = aData.get(position);
         holder.bindData(aData.get(position));
-        holder.status.setOnClickListener(new View.OnClickListener() {
+
+        // Set the click listener on the CardView
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nombrepez = le.getName();
@@ -63,25 +62,35 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
         TextView name, city;
-        Button status;
+        CardView cardView;
 
         ViewHolder(View itemView) {
             super(itemView);
             iconImage = itemView.findViewById(R.id.iconImageView);
             name = itemView.findViewById(R.id.nameTextView);
             city = itemView.findViewById(R.id.cityTextView);
-            status = itemView.findViewById(R.id.statusTextView);
+            cardView = itemView.findViewById(R.id.cv); // Reference to the CardView
         }
 
         void bindData(final ListarElementos item) {
-            // Load the image using Glide
-            Glide.with(context)
-                    .load(item.getImagen()) // URL of the image to load
-                    .into(iconImage); // ImageView where the image will be loaded
+            // Cargar la imagen usando Glide
+            if (item.getImagen() instanceof String) {
+                // Si es una URL, cargar la imagen desde la URL
+                String imagenUrl = (String) item.getImagen();
+                Glide.with(context)
+                        .load(imagenUrl)
+                        .error(R.drawable.noimage) // Imagen predeterminada si falla la carga
+                        .into(iconImage);
+            } else if (item.getImagen() instanceof Integer) {
+                // Si es un recurso drawable, cargar directamente
+                int imagenResId = (Integer) item.getImagen();
+                Glide.with(context)
+                        .load(imagenResId)
+                        .into(iconImage);
+            }
 
             name.setText(item.getName());
             city.setText(item.getCity());
-            status.setText(item.getStatus());
         }
     }
 }
