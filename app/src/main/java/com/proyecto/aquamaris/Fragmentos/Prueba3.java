@@ -18,6 +18,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,6 +40,7 @@ public class Prueba3 extends Fragment {
     TextView resultado2;
     List<NombrePeces> pecesList;
     String formato = "";
+    GoogleSignInClient mGoogleSignInClient;
 
     public Prueba3() {
         // Required empty public constructor
@@ -66,6 +70,13 @@ public class Prueba3 extends Fragment {
     {
         super.onViewCreated(view, savedInstanceState);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
+
         AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
         TextView user = view.findViewById(R.id.nombreuser);
         user.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -73,8 +84,10 @@ public class Prueba3 extends Fragment {
         cerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+                FirebaseAuth.getInstance().signOut();
+                googleSignOut();
 
                 SharedPreferences.Editor editor = requireActivity()
                         .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -91,6 +104,14 @@ public class Prueba3 extends Fragment {
             }
         });
 
+    }
+
+    public void googleSignOut() {
+        mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity(), task -> {
+            mGoogleSignInClient.revokeAccess().addOnCompleteListener(requireActivity(), task1 -> {
+
+            });
+        });
     }
 /*
     public void init3(View view)

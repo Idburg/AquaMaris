@@ -51,10 +51,53 @@ public class Consulta extends AppCompatActivity {
         try {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
-            province = getIntent().getExtras().getString("PROVINCIA");
+            province = getIntent().getExtras().getString("PROVINCIA").toLowerCase();
             assert province != null;
-            String provinceLowerCase = province.toLowerCase();
 
+            switch (province) {
+                case "alava":
+                    province = province.replace("alava", "Álava");
+                    break;
+                case "almeria":
+                    province = province.replace("almeria", "Almería");
+                    break;
+                case "avila":
+                    province = province.replace("avila", "Ávila");
+                    break;
+                case "caceres":
+                    province = province.replace("caceres", "Cáceres");
+                    break;
+                case "cadiz":
+                    province = province.replace("cadiz", "Cádiz");
+                    break;
+                case "castellon":
+                    province = province.replace("castellon", "Castellón");
+                    break;
+                case "cordoba":
+                    province = province.replace("cordoba", "Córdoba");
+                    break;
+                case "gipuzcoa":
+                    province = province.replace("gipuzcoa", "Gipúzcoa");
+                    break;
+                case "jaen":
+                    province = province.replace("jaen", "Jaén");
+                    break;
+                case "leon":
+                    province = province.replace("leon", "León");
+                    break;
+                case "lerida":
+                    province = province.replace("lerida", "Lérida");
+                    break;
+                case "malaga":
+                    province = province.replace("malaga", "Málaga");
+                    break;
+                default:
+                    char firstLetter = province.charAt(0);
+                    province = province.replace(province.charAt(0), Character.toUpperCase(firstLetter));
+                    break;
+            }
+
+            /*
             if(province.contains("alava") || province.contains("almeria") || province.contains("avila")|| province.contains("caceres")
                     || province.contains("cadiz") || province.contains("castellon") || province.contains("cordoba") || province.contains("gipuzcoa")
                     || province.contains("jaen") || province.contains("leon") || province.contains("lerida") || province.contains("malaga")) {
@@ -71,6 +114,7 @@ public class Consulta extends AppCompatActivity {
                 province = province.replace("lerida", "Lérida");
                 province = province.replace("malaga", "Málaga");
             }
+            */
 
                 Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province.trim()+"%'", null);
                 Log.d("ValorProvincia", "Provincia: " + province);

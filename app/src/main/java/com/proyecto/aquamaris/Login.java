@@ -163,11 +163,14 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                        mainPage();
                     } else {
                         Toast.makeText(this, "Error de autenticación", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
+
 
     @Override
     protected void onStart() {
