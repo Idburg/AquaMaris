@@ -30,4 +30,5 @@
     <string name="cerrar_sesion">Cerrar Sesión</string>
     <string name="informacion">Información</string>
     <string name="profile_email">profile_email</string>
+    <string name="legal_notice">Aviso Legal</string>
 </resources>

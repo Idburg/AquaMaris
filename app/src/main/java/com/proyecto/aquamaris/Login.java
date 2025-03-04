@@ -158,10 +158,18 @@ public class Login extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        CheckBox remember = findViewById(R.id.remember);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
+                        if (remember.isChecked()) {
+                            Splash.pleaseDestroy = false;
+                            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                        } else {
+                            Splash.pleaseDestroy = true;
+                            FirebaseDatabase.getInstance().setPersistenceEnabled(false);
+                        }
                         Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                         mainPage();
                     } else {

@@ -51,8 +51,8 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@id/vertical"
         tools:ignore="MissingConstraints"
-        android:src="@drawable/mapa_fg"
-        android:background="@color/amarillo"
+        android:src="@drawable/add_user_icon_foreground"
+        android:background="@color/transparente"
         />
 
     <Button

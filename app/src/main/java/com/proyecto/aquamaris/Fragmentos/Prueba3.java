@@ -76,18 +76,25 @@ public class Prueba3 extends Fragment {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
+        TextView info = view.findViewById(R.id.infpersonal);
+        info.setText(mAuth.getCurrentUser().getDisplayName());
+
         TextView user = view.findViewById(R.id.nombreuser);
         user.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
+        AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
         cerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseUser user = mAuth.getCurrentUser();
 
-                FirebaseAuth.getInstance().signOut();
+                mAuth.signOut();
                 googleSignOut();
+
+                FirebaseDatabase.getInstance().setPersistenceEnabled(false);
+                Splash.pleaseDestroy = true;
 
                 SharedPreferences.Editor editor = requireActivity()
                         .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -95,8 +102,7 @@ public class Prueba3 extends Fragment {
                 editor.clear();
                 editor.apply();
 
-                FirebaseDatabase.getInstance().setPersistenceEnabled(false);
-                Splash.pleaseDestroy = true;
+
 
                 Intent intent = new Intent(requireActivity(), Login.class);
                 startActivity(intent);
@@ -109,7 +115,6 @@ public class Prueba3 extends Fragment {
     public void googleSignOut() {
         mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity(), task -> {
             mGoogleSignInClient.revokeAccess().addOnCompleteListener(requireActivity(), task1 -> {
-
             });
         });
     }
