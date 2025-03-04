@@ -122,16 +122,15 @@ public class Consulta extends AppCompatActivity {
             }
             */
 
-                Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province.trim()+"%'", null);
-                Log.d("ValorProvincia", "Provincia: " + province);
-                //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
-                if(c != null && c.moveToFirst())
-                {
-                    elements = new ArrayList<>();
-                    do{
+            Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province.trim()+"%'", null);
+            Log.d("ValorProvincia", "Provincia: " + province);
+            //Cursor c = obj.rawQuery("SELECT * FROM peces WHERE LOWER(provincias) LIKE LOWER(?)", new String[]{"%" + provincia.toLowerCase() + "%"});
+            if(c != null && c.moveToFirst()) {
+                elements = new ArrayList<>();
+                do {
 
-                        int indiceN = c.getColumnIndex("nombre_cientifico");
-                        int indicePV = c.getColumnIndex("provincias");
+                    int indiceN = c.getColumnIndex("nombre_cientifico");
+                    int indicePV = c.getColumnIndex("provincias");
 
                     String nombrecientifico = c.getString(indiceN);
                     String provinciass = c.getString(indicePV);
@@ -142,10 +141,11 @@ public class Consulta extends AppCompatActivity {
                 } while (c.moveToNext());
                 c.close();
             }
-
             init();
         } catch (Exception e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, ActivityError.class);
+            startActivity(intent);
         }
 
     }
