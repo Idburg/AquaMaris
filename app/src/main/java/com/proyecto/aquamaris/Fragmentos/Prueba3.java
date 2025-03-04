@@ -25,6 +25,7 @@ import com.proyecto.aquamaris.Login;
 import com.proyecto.aquamaris.NombrePeces;
 import com.proyecto.aquamaris.NombrePecesAdapter;
 import com.proyecto.aquamaris.R;
+import com.proyecto.aquamaris.Splash;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import java.util.ArrayList;
@@ -66,11 +67,14 @@ public class Prueba3 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
+        TextView user = view.findViewById(R.id.nombreuser);
+        user.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         cerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
+
 
                 SharedPreferences.Editor editor = requireActivity()
                         .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -79,6 +83,7 @@ public class Prueba3 extends Fragment {
                 editor.apply();
 
                 FirebaseDatabase.getInstance().setPersistenceEnabled(false);
+                Splash.pleaseDestroy = true;
 
                 Intent intent = new Intent(requireActivity(), Login.class);
                 startActivity(intent);

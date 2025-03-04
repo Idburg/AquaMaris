@@ -40,6 +40,8 @@ public class Login extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private String email;
     private String password;
+    public static String confirmedEmail = null;
+
     FirebaseAuth mAuth;
     GoogleSignInClient googleSignInClient;
 
@@ -91,14 +93,23 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                                    confirmedEmail = email;
                                     if (remember.isChecked()) {
+                                        Splash.pleaseDestroy = false;
+                                        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
                                         editor.putBoolean("rememberMe", true);
                                         editor.putString("userEmail", email);
                                         editor.apply();
+
+
                                     } else {
+                                        Splash.pleaseDestroy = true;
+                                        FirebaseDatabase.getInstance().setPersistenceEnabled(false);
+
                                         editor.clear();
                                         editor.apply();
+
                                     }
 
 

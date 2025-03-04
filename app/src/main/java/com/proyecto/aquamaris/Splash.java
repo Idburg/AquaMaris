@@ -33,11 +33,17 @@ public class Splash extends AppCompatActivity {
     private ImageView pez;
     private AppUpdateManager appUpdateManager;
     private static final int APP_UPDATE_REQUEST_CODE = 123;
+    public static boolean pleaseDestroy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+        if (pleaseDestroy)
+            FirebaseAuth.getInstance().signOut();
+
 
         appUpdateManager = AppUpdateManagerFactory.create(this);
         checkForAppUpdate();
@@ -105,7 +111,7 @@ public class Splash extends AppCompatActivity {
 
     private void openApp() {
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(Splash.this, Noticias.class);
+            Intent intent = new Intent(Splash.this, Login.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }, 4000); // Retraso de 4 segundos

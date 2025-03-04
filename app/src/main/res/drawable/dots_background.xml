@@ -6,7 +6,7 @@
     android:viewportHeight="469">
     <group>
         <path
-            android:fillColor="#FF2567E8"
+            android:fillColor="@color/marine_blue"
             android:pathData="M0 0h404v469H0z"/>
         <group>
             <group>
