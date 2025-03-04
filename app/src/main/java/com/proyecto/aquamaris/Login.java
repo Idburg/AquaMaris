@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private String email;
     private String password;
-    public static String confirmedEmail = null;
 
     FirebaseAuth mAuth;
     GoogleSignInClient googleSignInClient;
@@ -93,7 +92,6 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    confirmedEmail = email;
                                     if (remember.isChecked()) {
                                         Splash.pleaseDestroy = false;
                                         FirebaseDatabase.getInstance().setPersistenceEnabled(true);

@@ -53,6 +53,8 @@ public class Consulta extends AppCompatActivity {
             SQLiteDatabase obj = db.getReadableDatabase();
             province = getIntent().getExtras().getString("PROVINCIA");
             assert province != null;
+            String provinceLowerCase = province.toLowerCase();
+
             if(province.contains("alava") || province.contains("almeria") || province.contains("avila")|| province.contains("caceres")
                     || province.contains("cadiz") || province.contains("castellon") || province.contains("cordoba") || province.contains("gipuzcoa")
                     || province.contains("jaen") || province.contains("leon") || province.contains("lerida") || province.contains("malaga")) {
