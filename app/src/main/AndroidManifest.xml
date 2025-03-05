@@ -39,12 +39,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"/>
-        <activity
-            android:name=".Consulta"
-            android:exported="true" />
-        <activity
-            android:name=".Consulta2"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity2"
             android:exported="true" />
@@ -64,15 +59,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Noticias"
-            android:exported="true"/>
-    <activity
-        android:name=".WebNews"
-        android:exported="true"/>
+            android:name=".Consulta"
+            android:exported="true"
+            android:parentActivityName=".Comunidades" /> <!-- Actividad padre: Comunidades -->
+        <activity
+            android:name=".Consulta2"
+            android:exported="true"
+            android:parentActivityName=".Comunidades" /> <!-- Actividad padre: Comunidades -->
 
+        <activity
+            android:name=".WebNews"
+            android:exported="true"
+            android:parentActivityName=".Noticias" />
+        <activity
+            android:name=".Noticias"
+            android:exported="true" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>
