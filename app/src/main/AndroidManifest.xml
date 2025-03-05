@@ -61,11 +61,11 @@
         <activity
             android:name=".Consulta"
             android:exported="true"
-            /> <!-- Actividad padre: Comunidades -->
+            />
         <activity
             android:name=".Consulta2"
             android:exported="true"
-            /> <!-- Actividad padre: Comunidades -->
+            />
 
         <activity
             android:name=".WebNews"
