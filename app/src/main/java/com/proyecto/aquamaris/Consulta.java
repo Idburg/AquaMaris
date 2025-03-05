@@ -55,7 +55,7 @@ public class Consulta extends AppCompatActivity {
         try {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
-            province = getIntent().getExtras().getString("PROVINCIA").toLowerCase();
+            province = getIntent().getExtras().getString("PROVINCIA").toLowerCase().trim();
             assert province != null;
 
             switch (province) {
@@ -120,7 +120,7 @@ public class Consulta extends AppCompatActivity {
             }
             */
 
-            Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province.trim()+"%'", null);
+            Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%'", null);
             Log.d("ValorProvincia", "Provincia: " + province);
 
             if (c != null && c.moveToFirst()) {
