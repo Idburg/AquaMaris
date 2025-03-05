@@ -1,25 +1,23 @@
 package com.proyecto.aquamaris;
 
-public class ListarElementos
-{
-    public String imagen;
-    public String name;
-    public String city;
-    public String status;
+public class ListarElementos {
+    private Object imagen; // Puede ser String (URL) o Integer (resource ID)
+    private String name;
+    private String city;
+    private String status;
 
-    public ListarElementos(String imagen, String name, String city, String status)
-    {
+    public ListarElementos(Object imagen, String name, String city, String status) {
         this.imagen = imagen;
         this.name = name;
         this.city = city;
         this.status = status;
     }
 
-    public String getImagen() {
+    public Object getImagen() {
         return imagen;
     }
 
-    public void setColor(String color) {
+    public void setImagen(Object imagen) {
         this.imagen = imagen;
     }
 
@@ -46,5 +44,4 @@ public class ListarElementos
     public void setStatus(String status) {
         this.status = status;
     }
-
 }
