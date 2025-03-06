@@ -29,7 +29,6 @@ import java.util.concurrent.ExecutionException;
 public class PezIndividual extends AppCompatActivity {
     private TextView Info_pez;
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +57,16 @@ public class PezIndividual extends AppCompatActivity {
         String language = Locale.getDefault().getLanguage(); //Detecta el idioma del dispositivo
         // Creamos un hilo para hacer la solicitud de red en segundo plano
         new Thread(() -> {
-
             Document doc;
             try {
                 // Realizamos la conexión a la página de Wikipedia del pez
                 doc = Jsoup.connect("https://" + language + ".wikipedia.org/wiki/" + nombrepez).get();
-                System.out.println("https://" + language + ".wikipedia.org/wiki/" + nombrepez);
-
                 // Extraemos los párrafos de la página pero excluimos las tablas
                 Elements paragraphs = doc.select("p:not(table p)");
                 Elements images = doc.select(".mw-file-element");
                 String imgUrl = "";
+
+                //System.out.println("https://" + language + ".wikipedia.org/wiki/" + nombrepez);
 
                 // Recorremos las imágenes para obtener una válida
                 for (Element image : images) {
@@ -124,7 +122,6 @@ public class PezIndividual extends AppCompatActivity {
                 String finalParagraphText = paragraphText.toString();
                 System.out.println(finalParagraphText.length());
                 runOnUiThread(() -> Info_pez.setText(finalParagraphText));
-
 
             } catch (IOException | InterruptedException | ExecutionException e) {
                 try {
