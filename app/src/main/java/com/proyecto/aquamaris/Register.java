@@ -6,6 +6,7 @@ import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,18 +25,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-/** @noinspection deprecation*/
+/**
+ * @noinspection deprecation
+ */
 public class Register extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     FirebaseAuth mAuth;
     private String passTxt;
     private String emailTxt;
+    private final View currentView = findViewById(android.R.id.content);
     private static final int RC_SIGN_IN = 9001;
 
     @Override
@@ -66,27 +71,22 @@ public class Register extends AppCompatActivity {
             emailTxt = emailInput.getText().toString().trim();
             passTxt = passInput.getText().toString().trim();
 
-            if (emailTxt.isEmpty() || passTxt.isEmpty()) {
-                Toast.makeText(getApplicationContext(),"Los campos vacíos deben rellenarse",Toast.LENGTH_SHORT).show();
-
-            }
+            if (emailTxt.isEmpty() || passTxt.isEmpty())
+                Snackbar.make(currentView, "Los campos vacíos deben rellenarse", 1500).show();
             else {
                 if (isValidEmail(emailTxt)) {
                     if (passTxt.length() > 6) {
-                        mAuth.createUserWithEmailAndPassword(emailTxt,passTxt).addOnCompleteListener(task -> {
+                        mAuth.createUserWithEmailAndPassword(emailTxt, passTxt).addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Cuenta creada correctamente", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(currentView, "Cuenta creada correctamente", 1500).show();
                                 backToLogin();
-                            }
-                            else
-                                Toast.makeText(getApplicationContext(),"Hubo un fallo con la creación de cuentas",Toast.LENGTH_SHORT).show();
+                            } else
+                                Snackbar.make(currentView, "Hubo un fallo con la creación de cuentas", 1500).show();
                         });
-                    }
-                    else
-                        Toast.makeText(getApplicationContext(),"La contraseña debe tener por lo menos 7 caracteres",Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(getApplicationContext(),"Formato de email inválido",Toast.LENGTH_SHORT).show();
+                    } else
+                        Snackbar.make(currentView, "La contraseña debe tener por lo menos 7 caracteres", 1500).show();
+                } else
+                    Snackbar.make(currentView, "Formato de email inválido", 1500).show();
             }
 
         });
@@ -120,7 +120,7 @@ public class Register extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -130,7 +130,7 @@ public class Register extends AppCompatActivity {
                     firebaseAuthWithGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
-                Toast.makeText(this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
+                Snackbar.make(currentView, "Error en el inicio de sesión", 1500).show();
             }
         }
     }
@@ -139,12 +139,10 @@ public class Register extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Error de autenticación", Toast.LENGTH_SHORT).show();
-                    }
+                    if (task.isSuccessful())
+                        Snackbar.make(currentView, "Bienvenido", 1500).show();
+                    else
+                        Snackbar.make(currentView, "Error de autenticación", 1500).show();
                 });
     }
 
