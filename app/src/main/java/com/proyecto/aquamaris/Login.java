@@ -6,14 +6,12 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
@@ -25,11 +23,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -41,9 +37,11 @@ public class Login extends AppCompatActivity {
     private String password;
 
     FirebaseAuth mAuth;
+    /** @noinspection deprecation*/
     GoogleSignInClient googleSignInClient;
 
 
+    /** @noinspection deprecation*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +61,9 @@ public class Login extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Button gLoginButton = findViewById(R.id.google_login);
-        gLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
+        gLoginButton.setOnClickListener(view -> {
+            Intent signInIntent = googleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
         });
 
         AppCompatButton logButton = findViewById(R.id.login_button);
@@ -86,21 +81,18 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Por favor rellene los campos vacíos", Toast.LENGTH_SHORT).show();
                 else {
                     if (isValidEmail(email)) {
-                        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-                                    editor.putBoolean("rememberMe", true);
-                                    editor.putString("userEmail", email);
-                                    editor.apply();
+                                editor.putBoolean("rememberMe", true);
+                                editor.putString("userEmail", email);
+                                editor.apply();
 
-                                    Toast.makeText(getApplicationContext(), "Iniciando sesión...", Toast.LENGTH_SHORT).show();
-                                    mainPage();
-                                } else
-                                    Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
-                            }
+                                Toast.makeText(getApplicationContext(), "Iniciando sesión...", Toast.LENGTH_SHORT).show();
+                                mainPage();
+                            } else
+                                Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                         });
                     } else
                         Toast.makeText(getApplicationContext(), "Formato de email no válido, intenta de nuevo", Toast.LENGTH_SHORT).show();
@@ -125,6 +117,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    /** @noinspection deprecation*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

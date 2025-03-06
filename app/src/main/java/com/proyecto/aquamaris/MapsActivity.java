@@ -2,6 +2,7 @@ package com.proyecto.aquamaris;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -38,7 +39,6 @@ import java.util.List;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ActivityMapsBinding binding;
     private final LatLng defaultCoords = new LatLng(40.4168, -3.7038); // Madrid
     private final float defaultZoom = 5.75f;
     private GeoJsonFeature lastFeature = null;
@@ -49,7 +49,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        com.proyecto.aquamaris.databinding.ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -190,7 +190,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 120),2000,null);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("MapZoomInError","Error: "+e);
         }
     }
 
@@ -198,7 +198,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom),2000,null);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("MapZoomOutError","Error: "+e);
         }
     }
 

@@ -6,6 +6,7 @@ import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -39,7 +40,6 @@ public class Splash extends AppCompatActivity {
 
         ImageView fondo = findViewById(R.id.fondo);
         ImageView logo = findViewById(R.id.logo);
-        ImageView pezuno = findViewById(R.id.pezuno);
         pez = findViewById(R.id.pez);
 
         // Cargar imágenes con Glide
@@ -117,6 +117,7 @@ public class Splash extends AppCompatActivity {
         });
     }
 
+    /** @noinspection deprecation*/
     private void startUpdateFlow(AppUpdateInfo appUpdateInfo) {
         try {
             appUpdateManager.startUpdateFlowForResult(
@@ -125,7 +126,7 @@ public class Splash extends AppCompatActivity {
                     this,
                     APP_UPDATE_REQUEST_CODE);
         } catch (IntentSender.SendIntentException e) {
-            e.printStackTrace();
+            Log.d("IntentSend","Error: "+e);
         }
     }
 

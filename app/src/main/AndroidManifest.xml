@@ -49,9 +49,6 @@
             android:name=".FirebaseImplementation"
             android:exported="true" />
         <activity
-            android:name=".Pez"
-            android:exported="true" />
-        <activity
             android:name=".Splash"
             android:exported="true">
             <intent-filter>

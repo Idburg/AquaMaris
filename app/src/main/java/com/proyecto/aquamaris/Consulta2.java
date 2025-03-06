@@ -64,7 +64,7 @@ public class Consulta2 extends AppCompatActivity {
                         // Si la imagen está vacía, usar la imagen predeterminada
                         if (!imagenUrl.equals("vacio")) {
                             // Agregar el elemento con la URL de la imagen al listado de elementos
-                            elements2.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
+                            elements2.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass));
                         }
 
                         // Actualiza el RecyclerView después de agregar los elementos

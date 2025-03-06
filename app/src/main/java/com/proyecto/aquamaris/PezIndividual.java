@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,8 +26,6 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class PezIndividual extends AppCompatActivity {
-
-    private WebView miVisorWeb;
     private TextView Info_pez;
 
 
@@ -53,6 +50,7 @@ public class PezIndividual extends AppCompatActivity {
         TextView TituloPez = findViewById(R.id.TituloPez);
         Info_pez = findViewById(R.id.Info_pez);
         String nombrepez = getIntent().getStringExtra("PEZ");
+        assert nombrepez != null;
         String titulo = nombrepez.replace("_", " ");
         TituloPez.setText(titulo);
 
@@ -60,7 +58,7 @@ public class PezIndividual extends AppCompatActivity {
         // Creamos un hilo para hacer la solicitud de red en segundo plano
         new Thread(() -> {
 
-            Document doc = null;
+            Document doc;
             try {
                 // Realizamos la conexión a la página de Wikipedia del pez
                 doc = Jsoup.connect("https://"+language+".wikipedia.org/wiki/" + nombrepez).get();
@@ -106,30 +104,23 @@ public class PezIndividual extends AppCompatActivity {
                 }
 
                 // Variables para el texto
-                String paragraphText = "";
+                StringBuilder paragraphText = new StringBuilder();
                 int i = 0;
 
 // Verificamos que haya al menos un párrafo
                 if (!paragraphs.isEmpty()) {
-                    paragraphText = paragraphs.get(i).text();
+                    paragraphText = new StringBuilder(paragraphs.get(i).text());
                     System.out.println(paragraphText);
 
                     // Añadimos más párrafos si el primero tiene menos de 100 caracteres
                     while (paragraphText.length() < 600 && i + 1 < paragraphs.size()) {
                         i++;
-                        paragraphText += "\n\n" + paragraphs.get(i).text();
+                        paragraphText.append("\n\n").append(paragraphs.get(i).text());
                     }
                 }
-/*
-// Aquí cortamos el texto si supera los 825 caracteres
-                if (paragraphText.length() > 825) {
-                    paragraphText = paragraphText.substring(0, 825) + "...";
-                }
-
- */
 
 // Actualizamos el TextView con el texto truncado o completo en el hilo principal
-                String finalParagraphText = paragraphText;
+                String finalParagraphText = paragraphText.toString();
                 System.out.println(finalParagraphText.length());
                 runOnUiThread(() -> Info_pez.setText(finalParagraphText));
 
@@ -137,8 +128,7 @@ public class PezIndividual extends AppCompatActivity {
             } catch (IOException | InterruptedException | ExecutionException e) {
                 try {
                     // Modificamos el nombre del pez en caso de error
-                    String npez = nombrepez;
-                    String[] ppez = npez.split("_");
+                    String[] ppez = nombrepez.split("_");
 
                     // Usamos el primer elemento (ppez[0]) si no hay segundo elemento (ppez[1])
                     String pezParaBuscar = ppez.length > 1 ? ppez[1] : ppez[0];
@@ -184,31 +174,23 @@ public class PezIndividual extends AppCompatActivity {
                     }
 
                     // Variables para el texto
-                    String paragraphText = "";
+                    StringBuilder paragraphText = new StringBuilder();
                     int i = 0;
 
 // Verificamos que haya al menos un párrafo
                     if (!paragraphs.isEmpty()) {
-                        paragraphText = paragraphs.get(i).text();
+                        paragraphText = new StringBuilder(paragraphs.get(i).text());
                         System.out.println(paragraphText);
 
                         // Añadimos más párrafos si el primero tiene menos de 100 caracteres
                         while (paragraphText.length() < 600 && i + 1 < paragraphs.size()) {
                             i++;
-                            paragraphText += "\n\n" + paragraphs.get(i).text();
+                            paragraphText.append("\n\n").append(paragraphs.get(i).text());
                         }
                     }
 
-                    /*
-// Aquí cortamos el texto si supera los 825 caracteres
-                    if (paragraphText.length() > 825) {
-                        paragraphText = paragraphText.substring(0, 825) + "...";
-                    }
-
-                     */
-
 // Actualizamos el TextView con el texto truncado o completo en el hilo principal
-                    String finalParagraphText = paragraphText;
+                    String finalParagraphText = paragraphText.toString();
                     System.out.println(finalParagraphText.length());
                     runOnUiThread(() -> Info_pez.setText(finalParagraphText));
 
@@ -216,10 +198,11 @@ public class PezIndividual extends AppCompatActivity {
 
                         // Modificamos el fondo de la actividad a azul
                         runOnUiThread(() -> {
+                            //noinspection deprecation
                             findViewById(R.id.main).setBackgroundColor(getResources().getColor(android.R.color.holo_blue_bright));
                             // Cambiamos el título y el texto
-                            TituloPez.setText("Lo sentimos!");
-                            Info_pez.setText("Aun no hemos encontrado información de este pez...");
+                            TituloPez.setText(R.string.sorry_mssg);
+                            Info_pez.setText(R.string.info_not_found);
                             runOnUiThread(() -> Glide.with(PezIndividual.this)
                                     .load(R.drawable.peztriste) // Aquí cargamos la imagen desde los recursos (no desde PezImages)
                                     .centerCrop()

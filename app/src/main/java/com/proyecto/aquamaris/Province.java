@@ -1,8 +1,8 @@
 package com.proyecto.aquamaris;
 
 public class Province {
-    private int imagen;  // Recurso de la imagen
-    private String nombre; // Nombre de la provincia
+    private final int imagen;  // Recurso de la imagen
+    private final String nombre; // Nombre de la provincia
 
     // Constructor para inicializar los valores
     public Province(int imagen, String nombre) {

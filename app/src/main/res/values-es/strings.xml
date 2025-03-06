@@ -33,4 +33,6 @@
     <string name="legal_notice">Aviso Legal</string>
     <string name="insert_province">Introduzca provincia</string>
     <string name="profile_icon">profile_icon</string>
+    <string name="sorry_mssg">Lo sentimos!</string>
+    <string name="info_not_found">Aun no hemos encontrado información de este pez...</string>
 </resources>

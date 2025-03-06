@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +17,9 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<ListarElementos> aData;
-    private LayoutInflater mInflater;
-    private Context context;
+    private final List<ListarElementos> aData;
+    private final LayoutInflater mInflater;
+    private final Context context;
     String nombrepez;
 
     public ListAdapter(List<ListarElementos> itemList, Context context) {
@@ -32,8 +33,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return aData.size();
     }
 
+    @NonNull
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.elementos, null);
         return new ListAdapter.ViewHolder(view);
     }
@@ -45,19 +47,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.bindData(aData.get(position));
 
         // Set the click listener on the CardView
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nombrepez = le.getName();
-                Intent intent = new Intent(view.getContext(), PezIndividual.class);
-                intent.putExtra("PEZ", nombrepez);
-                view.getContext().startActivity(intent);
-            }
+        holder.cardView.setOnClickListener(view -> {
+            nombrepez = le.getName();
+            Intent intent = new Intent(view.getContext(), PezIndividual.class);
+            intent.putExtra("PEZ", nombrepez);
+            view.getContext().startActivity(intent);
         });
-    }
-
-    public void setItems(List<ListarElementos> items) {
-        aData = items;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

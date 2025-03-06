@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,8 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class Consulta extends AppCompatActivity {
-
-    TextView resultado;
     List<ListarElementos> elements;
     String province;
 
@@ -112,19 +109,15 @@ public class Consulta extends AppCompatActivity {
                     String provinciass = c.getString(indicePV);
 
                     // Llamada al método getUrlImagen con un listener
-                    getUrlImagen(nombrecientifico, new OnImageUrlFetchedListener() {
-                        @Override
-                        public void onImageUrlFetched(String imagenUrl) {
-                            // Si la imagen está vacía, usar la imagen predeterminada
-                            if (imagenUrl.equals("vacio")) {
-                            } else {
-                                // Agregar el elemento con la URL de la imagen al listado de elementos
-                                elements.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
-                            }
-
-                            // Actualiza el RecyclerView después de agregar los elementos
-                            init();
+                    getUrlImagen(nombrecientifico, imagenUrl -> {
+                        // Si la imagen está vacía, usar la imagen predeterminada
+                        if (!imagenUrl.equals("vacio")) {
+                            // Agregar el elemento con la URL de la imagen al listado de elementos
+                            elements.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass));
                         }
+
+                        // Actualiza el RecyclerView después de agregar los elementos
+                        init();
                     });
 
                     Log.d("Consulta", "Provincia encontrada: " + provinciass);
@@ -134,7 +127,7 @@ public class Consulta extends AppCompatActivity {
             }
             init();
         } catch (Exception e) {
-            Log.e("Consulta", "Error: " + e.toString());
+            Log.e("Consulta", "Error: " + e);
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, ActivityError.class);
             startActivity(intent);
@@ -154,7 +147,7 @@ public class Consulta extends AppCompatActivity {
         // Hacer la solicitud en un hilo para evitar bloquear el hilo principal
         new Thread(() -> {
 
-            String imagenUrl = "";  // La URL de la imagen a obtener
+            String imagenUrl;  // La URL de la imagen a obtener
 
             try {
                 // Conectar a la página de Wikipedia del pez
