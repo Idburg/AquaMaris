@@ -122,11 +122,13 @@ public class PezIndividual extends AppCompatActivity {
                         paragraphText += "\n\n" + paragraphs.get(i).text();
                     }
                 }
-
+/*
 // Aquí cortamos el texto si supera los 825 caracteres
                 if (paragraphText.length() > 825) {
                     paragraphText = paragraphText.substring(0, 825) + "...";
                 }
+
+ */
 
 // Actualizamos el TextView con el texto truncado o completo en el hilo principal
                 String finalParagraphText = paragraphText;
@@ -199,10 +201,13 @@ public class PezIndividual extends AppCompatActivity {
                         }
                     }
 
+                    /*
 // Aquí cortamos el texto si supera los 825 caracteres
                     if (paragraphText.length() > 825) {
                         paragraphText = paragraphText.substring(0, 825) + "...";
                     }
+
+                     */
 
 // Actualizamos el TextView con el texto truncado o completo en el hilo principal
                     String finalParagraphText = paragraphText;
