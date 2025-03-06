@@ -30,6 +30,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Consulta2 extends AppCompatActivity {
     String prov;
@@ -112,11 +113,12 @@ public class Consulta2 extends AppCompatActivity {
     public void getUrlImagen(String indiceN, OnImageUrlFetchedListener listener) {
         // Hacer la solicitud en un hilo para evitar bloquear el hilo principal
         new Thread(() -> {
+            String language = Locale.getDefault().getLanguage();
             String imagenUrl = "";  // La URL de la imagen a obtener
 
             try {
                 // Conectar a la página de Wikipedia del pez
-                String urlWiki = "https://es.wikipedia.org/wiki/" + indiceN.replace(" ", "_");
+                String urlWiki = "https://"+language+".wikipedia.org/wiki/" + indiceN.replace(" ", "_");
                 Document doc = Jsoup.connect(urlWiki).get();
 
                 Elements images = doc.select(".mw-file-element");
@@ -144,7 +146,7 @@ public class Consulta2 extends AppCompatActivity {
                     String[] nombres = indiceN.split(" ");  // Separar por espacio
                     if (nombres.length > 0) {
                         // Usamos solo la primera palabra del nombre científico
-                        String alternativeUrl = "https://es.wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
+                        String alternativeUrl = "https://"+language+".wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
 
                         // Ahora intentamos conectarnos a esa nueva URL y obtener la imagen
                         Document docAlternative = Jsoup.connect(alternativeUrl).get();
@@ -174,7 +176,7 @@ public class Consulta2 extends AppCompatActivity {
                 String[] pez1 = indiceN.split("_");
                 if (pez1.length > 0) {
                     try {
-                        String urlWiki = "https://es.wikipedia.org/wiki/" + pez1[0];
+                        String urlWiki = "https://"+language+".wikipedia.org/wiki/" + pez1[0];
                         Document doc = Jsoup.connect(urlWiki).get();
 
                         Elements images = doc.select(".mw-file-element");

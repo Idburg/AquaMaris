@@ -25,6 +25,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class PezIndividual extends AppCompatActivity {
@@ -57,13 +58,15 @@ public class PezIndividual extends AppCompatActivity {
         String titulo = nombrepez.replace("_", " ");
         TituloPez.setText(titulo);
 
+        String language = Locale.getDefault().getLanguage();
         // Creamos un hilo para hacer la solicitud de red en segundo plano
         new Thread(() -> {
+
             Document doc = null;
             try {
                 // Realizamos la conexión a la página de Wikipedia del pez
-                doc = Jsoup.connect("https://es.wikipedia.org/wiki/" + nombrepez).get();
-                System.out.println("https://es.wikipedia.org/wiki/" + nombrepez);
+                doc = Jsoup.connect("https://"+language+".wikipedia.org/wiki/" + nombrepez).get();
+                System.out.println("https://"+language+".wikipedia.org/wiki/" + nombrepez);
 
                 // Extraemos los párrafos de la página pero excluimos las tablas
                 Elements paragraphs = doc.select("p:not(table p)");
@@ -141,7 +144,7 @@ public class PezIndividual extends AppCompatActivity {
                     String pezParaBuscar = ppez.length > 1 ? ppez[1] : ppez[0];
 
                     // Realizamos la conexión con el nombre del pez
-                    doc = Jsoup.connect("https://es.wikipedia.org/wiki/" + pezParaBuscar).get();
+                    doc = Jsoup.connect("https://"+language+".wikipedia.org/wiki/" + pezParaBuscar).get();
                     Elements paragraphs = doc.select("p:not(table p)");
                     Elements images = doc.select(".mw-file-element");
                     String imgUrl = "";
@@ -239,9 +242,6 @@ public class PezIndividual extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Al presionar la flecha, vuelve a la actividad Noticias
-            Intent intent = new Intent(PezIndividual.this, ListAdapter.class);
-            startActivity(intent);  // Inicia la actividad de Noticias
             finish();  // Finaliza la actividad actual para que no quede en el stack
             return true;
         }

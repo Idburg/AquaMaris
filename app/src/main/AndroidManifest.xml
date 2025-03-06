@@ -26,7 +26,8 @@
             android:exported="true" />
         <activity
             android:name=".PezIndividual"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Noticias"/>
         <activity
             android:name=".MapsActivity"
             android:exported="true"

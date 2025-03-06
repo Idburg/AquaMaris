@@ -124,9 +124,4 @@ public class Noticias extends AppCompatActivity {
             return insets;
         });
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }
