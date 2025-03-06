@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,9 +25,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.proyecto.aquamaris.AvisoLegal;
 import com.proyecto.aquamaris.Login;
 import com.proyecto.aquamaris.NombrePeces;
 import com.proyecto.aquamaris.NombrePecesAdapter;
+import com.proyecto.aquamaris.PantallaAjustes;
 import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.Splash;
 import com.proyecto.aquamaris.db.DBHelper;
@@ -77,6 +80,18 @@ public class Prueba3 extends Fragment {
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+
+        TextView textViewLink = view.findViewById(R.id.textViewLink);
+        textViewLink.setPaintFlags(textViewLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textViewLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Abrir la nueva actividad
+                Intent intent = new Intent(getActivity(), AvisoLegal.class);
+                startActivity(intent);
+            }
+        });
 
         TextView info = view.findViewById(R.id.infpersonal);
         info.setText(mAuth.getCurrentUser().getDisplayName());

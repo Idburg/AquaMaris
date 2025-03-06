@@ -109,7 +109,19 @@
         app:layout_constraintTop_toBottomOf="@id/infpersonal"
         />
 
+    <TextView
+        android:id="@+id/textViewLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aviso_legal"
+        android:textColor="@color/azul"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"
 
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/vertical"
+        app:layout_constraintTop_toBottomOf="@id/nombreuser"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

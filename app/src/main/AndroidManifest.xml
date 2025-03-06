@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,11 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaMaris"
         tools:targetApi="31">
-
+        <activity
+            android:name=".AvisoLegal"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
         <activity
             android:name=".ActivityError"
             android:exported="true" />
@@ -30,7 +33,7 @@
         <activity
             android:name=".MapsActivity"
             android:exported="true"
-            android:parentActivityName=".Noticias"/>
+            android:parentActivityName=".Noticias" />
         <activity
             android:name=".Register"
             android:exported="false" />
@@ -39,8 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".MainActivity2"
             android:exported="true" />
@@ -62,12 +64,11 @@
         <activity
             android:name=".Consulta"
             android:exported="true"
-            android:parentActivityName=".Noticias"
-            />
+            android:parentActivityName=".Noticias" />
         <activity
             android:name=".Consulta2"
             android:exported="true"
-            android:parentActivityName=".Noticias"/>
+            android:parentActivityName=".Noticias" />
         <activity
             android:name=".WebNews"
             android:exported="true"
@@ -75,8 +76,10 @@
         <activity
             android:name=".Noticias"
             android:exported="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>
