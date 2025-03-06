@@ -143,7 +143,7 @@ public class Login extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                        Snackbar.make(currentView,"Bienvenido",1500).show();
                         mainPage();
                     } else {
                         Snackbar.make(currentView,"Error de autenticación",1500).show();
