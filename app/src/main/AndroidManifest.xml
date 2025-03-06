@@ -29,7 +29,8 @@
             android:exported="true" />
         <activity
             android:name=".MapsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Noticias"/>
         <activity
             android:name=".Register"
             android:exported="false" />
@@ -61,12 +62,12 @@
         <activity
             android:name=".Consulta"
             android:exported="true"
+            android:parentActivityName=".Noticias"
             />
         <activity
             android:name=".Consulta2"
             android:exported="true"
-            />
-
+            android:parentActivityName=".Noticias"/>
         <activity
             android:name=".WebNews"
             android:exported="true"

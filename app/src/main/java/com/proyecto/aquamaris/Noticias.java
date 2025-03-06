@@ -22,6 +22,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.proyecto.aquamaris.Fragmentos.Prueba2;
 
 import org.jsoup.Jsoup;
@@ -123,4 +125,8 @@ public class Noticias extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

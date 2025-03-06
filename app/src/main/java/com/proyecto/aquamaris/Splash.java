@@ -33,17 +33,11 @@ public class Splash extends AppCompatActivity {
     private ImageView pez;
     private AppUpdateManager appUpdateManager;
     private static final int APP_UPDATE_REQUEST_CODE = 123;
-    public static boolean pleaseDestroy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-
-        if (pleaseDestroy)
-            FirebaseAuth.getInstance().signOut();
-
 
         appUpdateManager = AppUpdateManagerFactory.create(this);
         checkForAppUpdate();

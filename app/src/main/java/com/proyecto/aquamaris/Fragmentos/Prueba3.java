@@ -85,29 +85,21 @@ public class Prueba3 extends Fragment {
         user.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
-        cerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseUser user = mAuth.getCurrentUser();
+        cerrar.setOnClickListener(view1 -> {
+            FirebaseUser user1 = mAuth.getCurrentUser();
 
-                mAuth.signOut();
-                googleSignOut();
+            mAuth.signOut();
+            googleSignOut();
 
-                FirebaseDatabase.getInstance().setPersistenceEnabled(false);
-                Splash.pleaseDestroy = true;
+            SharedPreferences.Editor editor = requireActivity()
+                    .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                    .edit();
+            editor.clear();
+            editor.apply();
 
-                SharedPreferences.Editor editor = requireActivity()
-                        .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                        .edit();
-                editor.clear();
-                editor.apply();
-
-
-
-                Intent intent = new Intent(requireActivity(), Login.class);
-                startActivity(intent);
-                requireActivity().finish();
-            }
+            Intent intent = new Intent(requireActivity(), Login.class);
+            startActivity(intent);
+            requireActivity().finish();
         });
 
     }

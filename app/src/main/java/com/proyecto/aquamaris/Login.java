@@ -72,7 +72,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        CheckBox remember = findViewById(R.id.remember);
         AppCompatButton logButton = findViewById(R.id.login_button);
         TextInputEditText passInput = findViewById(R.id.pass2);
         EditText emailInput = findViewById(R.id.mail);
@@ -92,24 +91,11 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    if (remember.isChecked()) {
-                                        Splash.pleaseDestroy = false;
-                                        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                                    FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-                                        editor.putBoolean("rememberMe", true);
-                                        editor.putString("userEmail", email);
-                                        editor.apply();
-
-
-                                    } else {
-                                        Splash.pleaseDestroy = true;
-                                        FirebaseDatabase.getInstance().setPersistenceEnabled(false);
-
-                                        editor.clear();
-                                        editor.apply();
-
-                                    }
-
+                                    editor.putBoolean("rememberMe", true);
+                                    editor.putString("userEmail", email);
+                                    editor.apply();
 
                                     Toast.makeText(getApplicationContext(), "Iniciando sesión...", Toast.LENGTH_SHORT).show();
                                     mainPage();
@@ -158,18 +144,10 @@ public class Login extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        CheckBox remember = findViewById(R.id.remember);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        if (remember.isChecked()) {
-                            Splash.pleaseDestroy = false;
-                            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-                        } else {
-                            Splash.pleaseDestroy = true;
-                            FirebaseDatabase.getInstance().setPersistenceEnabled(false);
-                        }
                         Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                         mainPage();
                     } else {

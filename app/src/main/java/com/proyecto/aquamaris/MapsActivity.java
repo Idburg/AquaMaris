@@ -80,7 +80,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         currentMarker = mMap.addMarker(new MarkerOptions()
                 .position(defaultCoords)
                         .title("Madrid")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         try {
             loadGeoJson();
