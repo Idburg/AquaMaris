@@ -3,32 +3,26 @@ package com.proyecto.aquamaris.Fragmentos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proyecto.aquamaris.Consulta;
 import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.MapsActivity;
-import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.Province;
+import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.RecyclerViewAdapter;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Prueba2 extends Fragment {
     EditText et;

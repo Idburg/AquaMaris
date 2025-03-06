@@ -31,9 +31,10 @@
 
         <ImageView
             android:id="@+id/logo_img"
-            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
             android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/logo"
             android:src="@mipmap/aqua_maris_logo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,7 @@
         android:id="@+id/fotoperfil"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:contentDescription="@string/profile_icon"
         app:layout_constraintTop_toBottomOf="@id/constraint"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@id/vertical"

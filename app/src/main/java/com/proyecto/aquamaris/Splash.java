@@ -1,11 +1,12 @@
 package com.proyecto.aquamaris;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.Handler;
-import android.animation.ObjectAnimator;
 import android.util.DisplayMetrics;
-import android.view.View; // Asegúrate de tener esta importación
+import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
@@ -21,12 +22,6 @@ import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.firebase.auth.FirebaseAuth;
-
-import android.content.Intent;
-import android.content.IntentSender;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 

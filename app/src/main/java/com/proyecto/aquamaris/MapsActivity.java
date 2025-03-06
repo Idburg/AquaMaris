@@ -1,14 +1,13 @@
 package com.proyecto.aquamaris;
 
-import androidx.annotation.NonNull;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,11 +20,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.geojson.GeoJsonFeature;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.google.maps.android.data.geojson.GeoJsonMultiPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 import com.proyecto.aquamaris.databinding.ActivityMapsBinding;
-import com.google.maps.android.data.geojson.GeoJsonLayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,11 +1,8 @@
 package com.proyecto.aquamaris;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,24 +12,11 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.proyecto.aquamaris.Fragmentos.Prueba2;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import ui.main.SectionsPagerAdapter;
@@ -43,7 +27,6 @@ public class Noticias extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private List<NewsItem> newsList;
-    private SectionsPagerAdapter sectionsPagerAdapter;
     private MenuItem prevMenuItem;
 
     @Override
@@ -51,7 +34,7 @@ public class Noticias extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 //        ViewPager viewPager = binding.viewPager;
         ViewPager viewPager1 = findViewById(R.id.view_pager);
         viewPager1.setAdapter(sectionsPagerAdapter);

@@ -3,35 +3,24 @@ package com.proyecto.aquamaris.Fragmentos;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.proyecto.aquamaris.Login;
 import com.proyecto.aquamaris.NombrePeces;
-import com.proyecto.aquamaris.NombrePecesAdapter;
 import com.proyecto.aquamaris.R;
-import com.proyecto.aquamaris.Splash;
-import com.proyecto.aquamaris.db.DBHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Prueba3 extends Fragment {

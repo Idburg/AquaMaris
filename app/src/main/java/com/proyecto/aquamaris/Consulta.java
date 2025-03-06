@@ -16,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.proyecto.aquamaris.Fragmentos.Prueba2;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import org.jsoup.Jsoup;

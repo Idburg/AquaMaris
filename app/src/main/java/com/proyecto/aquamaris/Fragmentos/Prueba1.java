@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.proyecto.aquamaris.NewsAdapter;
 import com.proyecto.aquamaris.NewsItem;
-import com.proyecto.aquamaris.Noticias;
 import com.proyecto.aquamaris.R;
 import com.proyecto.aquamaris.WebNews;
 
