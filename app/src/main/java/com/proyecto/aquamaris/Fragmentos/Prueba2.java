@@ -85,6 +85,7 @@ public class Prueba2 extends Fragment {
 
         // Crear una lista de provincias
         List<Province> provinciaList = new ArrayList<>();
+        provinciaList.add(new Province(R.drawable.lacorunha, "A Coruña"));
         provinciaList.add(new Province(R.drawable.alava, "Álava"));
         provinciaList.add(new Province(R.drawable.albacete, "Albacete"));
         provinciaList.add(new Province(R.drawable.alicante, "Alicante"));
@@ -113,7 +114,6 @@ public class Prueba2 extends Fragment {
         provinciaList.add(new Province(R.drawable.huesca, "Huesca"));
         provinciaList.add(new Province(R.drawable.ibiza, "Ibiza"));
         provinciaList.add(new Province(R.drawable.jaen, "Jaén"));
-        provinciaList.add(new Province(R.drawable.lacorunha, "La Coruña"));
         provinciaList.add(new Province(R.drawable.lagomera, "La Gomera"));
         provinciaList.add(new Province(R.drawable.lanzarote, "Lanzarote"));
         provinciaList.add(new Province(R.drawable.lapalma, "La Palma"));
