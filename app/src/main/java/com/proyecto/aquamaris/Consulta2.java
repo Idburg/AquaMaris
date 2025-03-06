@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import org.jsoup.Jsoup;
@@ -29,12 +31,15 @@ public class Consulta2 extends AppCompatActivity {
     String prov;
     List<ListarElementos> elements2;
 
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) throws IllegalStateException, NullPointerException {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.consulta2);
+
+        View currentView = findViewById(android.R.id.content);
 
         // Configurar el Toolbar como la barra de acción
         Toolbar toolbar = findViewById(R.id.toolbar1);
@@ -78,7 +83,7 @@ public class Consulta2 extends AppCompatActivity {
             }
         } catch (Exception e) {
             Log.e("Consulta2", "Error: " + e);
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Snackbar.make(currentView, e.toString(),2000).show();
         }
     }
 

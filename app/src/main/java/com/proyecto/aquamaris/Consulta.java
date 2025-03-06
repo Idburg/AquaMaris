@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import org.jsoup.Jsoup;
@@ -38,6 +40,8 @@ public class Consulta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_consulta);
+
+        View currentView = findViewById(android.R.id.content);
 
         // Configurar el Toolbar como la barra de acción
         Toolbar toolbar = findViewById(R.id.toolbar1);
@@ -128,7 +132,7 @@ public class Consulta extends AppCompatActivity {
             init();
         } catch (Exception e) {
             Log.e("Consulta", "Error: " + e);
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Snackbar.make(currentView, e.toString(),2000).show();
             Intent intent = new Intent(this, ActivityError.class);
             startActivity(intent);
         }

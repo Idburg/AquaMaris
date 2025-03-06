@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +36,7 @@ public class Login extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private String email;
     private String password;
-    private final View currentView = findViewById(android.R.id.content);
+
 
     FirebaseAuth mAuth;
     /** @noinspection deprecation*/
@@ -73,8 +72,7 @@ public class Login extends AppCompatActivity {
         TextInputEditText passInput = findViewById(R.id.pass2);
         EditText emailInput = findViewById(R.id.mail);
 
-
-
+        View currentView = findViewById(android.R.id.content);
 
         logButton.setOnClickListener(view -> {
             email = emailInput.getText().toString().trim();
@@ -124,6 +122,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        View currentView = findViewById(android.R.id.content);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -139,15 +138,14 @@ public class Login extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        View currentView = findViewById(android.R.id.content);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
                         Snackbar.make(currentView,"Bienvenido",1500).show();
                         mainPage();
-                    } else {
+                    } else
                         Snackbar.make(currentView,"Error de autenticación",1500).show();
-                    }
                 });
     }
 

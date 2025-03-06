@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +28,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 /**
@@ -40,7 +38,6 @@ public class Register extends AppCompatActivity {
     FirebaseAuth mAuth;
     private String passTxt;
     private String emailTxt;
-    private final View currentView = findViewById(android.R.id.content);
     private static final int RC_SIGN_IN = 9001;
 
     @Override
@@ -66,6 +63,8 @@ public class Register extends AppCompatActivity {
             Intent signInIntent = googleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         });
+
+        View currentView = findViewById(android.R.id.content);
 
         signup_button.setOnClickListener(view -> {
             emailTxt = emailInput.getText().toString().trim();
@@ -122,6 +121,8 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        View currentView = findViewById(android.R.id.content);
+
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -136,6 +137,8 @@ public class Register extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
+        View currentView = findViewById(android.R.id.content);
+
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {

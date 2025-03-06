@@ -3,6 +3,7 @@ package com.proyecto.aquamaris;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,15 +55,15 @@ public class PezIndividual extends AppCompatActivity {
         String titulo = nombrepez.replace("_", " ");
         TituloPez.setText(titulo);
 
-        String language = Locale.getDefault().getLanguage();
+        String language = Locale.getDefault().getLanguage(); //Detecta el idioma del dispositivo
         // Creamos un hilo para hacer la solicitud de red en segundo plano
         new Thread(() -> {
 
             Document doc;
             try {
                 // Realizamos la conexión a la página de Wikipedia del pez
-                doc = Jsoup.connect("https://"+language+".wikipedia.org/wiki/" + nombrepez).get();
-                System.out.println("https://"+language+".wikipedia.org/wiki/" + nombrepez);
+                doc = Jsoup.connect("https://" + language + ".wikipedia.org/wiki/" + nombrepez).get();
+                System.out.println("https://" + language + ".wikipedia.org/wiki/" + nombrepez);
 
                 // Extraemos los párrafos de la página pero excluimos las tablas
                 Elements paragraphs = doc.select("p:not(table p)");
@@ -134,7 +135,7 @@ public class PezIndividual extends AppCompatActivity {
                     String pezParaBuscar = ppez.length > 1 ? ppez[1] : ppez[0];
 
                     // Realizamos la conexión con el nombre del pez
-                    doc = Jsoup.connect("https://"+language+".wikipedia.org/wiki/" + pezParaBuscar).get();
+                    doc = Jsoup.connect("https://" + language + ".wikipedia.org/wiki/" + pezParaBuscar).get();
                     Elements paragraphs = doc.select("p:not(table p)");
                     Elements images = doc.select(".mw-file-element");
                     String imgUrl = "";
@@ -164,8 +165,7 @@ public class PezIndividual extends AppCompatActivity {
                                 .load(finalImgUrl)
                                 .centerCrop()
                                 .into(PezImages));
-                    }
-                    else {
+                    } else {
                         runOnUiThread(() -> Glide.with(PezIndividual.this)
                                 .load(R.drawable.noimage) // Aquí cargamos la imagen desde los recursos (no desde PezImages)
                                 .centerCrop()
@@ -196,22 +196,21 @@ public class PezIndividual extends AppCompatActivity {
 
                 } catch (IOException | InterruptedException | ExecutionException x) {
 
-                        // Modificamos el fondo de la actividad a azul
-                        runOnUiThread(() -> {
-                            //noinspection deprecation
-                            findViewById(R.id.main).setBackgroundColor(getResources().getColor(android.R.color.holo_blue_bright));
-                            // Cambiamos el título y el texto
-                            TituloPez.setText(R.string.sorry_mssg);
-                            Info_pez.setText(R.string.info_not_found);
-                            runOnUiThread(() -> Glide.with(PezIndividual.this)
-                                    .load(R.drawable.peztriste) // Aquí cargamos la imagen desde los recursos (no desde PezImages)
-                                    .centerCrop()
-                                    .into(PezImages));  // Cargar la imagen en el ImageView
-                            System.out.println("Imagen: noImage");
-                        });
+                    // Modificamos el fondo de la actividad a azul
+                    runOnUiThread(() -> {
+                        //noinspection deprecation
+                        findViewById(R.id.main).setBackgroundColor(getResources().getColor(android.R.color.holo_blue_bright));
+                        // Cambiamos el título y el texto
+                        TituloPez.setText(R.string.sorry_mssg);
+                        Info_pez.setText(R.string.info_not_found);
+                        runOnUiThread(() -> Glide.with(PezIndividual.this)
+                                .load(R.drawable.peztriste) // Aquí cargamos la imagen desde los recursos (no desde PezImages)
+                                .centerCrop()
+                                .into(PezImages));  // Cargar la imagen en el ImageView
+                        System.out.println("Imagen: noImage");
+                    });
 
-                        // El resto del código sigue igual...
-                        // Aquí podrías agregar un mensaje o log para un error específico
+                    Log.d("ImageFinderError", "Error: "+x);
 
                 }
 
@@ -226,6 +225,7 @@ public class PezIndividual extends AppCompatActivity {
             return insets;
         });
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();  // Finaliza la actividad actual para que no quede en el stack
