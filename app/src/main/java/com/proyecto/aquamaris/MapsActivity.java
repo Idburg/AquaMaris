@@ -2,16 +2,11 @@ package com.proyecto.aquamaris;
 
 import androidx.annotation.NonNull;
 
-import android.app.ActionBar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -95,14 +90,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         GeoJsonLayer layer = new GeoJsonLayer(mMap, jsonObject);
 
 
-        for (GeoJsonFeature feature : layer.getFeatures()) {
-            GeoJsonPolygonStyle polygonStyle = new GeoJsonPolygonStyle();
-
-            polygonStyle.setStrokeColor(0xEE000000);
-            polygonStyle.setStrokeWidth(2.5f);
-
-            feature.setPolygonStyle(polygonStyle);
-        }
+        viewBorders(layer, true);
 
 
         layer.setOnFeatureClickListener(feature -> {
@@ -120,10 +108,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             selectedBounds = boundsBuilder.build();
 
             centrarMapa(selectedBounds,provincia);
+            viewBorders(layer, false);
 
             mMap.setOnMapClickListener(latLng -> {
                 if (selectedBounds != null && !selectedBounds.contains(latLng)) {
                     descentrarMapa();
+                    viewBorders(layer, true);
                     if (currentMarker != null) {
                         currentMarker.setAlpha(0f);
                     }
@@ -133,6 +123,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         layer.addLayerToMap();
 
+    }
+
+    private static void viewBorders(GeoJsonLayer layer, boolean set) {
+        for (GeoJsonFeature feature : layer.getFeatures()) {
+            GeoJsonPolygonStyle polygonStyle = new GeoJsonPolygonStyle();
+            if (set) {
+                polygonStyle.setStrokeColor(0xEE000000);
+                polygonStyle.setStrokeWidth(2.5f);
+            }
+            else {
+                polygonStyle.setStrokeWidth(0.5f);
+            }
+            feature.setPolygonStyle(polygonStyle);
+        }
     }
 
     private static LatLngBounds.Builder getBounds(Feature feature) {

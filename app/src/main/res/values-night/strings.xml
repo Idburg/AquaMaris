@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="legal_notice">Legal Notice</string>
+    <string name="insert_province">Insert province..</string>
 </resources>
