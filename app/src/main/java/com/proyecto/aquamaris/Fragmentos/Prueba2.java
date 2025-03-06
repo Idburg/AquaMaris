@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +29,6 @@ public class Prueba2 extends Fragment {
     EditText et;
     ImageButton b3;
     String provincia;
-    private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerViewAdapter recyclerViewAdapter;
 
@@ -36,31 +36,9 @@ public class Prueba2 extends Fragment {
         // Required empty public constructor
     }
 
-    public static Prueba2 newInstance(String param1, String param2) {
-        Prueba2 fragment = new Prueba2();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        try {
-            Toolbar mapToolBar = requireActivity().findViewById(R.id.mapToolbar);
-            ((AppCompatActivity)getActivity()).setSupportActionBar(mapToolBar);
-            if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-            }
-        } catch (NullPointerException npe) {
-            npe.printStackTrace();
-        } catch (IllegalStateException ise) {
-            ise.printStackTrace();
-        }
-
-         */
     }
 
     @Override
@@ -70,7 +48,7 @@ public class Prueba2 extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
@@ -137,7 +115,7 @@ public class Prueba2 extends Fragment {
         provinciaList.add(new Province(R.drawable.zamora, "Zamora"));
         provinciaList.add(new Province(R.drawable.zaragoza, "Zaragoza"));
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -151,32 +129,22 @@ public class Prueba2 extends Fragment {
         FloatingActionButton myfab = view.findViewById(R.id.fab);
 
 
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                provincia = et.getText().toString();
-                Intent intent = new Intent(getContext(), Consulta.class);
-                intent.putExtra("PROVINCIA", provincia);
-                startActivity(intent);
-            }
+        b3.setOnClickListener(v -> {
+            provincia = et.getText().toString();
+            Intent intent = new Intent(getContext(), Consulta.class);
+            intent.putExtra("PROVINCIA", provincia);
+            startActivity(intent);
         });
 
-        myfab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MapsActivity.class);
-                startActivity(intent);
-            }
+        myfab.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), MapsActivity.class);
+            startActivity(intent);
         });
 
-        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Consulta2.class);
-                intent.putExtra("PROVINCIA", provincia);
-                startActivity(intent);
-            }
-
+        bottomAppBar.setNavigationOnClickListener(view12 -> {
+            Intent intent = new Intent(getContext(), Consulta2.class);
+            intent.putExtra("PROVINCIA", provincia);
+            startActivity(intent);
         });
 
     }

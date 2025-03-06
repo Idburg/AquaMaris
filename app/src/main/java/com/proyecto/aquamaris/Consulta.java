@@ -56,8 +56,6 @@ public class Consulta extends AppCompatActivity {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
             province = getIntent().getExtras().getString("PROVINCIA").toLowerCase().trim();
-            assert province != null;
-
             switch (province) {
                 case "alava":
                     province = province.replace("alava", "Álava");
@@ -104,7 +102,7 @@ public class Consulta extends AppCompatActivity {
             Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%'", null);
             Log.d("ValorProvincia", "Provincia: " + province);
 
-            if (c != null && c.moveToFirst()) {
+            if (c.moveToFirst()) {
                 elements = new ArrayList<>();
                 do {
                     int indiceN = c.getColumnIndex("nombre_cientifico");
@@ -170,7 +168,7 @@ public class Consulta extends AppCompatActivity {
                 // Buscamos la imagen
                 for (Element image : images) {
                     String imageSrc = "https:" + image.attr("src");
-                    if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                    if (!imageSrc.contains("svg.")) {
                         imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                         break;  // Salir del bucle si encontramos la imagen
                     }
@@ -195,7 +193,7 @@ public class Consulta extends AppCompatActivity {
                         Elements imagesAlternative = docAlternative.select(".mw-file-element");
                         for (Element image : imagesAlternative) {
                             String imageSrc = "https:" + image.attr("src");
-                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                            if (!imageSrc.contains("svg.")) {
                                 imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                                 break;  // Salir del bucle si encontramos la imagen
                             }
@@ -228,7 +226,7 @@ public class Consulta extends AppCompatActivity {
                         // Buscamos la imagen
                         for (Element image : images) {
                             String imageSrc = "https:" + image.attr("src");
-                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                            if (!imageSrc.contains("svg.")) {
                                 imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                                 break;  // Salir del bucle si encontramos la imagen
                             }

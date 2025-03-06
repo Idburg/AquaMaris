@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
@@ -18,34 +19,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.proyecto.aquamaris.Login;
-import com.proyecto.aquamaris.NombrePeces;
 import com.proyecto.aquamaris.R;
 
-import java.util.List;
 
 public class Prueba3 extends Fragment {
-
-    String province;
-    TextView resultado2;
-    List<NombrePeces> pecesList;
-    String formato = "";
+    /** @noinspection deprecation*/
     GoogleSignInClient mGoogleSignInClient;
 
     public Prueba3() {
         // Required empty public constructor
     }
 
-    public static Prueba3 newInstance(String param1, String param2) {
-        Prueba3 fragment = new Prueba3();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -55,28 +42,27 @@ public class Prueba3 extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
+        //noinspection deprecation
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
+        //noinspection deprecation
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user1 = mAuth.getCurrentUser();
+        assert user1 != null;
 
-        TextView info = view.findViewById(R.id.infpersonal);
-        info.setText(mAuth.getCurrentUser().getDisplayName());
-
-        TextView user = view.findViewById(R.id.nombreuser);
-        user.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        TextView username = view.findViewById(R.id.nombreuser);
+        username.setText(user1.getEmail());
 
         AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
         cerrar.setOnClickListener(view1 -> {
-            FirebaseUser user1 = mAuth.getCurrentUser();
-
             mAuth.signOut();
             googleSignOut();
 
@@ -94,20 +80,7 @@ public class Prueba3 extends Fragment {
     }
 
     public void googleSignOut() {
-        mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity(), task -> {
-            mGoogleSignInClient.revokeAccess().addOnCompleteListener(requireActivity(), task1 -> {
-            });
-        });
+        mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity(), task ->
+                mGoogleSignInClient.revokeAccess().addOnCompleteListener(requireActivity(), task1 -> {}));
     }
-/*
-    public void init3(View view)
-    {
-
-        NombrePecesAdapter npa = new NombrePecesAdapter(pecesList, getContext());
-        RecyclerView recyclerView = view.findViewById(R.id.listRecycleView2);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(npa);
-    }
-*/
 }

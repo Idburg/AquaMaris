@@ -2,8 +2,8 @@ package com.proyecto.aquamaris.Fragmentos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -31,28 +31,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ui.main.SectionsPagerAdapter;
-
 public class Prueba1 extends Fragment {
 
     private ImageView newsImage;
     private TextView newsTitle;
-    private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private List<NewsItem> newsList;
-    private SectionsPagerAdapter sectionsPagerAdapter;
-    private MenuItem prevMenuItem;
     private FrameLayout NoticiaPrincipal;
 
     public Prueba1() {
         // Required empty public constructor
-    }
-
-    public static Prueba1 newInstance() {
-        Prueba1 fragment = new Prueba1();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -72,7 +60,7 @@ public class Prueba1 extends Fragment {
     public void onViewCreated(@NonNull View view,@Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         newsImage = view.findViewById(R.id.newsImageLarge);  // Imagen
         newsTitle = view.findViewById(R.id.newsTitleLarge);// Título
         NoticiaPrincipal = view.findViewById(R.id.imageContainer);
@@ -123,21 +111,18 @@ public class Prueba1 extends Fragment {
                     // Asignamos los datos al UI (en el hilo principal)
                     String finalHrefPrincipal = HrefPrincipal;
                     try {
-                        this.getActivity().runOnUiThread(() -> {
+                        this.requireActivity().runOnUiThread(() -> {
                             newsTitle.setText(title);  // Asignamos el título
-                            Glide.with(getContext()).load(img).into(newsImage);
-                            NoticiaPrincipal.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    // Aquí, pasar el href al WebNews Activity
-                                    Intent intent = new Intent(getContext(), WebNews.class);
-                                    intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
-                                    startActivity(intent);
-                                }
+                            Glide.with(requireContext()).load(img).into(newsImage);
+                            NoticiaPrincipal.setOnClickListener(view -> {
+                                // Aquí, pasar el href al WebNews Activity
+                                Intent intent = new Intent(getContext(), WebNews.class);
+                                intent.putExtra("url", finalHrefPrincipal);  // Pasamos el href a WebNews
+                                startActivity(intent);
                             });
                         });
                     } catch (NullPointerException npe) {
-                        npe.printStackTrace();
+                        Log.d("Error: ",npe.toString());
                     }
 
                 } else {
@@ -164,24 +149,24 @@ public class Prueba1 extends Fragment {
                     if (!imagen.isEmpty() && !h2.isEmpty() && i < 8) {
                         try {
                             newsList.add(new NewsItem(title, img, href));
-                            this.getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+                            this.requireActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
                             i++;
                         }
                         catch (NullPointerException npe) {
-                            npe.printStackTrace();
+                            Log.d("Error: ",npe.toString());
                         }
                     }
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d("Error: ",e.toString());
                 try {
-                    this.getActivity().runOnUiThread(() -> {
+                    this.requireActivity().runOnUiThread(() -> {
                         newsList.add(new NewsItem("Error al cargar noticias", "", ""));
                         adapter.notifyDataSetChanged();
                     });
                 } catch (NullPointerException npe) {
-                    npe.printStackTrace();
+                    Log.d("Error: ",npe.toString());
                 }
             }
         }).start();
