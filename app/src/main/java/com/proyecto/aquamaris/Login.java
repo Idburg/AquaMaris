@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +37,7 @@ public class Login extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private String email;
     private String password;
+    private final View currentView = findViewById(android.R.id.content);
 
     FirebaseAuth mAuth;
     /** @noinspection deprecation*/
@@ -72,13 +75,14 @@ public class Login extends AppCompatActivity {
 
 
 
+
         logButton.setOnClickListener(view -> {
             email = emailInput.getText().toString().trim();
             password = passInput.getText().toString().trim();
 
             if (!email.contains("gmail")) {
                 if (email.isEmpty() || password.isEmpty())
-                    Toast.makeText(getApplicationContext(), "Por favor rellene los campos vacíos", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(currentView,"Por favor rellene los campos vacíos", 1500).show();
                 else {
                     if (isValidEmail(email)) {
                         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -89,18 +93,17 @@ public class Login extends AppCompatActivity {
                                 editor.putString("userEmail", email);
                                 editor.apply();
 
-                                Toast.makeText(getApplicationContext(), "Iniciando sesión...", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(currentView, "Iniciando sesión...", 1500).show();
                                 mainPage();
                             } else
-                                Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(currentView,"Contraseña incorrecta",1500).show();
                         });
                     } else
-                        Toast.makeText(getApplicationContext(), "Formato de email no válido, intenta de nuevo", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(currentView,"Formato de email no válido, intenta de nuevo",1500).show();
                 }
             }
             else
-                Toast.makeText(getApplicationContext(), "Pulsa el otro botón para registrarse con Google", Toast.LENGTH_SHORT).show();
-
+                Snackbar.make(currentView,"Pulsa el otro botón para registrarse con Google",1500).show();
         });
 
         TextView signup_link = findViewById(R.id.signup_link);
@@ -129,7 +132,7 @@ public class Login extends AppCompatActivity {
                     firebaseAuthWithGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
-                Toast.makeText(this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
+                Snackbar.make(currentView,"Error en el inicio de sesión",1500).show();
             }
         }
     }
@@ -143,7 +146,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                         mainPage();
                     } else {
-                        Toast.makeText(this, "Error de autenticación", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(currentView,"Error de autenticación",1500).show();
                     }
                 });
     }
