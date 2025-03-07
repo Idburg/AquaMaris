@@ -26,11 +26,11 @@
 
             <ImageView
                 android:id="@+id/PezImages"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_image_background"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 />
 
 
