@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.aquamaris.Consulta;
 import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.MapsActivity;

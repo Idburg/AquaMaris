@@ -3,9 +3,6 @@ package com.proyecto.aquamaris.Fragmentos;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +18,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.proyecto.aquamaris.AvisoLegal;
 import com.proyecto.aquamaris.Login;
 import com.proyecto.aquamaris.R;
@@ -65,6 +61,12 @@ public class Prueba3 extends Fragment {
 
         TextView username = view.findViewById(R.id.nombreuser);
         username.setText(user1.getEmail());
+
+        TextView legal = view.findViewById(R.id.legal);
+        legal.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), AvisoLegal.class);
+            startActivity(intent);
+        });
 
         AppCompatButton cerrar = view.findViewById(R.id.settings_sign_out);
         cerrar.setOnClickListener(view1 -> {
