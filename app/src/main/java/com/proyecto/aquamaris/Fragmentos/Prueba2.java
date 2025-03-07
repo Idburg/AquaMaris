@@ -132,7 +132,7 @@ public class Prueba2 extends Fragment {
 
         b3.setOnClickListener(v -> {
             boolean isValidProvince = false;
-            provincia = et.getText().toString().toLowerCase().trim();
+            provincia = et.getText().toString().toLowerCase();
             switch (provincia) {
                 case "alava":
                     provincia = provincia.replace("alava", "Álava");
