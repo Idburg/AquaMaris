@@ -40,9 +40,6 @@
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".FirebaseImplementation"
-            android:exported="true" />
-        <activity
             android:name=".Splash"
             android:exported="true">
             <intent-filter>

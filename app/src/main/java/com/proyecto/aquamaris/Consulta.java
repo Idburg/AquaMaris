@@ -31,6 +31,7 @@ import java.util.Locale;
 public class Consulta extends AppCompatActivity {
     List<ListarElementos> elements;
     String province;
+    String language = Locale.getDefault().getLanguage();
 
     public Consulta () {}
 
@@ -147,7 +148,6 @@ public class Consulta extends AppCompatActivity {
     }
 
     public void getUrlImagen(String indiceN, OnImageUrlFetchedListener listener) {
-        String language = Locale.getDefault().getLanguage();
         // Hacer la solicitud en un hilo para evitar bloquear el hilo principal
         new Thread(() -> {
 
