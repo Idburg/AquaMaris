@@ -7,11 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
-
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "TablaAquaMaris.sql";
     public static final String TABLA = "peces";
-
 
     public DBHelper(@Nullable Context context) {
         super(context, "AquaMarisFull.db", null, 1);

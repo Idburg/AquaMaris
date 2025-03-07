@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,49 +56,7 @@ public class Consulta extends AppCompatActivity {
         try {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
-            province = getIntent().getExtras().getString("PROVINCIA").toLowerCase().trim();
-            switch (province) {
-                case "alava":
-                    province = province.replace("alava", "Álava");
-                    break;
-                case "almeria":
-                    province = province.replace("almeria", "Almería");
-                    break;
-                case "avila":
-                    province = province.replace("avila", "Ávila");
-                    break;
-                case "caceres":
-                    province = province.replace("caceres", "Cáceres");
-                    break;
-                case "cadiz":
-                    province = province.replace("cadiz", "Cádiz");
-                    break;
-                case "castellon":
-                    province = province.replace("castellon", "Castellón");
-                    break;
-                case "cordoba":
-                    province = province.replace("cordoba", "Córdoba");
-                    break;
-                case "gipuzcoa":
-                    province = province.replace("gipuzcoa", "Gipúzcoa");
-                    break;
-                case "jaen":
-                    province = province.replace("jaen", "Jaén");
-                    break;
-                case "leon":
-                    province = province.replace("leon", "León");
-                    break;
-                case "lerida":
-                    province = province.replace("lerida", "Lérida");
-                    break;
-                case "malaga":
-                    province = province.replace("malaga", "Málaga");
-                    break;
-                default:
-                    char firstLetter = province.charAt(0);
-                    province = province.replace(province.charAt(0), Character.toUpperCase(firstLetter));
-                    break;
-            }
+            province = getIntent().getExtras().getString("PROVINCIA");
 
             Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%'", null);
             Log.d("ValorProvincia", "Provincia: " + province);

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.aquamaris.Consulta;
 import com.proyecto.aquamaris.Consulta2;
 import com.proyecto.aquamaris.MapsActivity;
@@ -24,6 +25,7 @@ import com.proyecto.aquamaris.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Prueba2 extends Fragment {
     EditText et;
@@ -48,8 +50,7 @@ public class Prueba2 extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         et = view.findViewById(R.id.editTextText);
@@ -130,10 +131,68 @@ public class Prueba2 extends Fragment {
 
 
         b3.setOnClickListener(v -> {
-            provincia = et.getText().toString();
-            Intent intent = new Intent(getContext(), Consulta.class);
-            intent.putExtra("PROVINCIA", provincia);
-            startActivity(intent);
+            boolean isValidProvince = false;
+            provincia = et.getText().toString().toLowerCase().trim();
+            switch (provincia) {
+                case "alava":
+                    provincia = provincia.replace("alava", "Álava");
+                    break;
+                case "almeria":
+                    provincia = provincia.replace("almeria", "Almería");
+                    break;
+                case "avila":
+                    provincia = provincia.replace("avila", "Ávila");
+                    break;
+                case "caceres":
+                    provincia = provincia.replace("caceres", "Cáceres");
+                    break;
+                case "cadiz":
+                    provincia = provincia.replace("cadiz", "Cádiz");
+                    break;
+                case "castellon":
+                    provincia = provincia.replace("castellon", "Castellón");
+                    break;
+                case "cordoba":
+                    provincia = provincia.replace("cordoba", "Córdoba");
+                    break;
+                case "gipuzcoa":
+                    provincia = provincia.replace("gipuzcoa", "Gipúzcoa");
+                    break;
+                case "jaen":
+                    provincia = provincia.replace("jaen", "Jaén");
+                    break;
+                case "leon":
+                    provincia = provincia.replace("leon", "León");
+                    break;
+                case "lerida":
+                    provincia = provincia.replace("lerida", "Lérida");
+                    break;
+                case "malaga":
+                    provincia = provincia.replace("malaga", "Málaga");
+                    break;
+                default:
+                    char firstLetter = provincia.charAt(0);
+                    provincia = provincia.replace(provincia.charAt(0), Character.toUpperCase(firstLetter));
+                    break;
+            }
+
+            for (Province prov : provinciaList) {
+                if (Objects.equals(prov.getNombre(), provincia)) {
+                    isValidProvince = true;
+                    break;
+                }
+            }
+
+            if (!provincia.isEmpty() && isValidProvince) {
+                Intent intent = new Intent(getContext(), Consulta.class);
+                intent.putExtra("PROVINCIA", provincia);
+                startActivity(intent);
+            } else {
+                et.setText(null);
+                Snackbar.make(v, "Intenta otra vez", 1000).show();
+            }
+
+
         });
 
         myfab.setOnClickListener(view1 -> {
