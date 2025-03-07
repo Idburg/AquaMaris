@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public DBHelper(@Nullable Context context) {
-        super(context, "AquaMaris.db", null, 1);
+        super(context, "AquaMarisFull.db", null, 1);
     }
 
     @Override
@@ -444,7 +444,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Lepidopus caudatus','Trichiuridae','Peninsula','Alicante, Valencia, Cádiz')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Aphanopus carbo','Trichiuridae','Peninsula','Valencia, Barcelona, Cádiz')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Barbus barbus','Cyprinidae','Peninsula','Madrid, Segovia, Toledo')");
-        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Cyprinus carpio','Cyprinidae','Peninsula','ávila, Madrid, Soria, Guadalajara, La Rioja, Navarra')");
+        sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Cyprinus carpio','Cyprinidae','Peninsula','Ávila, Madrid, Soria, Guadalajara, La Rioja, Navarra')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Salmo trutta','Salmonidae','Burgos','Segovia, Soria, Gipúzcoa, Vizcaya, Álava')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Esox Lucius','Esocidae','Peninsula','Zamora, Salamanca, Cuenca, Toledo, Zaragoza')");
         sqLiteDatabase.execSQL("INSERT INTO peces VALUES ('España','Perca Fluviatilis','Percidae','Peninsula','Zamora, Soria, Ciudad Real, Huesca, Zaragoza, La Rioja')");
