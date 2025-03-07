@@ -200,7 +200,6 @@ public class PezIndividual extends AppCompatActivity {
                         Info_pez.setText(R.string.info_not_found);
                         runOnUiThread(() -> Glide.with(PezIndividual.this)
                                 .load(R.drawable.peztriste) // Aquí cargamos la imagen desde los recursos (no desde PezImages)
-                                .centerCrop()
                                 .into(PezImages));  // Cargar la imagen en el ImageView
                         System.out.println("Imagen: noImage");
                     });
