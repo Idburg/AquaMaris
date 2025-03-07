@@ -133,8 +133,10 @@ public class Consulta extends AppCompatActivity {
 
                 } while (c.moveToNext());
                 c.close();
+
             }
             init();
+
         } catch (Exception e) {
             Log.e("Consulta", "Error: " + e.toString());
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
