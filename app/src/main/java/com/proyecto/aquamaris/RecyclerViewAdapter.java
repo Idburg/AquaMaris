@@ -15,7 +15,7 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
 
-    private List<Province> provinciaList;
+    private final List<Province> provinciaList;
     String provincias;// Lista de provincias
 
     // Constructor para recibir la lista de provincias
@@ -40,23 +40,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.textView.setText(provincia.getNombre());
         holder.btnProv.setText(provincia.getNombre());
         //holder.textView.setOnClickListener(v -> {Intent intent = new Intent (v.getContext(), Consulta.class);
-        holder.textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                provincias = ((Button)view).getText().toString();
-                Intent intent2 = new Intent(view.getContext(), Consulta2.class);
-                intent2.putExtra("PROV",provincias);
-                view.getContext().startActivity(intent2);
-                }
+        holder.textView.setOnClickListener(view -> {
+            provincias = ((Button)view).getText().toString();
+            Intent intent2 = new Intent(view.getContext(), Consulta2.class);
+            intent2.putExtra("PROV",provincias);
+            view.getContext().startActivity(intent2);
             });
-        holder.btnProv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                provincias = ((Button)view).getText().toString();
-                Intent intent3 = new Intent(view.getContext(), Consulta2.class);
-                intent3.putExtra("PROV",provincias);
-                view.getContext().startActivity(intent3);
-            }
+        holder.btnProv.setOnClickListener(view -> {
+            provincias = ((Button)view).getText().toString();
+            Intent intent3 = new Intent(view.getContext(), Consulta2.class);
+            intent3.putExtra("PROV",provincias);
+            view.getContext().startActivity(intent3);
         });
     }
 

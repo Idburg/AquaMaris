@@ -3,15 +3,14 @@ package com.proyecto.aquamaris;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class WebNews extends AppCompatActivity {
-    private WebView webView;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -30,7 +29,7 @@ public class WebNews extends AppCompatActivity {
         }
 
         // Configura el WebView
-        webView = findViewById(R.id.WebView);
+        WebView webView = findViewById(R.id.WebView);
         String url = getIntent().getStringExtra("url");
 
         if (url != null) {

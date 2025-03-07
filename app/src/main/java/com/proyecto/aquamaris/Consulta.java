@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,7 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.proyecto.aquamaris.Fragmentos.Prueba2;
+import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import org.jsoup.Jsoup;
@@ -26,12 +26,12 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Consulta extends AppCompatActivity {
-
-    TextView resultado;
     List<ListarElementos> elements;
     String province;
+    String language = Locale.getDefault().getLanguage();
 
     public Consulta () {}
 
@@ -41,6 +41,8 @@ public class Consulta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_consulta);
+
+        View currentView = findViewById(android.R.id.content);
 
         // Configurar el Toolbar como la barra de acción
         Toolbar toolbar = findViewById(R.id.toolbar1);
@@ -56,8 +58,6 @@ public class Consulta extends AppCompatActivity {
             DBHelper db = new DBHelper(this);
             SQLiteDatabase obj = db.getReadableDatabase();
             province = getIntent().getExtras().getString("PROVINCIA").toLowerCase().trim();
-            assert province != null;
-
             switch (province) {
                 case "alava":
                     province = province.replace("alava", "Álava");
@@ -104,7 +104,7 @@ public class Consulta extends AppCompatActivity {
             Cursor c = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%"+province+"%'", null);
             Log.d("ValorProvincia", "Provincia: " + province);
 
-            if (c != null && c.moveToFirst()) {
+            if (c.moveToFirst()) {
                 elements = new ArrayList<>();
                 do {
                     int indiceN = c.getColumnIndex("nombre_cientifico");
@@ -114,19 +114,15 @@ public class Consulta extends AppCompatActivity {
                     String provinciass = c.getString(indicePV);
 
                     // Llamada al método getUrlImagen con un listener
-                    getUrlImagen(nombrecientifico, new OnImageUrlFetchedListener() {
-                        @Override
-                        public void onImageUrlFetched(String imagenUrl) {
-                            // Si la imagen está vacía, usar la imagen predeterminada
-                            if (imagenUrl.equals("vacio")) {
-                            } else {
-                                // Agregar el elemento con la URL de la imagen al listado de elementos
-                                elements.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
-                            }
-
-                            // Actualiza el RecyclerView después de agregar los elementos
-                            init();
+                    getUrlImagen(nombrecientifico, imagenUrl -> {
+                        // Si la imagen está vacía, usar la imagen predeterminada
+                        if (!imagenUrl.equals("vacio")) {
+                            // Agregar el elemento con la URL de la imagen al listado de elementos
+                            elements.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass));
                         }
+
+                        // Actualiza el RecyclerView después de agregar los elementos
+                        init();
                     });
 
                     Log.d("Consulta", "Provincia encontrada: " + provinciass);
@@ -136,8 +132,8 @@ public class Consulta extends AppCompatActivity {
             }
             init();
         } catch (Exception e) {
-            Log.e("Consulta", "Error: " + e.toString());
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Log.e("Consulta", "Error: " + e);
+            Snackbar.make(currentView, e.toString(),2000).show();
             Intent intent = new Intent(this, ActivityError.class);
             startActivity(intent);
         }
@@ -154,11 +150,12 @@ public class Consulta extends AppCompatActivity {
     public void getUrlImagen(String indiceN, OnImageUrlFetchedListener listener) {
         // Hacer la solicitud en un hilo para evitar bloquear el hilo principal
         new Thread(() -> {
-            String imagenUrl = "";  // La URL de la imagen a obtener
+
+            String imagenUrl;  // La URL de la imagen a obtener
 
             try {
                 // Conectar a la página de Wikipedia del pez
-                String urlWiki = "https://es.wikipedia.org/wiki/" + indiceN.replace(" ", "_");
+                String urlWiki = "https://"+language+".wikipedia.org/wiki/" + indiceN.replace(" ", "_");
                 Document doc = Jsoup.connect(urlWiki).get();
 
                 Elements images = doc.select(".mw-file-element");
@@ -168,7 +165,7 @@ public class Consulta extends AppCompatActivity {
                 // Buscamos la imagen
                 for (Element image : images) {
                     String imageSrc = "https:" + image.attr("src");
-                    if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                    if (!imageSrc.contains("svg.")) {
                         imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                         break;  // Salir del bucle si encontramos la imagen
                     }
@@ -186,14 +183,14 @@ public class Consulta extends AppCompatActivity {
                     String[] nombres = indiceN.split(" ");  // Separar por espacio
                     if (nombres.length > 0) {
                         // Usamos solo la primera palabra del nombre científico
-                        String alternativeUrl = "https://es.wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
+                        String alternativeUrl = "https://"+language+".wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
 
                         // Ahora intentamos conectarnos a esa nueva URL y obtener la imagen
                         Document docAlternative = Jsoup.connect(alternativeUrl).get();
                         Elements imagesAlternative = docAlternative.select(".mw-file-element");
                         for (Element image : imagesAlternative) {
                             String imageSrc = "https:" + image.attr("src");
-                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                            if (!imageSrc.contains("svg.")) {
                                 imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                                 break;  // Salir del bucle si encontramos la imagen
                             }
@@ -216,7 +213,7 @@ public class Consulta extends AppCompatActivity {
                 String[] pez1 = indiceN.split("_");
                 if (pez1.length > 0) {
                     try {
-                        String urlWiki = "https://es.wikipedia.org/wiki/" + pez1[0];
+                        String urlWiki = "https://"+language+".wikipedia.org/wiki/" + pez1[0];
                         Document doc = Jsoup.connect(urlWiki).get();
 
                         Elements images = doc.select(".mw-file-element");
@@ -226,7 +223,7 @@ public class Consulta extends AppCompatActivity {
                         // Buscamos la imagen
                         for (Element image : images) {
                             String imageSrc = "https:" + image.attr("src");
-                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                            if (!imageSrc.contains("svg.")) {
                                 imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                                 break;  // Salir del bucle si encontramos la imagen
                             }

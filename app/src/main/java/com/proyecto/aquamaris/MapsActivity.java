@@ -1,14 +1,14 @@
 package com.proyecto.aquamaris;
 
-import androidx.annotation.NonNull;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,11 +21,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.geojson.GeoJsonFeature;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.google.maps.android.data.geojson.GeoJsonMultiPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 import com.proyecto.aquamaris.databinding.ActivityMapsBinding;
-import com.google.maps.android.data.geojson.GeoJsonLayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +39,6 @@ import java.util.List;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ActivityMapsBinding binding;
     private final LatLng defaultCoords = new LatLng(40.4168, -3.7038); // Madrid
     private final float defaultZoom = 5.75f;
     private GeoJsonFeature lastFeature = null;
@@ -50,7 +49,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        com.proyecto.aquamaris.databinding.ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -74,13 +73,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom));
         currentMarker = mMap.addMarker(new MarkerOptions()
                 .position(defaultCoords)
-                        .title("Madrid")
+                .title("Madrid")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         try {
             loadGeoJson();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Log.d("MapLoadError","Error: "+e);
         }
     }
 
@@ -88,10 +87,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         JSONObject jsonObject = getJsonObject();
 
         GeoJsonLayer layer = new GeoJsonLayer(mMap, jsonObject);
-
-
         viewBorders(layer, true);
-
 
         layer.setOnFeatureClickListener(feature -> {
 
@@ -104,10 +100,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             lastFeature = (GeoJsonFeature) feature;
 
             LatLngBounds.Builder boundsBuilder = getBounds(feature);
-
             selectedBounds = boundsBuilder.build();
 
-            centrarMapa(selectedBounds,provincia);
+            centrarMapa(selectedBounds, provincia);
             viewBorders(layer, false);
 
             mMap.setOnMapClickListener(latLng -> {
@@ -120,9 +115,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             });
         });
-
         layer.addLayerToMap();
-
     }
 
     private static void viewBorders(GeoJsonLayer layer, boolean set) {
@@ -131,10 +124,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (set) {
                 polygonStyle.setStrokeColor(0xEE000000);
                 polygonStyle.setStrokeWidth(2.5f);
-            }
-            else {
+            } else
                 polygonStyle.setStrokeWidth(0.5f);
-            }
+
             feature.setPolygonStyle(polygonStyle);
         }
     }
@@ -146,17 +138,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (feature.getGeometry() instanceof GeoJsonPolygon) {
             GeoJsonPolygon polygon = (GeoJsonPolygon) feature.getGeometry();
             for (List<LatLng> coordinates : polygon.getCoordinates()) {
-                for (LatLng point : coordinates) {
+                for (LatLng point : coordinates)
                     boundsBuilder.include(point);
-                }
             }
         } else if (feature.getGeometry() instanceof GeoJsonMultiPolygon) {
             GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
             for (GeoJsonPolygon polygon : multiPolygon.getPolygons()) {
                 for (List<LatLng> coordinates : polygon.getCoordinates()) {
-                    for (LatLng point : coordinates) {
+                    for (LatLng point : coordinates)
                         boundsBuilder.include(point);
-                    }
                 }
             }
         }
@@ -189,17 +179,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             currentMarker.setTitle(provincia);
             currentMarker.setAlpha(1f);
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 120),2000,null);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bob, 120), 2000, null);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("MapZoomInError", "Error: " + e);
         }
     }
 
     private void descentrarMapa() {
         try {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom),2000,null);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultCoords, defaultZoom), 2000, null);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("MapZoomOutError", "Error: " + e);
         }
     }
 

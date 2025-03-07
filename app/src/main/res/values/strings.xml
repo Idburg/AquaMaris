@@ -33,4 +33,8 @@
     <string name="profile_email">profile_email</string>
     <string name="legal_notice">Legal Notice</string>
     <string name="insert_province">Insert province..</string>
+    <string name="profile_icon">profile_icon</string>
+    <string name="sorry_mssg">s!</string>
+    <string name="info_not_found">Aun no hemos encontrado información de este pez…</string>
+    <string name="slash" translatable="false">/</string>
 </resources>

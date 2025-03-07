@@ -7,20 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.proyecto.aquamaris.Fragmentos.Prueba2;
+import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.aquamaris.db.DBHelper;
 
 import org.jsoup.Jsoup;
@@ -30,12 +25,13 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Consulta2 extends AppCompatActivity {
     String prov;
     List<ListarElementos> elements2;
-    TextView resultado2;
-    Button inf;
+    String language = Locale.getDefault().getLanguage();
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,6 +39,8 @@ public class Consulta2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.consulta2);
+
+        View currentView = findViewById(android.R.id.content);
 
         // Configurar el Toolbar como la barra de acción
         Toolbar toolbar = findViewById(R.id.toolbar1);
@@ -58,7 +56,7 @@ public class Consulta2 extends AppCompatActivity {
             SQLiteDatabase obj = db2.getReadableDatabase();
             prov = getIntent().getExtras().getString("PROV");
             Cursor c2 = obj.rawQuery("SELECT * FROM peces WHERE provincias LIKE '%" + prov + "%'", null);
-            if (c2 != null && c2.moveToFirst()) {
+            if (c2.moveToFirst()) {
                 elements2 = new ArrayList<>();
                 do {
                     int indiceN = c2.getColumnIndex("nombre_cientifico");
@@ -67,20 +65,16 @@ public class Consulta2 extends AppCompatActivity {
                     String nombrecientifico = c2.getString(indiceN);
                     String provinciass = c2.getString(indicePV);
 
-                    // Llamada al método getUrlImagen con un listener
-                    getUrlImagen(nombrecientifico, new OnImageUrlFetchedListener() {
-                        @Override
-                        public void onImageUrlFetched(String imagenUrl) {
-                            // Si la imagen está vacía, usar la imagen predeterminada
-                            if (imagenUrl.equals("vacio")) {
-                            } else {
-                                // Agregar el elemento con la URL de la imagen al listado de elementos
-                                elements2.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass, "Ver"));
-                            }
-
-                            // Actualiza el RecyclerView después de agregar los elementos
-                            init2();
+                    // Llamada al método getUrlImagen con un listener (onImageUrlFetched)
+                    getUrlImagen(nombrecientifico, imagenUrl -> {
+                        // Si la imagen está vacía, usar la imagen predeterminada
+                        if (!imagenUrl.equals("vacio")) {
+                            // Agregar el elemento con la URL de la imagen al listado de elementos
+                            elements2.add(new ListarElementos(imagenUrl, nombrecientifico, provinciass));
                         }
+
+                        // Actualiza el RecyclerView después de agregar los elementos
+                        init2();
                     });
 
                     Log.d("Consulta", "Provincia encontrada: " + provinciass);
@@ -89,8 +83,8 @@ public class Consulta2 extends AppCompatActivity {
                 c2.close();
             }
         } catch (Exception e) {
-            Log.e("Consulta2", "Error: " + e.toString());
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            Log.e("Consulta2", "Error: " + e);
+            Snackbar.make(currentView, e.toString(),2000).show();
         }
     }
 
@@ -116,7 +110,7 @@ public class Consulta2 extends AppCompatActivity {
 
             try {
                 // Conectar a la página de Wikipedia del pez
-                String urlWiki = "https://es.wikipedia.org/wiki/" + indiceN.replace(" ", "_");
+                String urlWiki = "https://"+language+".wikipedia.org/wiki/" + indiceN.replace(" ", "_");
                 Document doc = Jsoup.connect(urlWiki).get();
 
                 Elements images = doc.select(".mw-file-element");
@@ -126,7 +120,7 @@ public class Consulta2 extends AppCompatActivity {
                 // Buscamos la imagen
                 for (Element image : images) {
                     String imageSrc = "https:" + image.attr("src");
-                    if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                    if (!imageSrc.contains("svg.")) {
                         imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                         break;  // Salir del bucle si encontramos la imagen
                     }
@@ -144,14 +138,14 @@ public class Consulta2 extends AppCompatActivity {
                     String[] nombres = indiceN.split(" ");  // Separar por espacio
                     if (nombres.length > 0) {
                         // Usamos solo la primera palabra del nombre científico
-                        String alternativeUrl = "https://es.wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
+                        String alternativeUrl = "https://"+language+".wikipedia.org/wiki/" + nombres[0].replace(" ", "_");
 
                         // Ahora intentamos conectarnos a esa nueva URL y obtener la imagen
                         Document docAlternative = Jsoup.connect(alternativeUrl).get();
                         Elements imagesAlternative = docAlternative.select(".mw-file-element");
                         for (Element image : imagesAlternative) {
                             String imageSrc = "https:" + image.attr("src");
-                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                            if (!imageSrc.contains("svg.")) {
                                 imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                                 break;  // Salir del bucle si encontramos la imagen
                             }
@@ -174,7 +168,7 @@ public class Consulta2 extends AppCompatActivity {
                 String[] pez1 = indiceN.split("_");
                 if (pez1.length > 0) {
                     try {
-                        String urlWiki = "https://es.wikipedia.org/wiki/" + pez1[0];
+                        String urlWiki = "https://"+language+".wikipedia.org/wiki/" + pez1[0];
                         Document doc = Jsoup.connect(urlWiki).get();
 
                         Elements images = doc.select(".mw-file-element");
@@ -184,7 +178,7 @@ public class Consulta2 extends AppCompatActivity {
                         // Buscamos la imagen
                         for (Element image : images) {
                             String imageSrc = "https:" + image.attr("src");
-                            if (!imageSrc.contains("svg.") && !imageSrc.isEmpty()) {
+                            if (!imageSrc.contains("svg.")) {
                                 imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
                                 break;  // Salir del bucle si encontramos la imagen
                             }
@@ -217,14 +211,7 @@ public class Consulta2 extends AppCompatActivity {
     public interface OnImageUrlFetchedListener {
         void onImageUrlFetched(String imagenUrl);
     }
-    private int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();

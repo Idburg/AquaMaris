@@ -4,13 +4,11 @@ public class ListarElementos {
     private Object imagen; // Puede ser String (URL) o Integer (resource ID)
     private String name;
     private String city;
-    private String status;
 
-    public ListarElementos(Object imagen, String name, String city, String status) {
+    public ListarElementos(Object imagen, String name, String city) {
         this.imagen = imagen;
         this.name = name;
         this.city = city;
-        this.status = status;
     }
 
     public Object getImagen() {
@@ -33,15 +31,4 @@ public class ListarElementos {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

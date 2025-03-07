@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/prueba3"
-    android:background="@color/super_light_green">
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/lineaHorizontal"
@@ -31,9 +31,10 @@
 
         <ImageView
             android:id="@+id/logo_img"
-            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
             android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/logo"
             android:src="@mipmap/aqua_maris_logo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,7 @@
         android:id="@+id/fotoperfil"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:contentDescription="@string/profile_icon"
         app:layout_constraintTop_toBottomOf="@id/constraint"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@id/vertical"
@@ -89,23 +91,13 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/infpersonal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/informacion"
-        app:layout_constraintStart_toEndOf="@id/vertical"
-        app:layout_constraintTop_toBottomOf="@id/fotoperfil"
-        />
-
-    <TextView
         android:id="@+id/nombreuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profile_email"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@id/vertical"
-        app:layout_constraintTop_toBottomOf="@id/infpersonal"
+        app:layout_constraintTop_toBottomOf="@id/fotoperfil"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
