@@ -1,10 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AvisoLegal">
+    tools:context=".AvisoLegal"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            tools:ignore="MissingConstraints">
+
+            <!-- Toolbar personalizado -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar1"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/azul"
+                app:titleTextColor="@android:color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/privacidad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Política de Privacidad"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/info_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Información General\n\nNombre del Desarrollador/Empresa: Juan de la Cierva\nAplicación: Aqua Maris"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/recopilacion_datos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recopilación de Datos\n\nEsta política de privacidad explica qué datos personales y sensibles recoge la aplicación y cómo se utilizan. Esto incluye:\n\n- Tipo de datos recogidos: Nombre, correo electrónico, contraseña, país y fecha de nacimiento.\n- Propósito de la recopilación de datos: Necesitamos estos datos para que puedas interactuar con otras personas a través de la aplicación.\n- Terceros con los que se comparten datos: No compartimos datos con terceros."
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/uso_datos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uso de Datos\n\nDescribimos cómo se utilizan los datos recopilados, incluyendo:\n\n- Funcionalidad de la aplicación: Utilizamos los datos para mejorar y personalizar la experiencia del usuario.\n- Comunicación con los usuarios: Utilizamos los datos de contacto para comunicarnos con los usuarios sobre actualizaciones, promociones y otros asuntos relacionados con la aplicación."
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/conservacion_eliminacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conservación y Eliminación de Datos\n\nExplicamos cuánto tiempo conservamos los datos y cómo se eliminan:\nMantenemos los datos personales de los usuarios solo mientras sea necesario para permitir la interacción a través de la aplicación. Una vez que los datos ya no son necesarios, se eliminan de manera segura."
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/seguridad_datos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seguridad de Datos\n\nDescribimos las medidas de seguridad implementadas para proteger los datos de los usuarios:\nImplementamos medidas de seguridad adecuadas para proteger los datos personales de los usuarios contra el acceso no autorizado, la alteración, divulgación o destrucción de los datos."
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/contacto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contacto\n\nProporcionamos un punto de contacto para consultas sobre privacidad:\nEmail: aquamarisdam@gmail.com"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
