@@ -138,7 +138,8 @@ public class Prueba2 extends Fragment {
             try {
                 if (provincia.contains("alava") || provincia.contains("almeria") || provincia.contains("avila") || provincia.contains("caceres")
                         || provincia.contains("cadiz") || provincia.contains("castellon") || provincia.contains("cordoba") || provincia.contains("gipuzcoa")
-                        || provincia.contains("jaen") || provincia.contains("leon") || provincia.contains("lerida") || provincia.contains("malaga")) {
+                        || provincia.contains("jaen") || provincia.contains("leon") || provincia.contains("lerida") || provincia.contains("malaga")
+                        || provincia.contains("acoruna")) {
                     provincia = provincia.replace("alava", "Álava");
                     provincia = provincia.replace("almeria", "Almería");
                     provincia = provincia.replace("avila", "Ávila");
@@ -151,6 +152,7 @@ public class Prueba2 extends Fragment {
                     provincia = provincia.replace("leon", "León");
                     provincia = provincia.replace("lerida", "Lérida");
                     provincia = provincia.replace("malaga", "Málaga");
+                    provincia = provincia.replace("acoruna","A Coruña");
                 } else {
                     char firstLetter = provincia.charAt(0);
                     provincia = provincia.replace(provincia.charAt(0), Character.toUpperCase(firstLetter));
