@@ -80,7 +80,7 @@ public class PezIndividual extends AppCompatActivity {
                             .get(); // Bloquea y espera la carga de la imagen
 
                     // Si la imagen es válida, la seleccionamos
-                    if (bitmap.getWidth() >= 100 && bitmap.getHeight() >= 100) {
+                    if (bitmap.getWidth() >= 1 && bitmap.getHeight() >= 1) {
                         imgUrl = imageSrc;
                         break;
                     }
@@ -91,13 +91,11 @@ public class PezIndividual extends AppCompatActivity {
                     String finalImgUrl = imgUrl;
                     runOnUiThread(() -> Glide.with(PezIndividual.this)
                             .load(finalImgUrl)
-                            .centerCrop()
                             .into(PezImages));
                     System.out.println("Imagen: " + imgUrl);
                 } else {
                     runOnUiThread(() -> Glide.with(PezIndividual.this)
                             .load(R.drawable.noimage)
-                            .centerCrop()
                             .into(PezImages));  // Cargar la imagen en el ImageView
                     System.out.println("Imagen: noImage");
                 }
@@ -190,6 +188,8 @@ public class PezIndividual extends AppCompatActivity {
                     String finalParagraphText = paragraphText.toString();
                     System.out.println(finalParagraphText.length());
                     runOnUiThread(() -> Info_pez.setText(finalParagraphText));
+
+
 
                 } catch (IOException | InterruptedException | ExecutionException x) {
 

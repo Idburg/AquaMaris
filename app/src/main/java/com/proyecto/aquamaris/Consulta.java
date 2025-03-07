@@ -86,8 +86,10 @@ public class Consulta extends AppCompatActivity {
 
                 } while (c.moveToNext());
                 c.close();
+
             }
             init();
+
         } catch (Exception e) {
             Log.e("Consulta", "Error: " + e);
             Snackbar.make(currentView, e.toString(),2000).show();

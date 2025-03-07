@@ -37,4 +37,5 @@
     <string name="sorry_mssg">s!</string>
     <string name="info_not_found">Aun no hemos encontrado información de este pez…</string>
     <string name="slash" translatable="false">/</string>
+    <string name="aviso_legal">Aviso legal</string>
 </resources>
