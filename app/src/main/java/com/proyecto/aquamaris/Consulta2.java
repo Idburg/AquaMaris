@@ -30,6 +30,7 @@ import java.util.Locale;
 public class Consulta2 extends AppCompatActivity {
     String prov;
     List<ListarElementos> elements2;
+    String language = Locale.getDefault().getLanguage();
 
 
     @SuppressLint("SetTextI18n")
@@ -105,7 +106,6 @@ public class Consulta2 extends AppCompatActivity {
     public void getUrlImagen(String indiceN, OnImageUrlFetchedListener listener) {
         // Hacer la solicitud en un hilo para evitar bloquear el hilo principal
         new Thread(() -> {
-            String language = Locale.getDefault().getLanguage();
             String imagenUrl = "";  // La URL de la imagen a obtener
 
             try {
