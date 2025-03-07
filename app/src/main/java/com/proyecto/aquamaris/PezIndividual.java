@@ -147,7 +147,7 @@ public class PezIndividual extends AppCompatActivity {
                                 .get(); // Bloquea y espera la carga de la imagen
 
                         // Si la imagen es válida, la seleccionamos
-                        if (bitmap.getWidth() >= 100 && bitmap.getHeight() >= 100) {
+                        if (bitmap.getWidth() >= 1 && bitmap.getHeight() >= 1) {
                             imgUrl = imageSrc;
                             break;
                         }
