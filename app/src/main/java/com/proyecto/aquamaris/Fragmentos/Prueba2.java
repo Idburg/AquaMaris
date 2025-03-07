@@ -2,6 +2,7 @@ package com.proyecto.aquamaris.Fragmentos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,66 +133,48 @@ public class Prueba2 extends Fragment {
 
         b3.setOnClickListener(v -> {
             boolean isValidProvince = false;
-            provincia = et.getText().toString().toLowerCase();
-            switch (provincia) {
-                case "alava":
+            provincia = et.getText().toString().toLowerCase().replace(" ", "");
+
+            try {
+                if (provincia.contains("alava") || provincia.contains("almeria") || provincia.contains("avila") || provincia.contains("caceres")
+                        || provincia.contains("cadiz") || provincia.contains("castellon") || provincia.contains("cordoba") || provincia.contains("gipuzcoa")
+                        || provincia.contains("jaen") || provincia.contains("leon") || provincia.contains("lerida") || provincia.contains("malaga")) {
                     provincia = provincia.replace("alava", "Álava");
-                    break;
-                case "almeria":
                     provincia = provincia.replace("almeria", "Almería");
-                    break;
-                case "avila":
                     provincia = provincia.replace("avila", "Ávila");
-                    break;
-                case "caceres":
                     provincia = provincia.replace("caceres", "Cáceres");
-                    break;
-                case "cadiz":
                     provincia = provincia.replace("cadiz", "Cádiz");
-                    break;
-                case "castellon":
                     provincia = provincia.replace("castellon", "Castellón");
-                    break;
-                case "cordoba":
                     provincia = provincia.replace("cordoba", "Córdoba");
-                    break;
-                case "gipuzcoa":
                     provincia = provincia.replace("gipuzcoa", "Gipúzcoa");
-                    break;
-                case "jaen":
                     provincia = provincia.replace("jaen", "Jaén");
-                    break;
-                case "leon":
                     provincia = provincia.replace("leon", "León");
-                    break;
-                case "lerida":
                     provincia = provincia.replace("lerida", "Lérida");
-                    break;
-                case "malaga":
                     provincia = provincia.replace("malaga", "Málaga");
-                    break;
-                default:
+                } else {
                     char firstLetter = provincia.charAt(0);
                     provincia = provincia.replace(provincia.charAt(0), Character.toUpperCase(firstLetter));
-                    break;
-            }
+                }
 
-            for (Province prov : provinciaList) {
-                if (Objects.equals(prov.getNombre(), provincia)) {
-                    isValidProvince = true;
-                    break;
+
+                for (Province prov : provinciaList) {
+                    if (Objects.equals(prov.getNombre(), provincia)) {
+                        isValidProvince = true;
+                        break;
+                    }
+                }
+
+                if (!provincia.isEmpty() && isValidProvince) {
+                    Intent intent = new Intent(getContext(), Consulta.class);
+                    intent.putExtra("PROVINCIA", provincia);
+                    startActivity(intent);
+                } else {
+                    et.setText(null);
                 }
             }
-
-            if (!provincia.isEmpty() && isValidProvince) {
-                Intent intent = new Intent(getContext(), Consulta.class);
-                intent.putExtra("PROVINCIA", provincia);
-                startActivity(intent);
-            } else {
-                et.setText(null);
-                Snackbar.make(v, "Intenta otra vez", 1000).show();
+            catch (Exception e) {
+                Log.d("SearchBar","Error: "+e);
             }
-
 
         });
 
