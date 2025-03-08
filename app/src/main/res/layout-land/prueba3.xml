@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/prueba3"
-    android:background="@color/super_light_green">
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/lineaHorizontal"
@@ -20,7 +20,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="90dp"
         android:background="@color/marine_blue"
         app:layout_constraintBottom_toTopOf="@id/lineaHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
         android:id="@+id/settings_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/marine_blue"
         android:text="@string/cerrar_sesion"
         app:cornerRadius="0sp"
@@ -92,10 +92,11 @@
         android:id="@+id/infpersonal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:text="@string/informacion"
-        app:layout_constraintStart_toEndOf="@id/vertical"
-        app:layout_constraintTop_toBottomOf="@id/fotoperfil"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toEndOf="@id/fotoperfil"
+        app:layout_constraintTop_toBottomOf="@id/constraint"
         />
 
     <TextView
@@ -104,7 +105,8 @@
         android:layout_height="wrap_content"
         android:text="@string/profile_email"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@id/vertical"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toEndOf="@id/fotoperfil"
         app:layout_constraintTop_toBottomOf="@id/infpersonal"
         />
 
@@ -118,7 +120,9 @@
         android:focusable="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@id/vertical"
-        app:layout_constraintTop_toBottomOf="@id/nombreuser"/>
+        android:layout_marginRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_sign_out"
+        app:layout_constraintStart_toStartOf="@id/settings_sign_out" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
