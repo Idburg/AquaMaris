@@ -73,16 +73,9 @@ public class PezIndividual extends AppCompatActivity {
                     String imageSrc = "https:" + image.attr("src");
 
                     // Verificamos el tamaño de la imagen
-                    Bitmap bitmap = Glide.with(PezIndividual.this)
-                            .asBitmap()
-                            .load(imageSrc)
-                            .submit()
-                            .get(); // Bloquea y espera la carga de la imagen
-
-                    // Si la imagen es válida, la seleccionamos
-                    if (bitmap.getWidth() >= 1 && bitmap.getHeight() >= 1) {
-                        imgUrl = imageSrc;
-                        break;
+                    if (!imageSrc.contains("svg.")) {
+                        imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
+                        break;  // Salir del bucle si encontramos la imagen
                     }
                 }
 
@@ -121,7 +114,7 @@ public class PezIndividual extends AppCompatActivity {
                 System.out.println(finalParagraphText.length());
                 runOnUiThread(() -> Info_pez.setText(finalParagraphText));
 
-            } catch (IOException | InterruptedException | ExecutionException e) {
+            } catch (IOException e) {
                 try {
                     // Modificamos el nombre del pez en caso de error
                     String[] ppez = nombrepez.split("_");
@@ -140,16 +133,9 @@ public class PezIndividual extends AppCompatActivity {
                         String imageSrc = "https:" + image.attr("src");
 
                         // Verificamos el tamaño de la imagen
-                        Bitmap bitmap = Glide.with(PezIndividual.this)
-                                .asBitmap()
-                                .load(imageSrc)
-                                .submit()
-                                .get(); // Bloquea y espera la carga de la imagen
-
-                        // Si la imagen es válida, la seleccionamos
-                        if (bitmap.getWidth() >= 1 && bitmap.getHeight() >= 1) {
-                            imgUrl = imageSrc;
-                            break;
+                        if (!imageSrc.contains("svg.")) {
+                            imgUrl = imageSrc;  // Asignamos el URL de la imagen encontrada
+                            break;  // Salir del bucle si encontramos la imagen
                         }
                     }
 
@@ -189,7 +175,7 @@ public class PezIndividual extends AppCompatActivity {
 
 
 
-                } catch (IOException | InterruptedException | ExecutionException x) {
+                } catch (IOException x) {
 
                     // Modificamos el fondo de la actividad a azul
                     runOnUiThread(() -> {

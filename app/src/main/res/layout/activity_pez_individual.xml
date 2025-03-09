@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/PezImages"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_image_background"
                 android:scaleType="fitCenter"
