@@ -1,6 +1,7 @@
 package com.proyecto.aquamaris.Fragmentos;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -117,19 +118,20 @@ public class Prueba2 extends Fragment {
         provinciaList.add(new Province(R.drawable.zaragoza, "Zaragoza"));
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(layoutManager);
 
+        // Detectar la orientación del dispositivo
+        int orientation = getResources().getConfiguration().orientation;
+        int spanCount = (orientation == Configuration.ORIENTATION_LANDSCAPE) ? 4 : 2;
+
+        // Configurar RecyclerView con un GridLayoutManager
+        layoutManager = new GridLayoutManager(getContext(), spanCount);
+        recyclerView.setLayoutManager(layoutManager);
 
         recyclerViewAdapter = new RecyclerViewAdapter(provinciaList);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setHasFixedSize(true);
 
-
-        BottomAppBar bottomAppBar = view.findViewById(R.id.bottom_app_bar);
-        FloatingActionButton myfab = view.findViewById(R.id.fab);
-
-
+        // Resto del código (búsqueda, botones, etc.)
         b3.setOnClickListener(v -> {
             boolean isValidProvince = false;
             provincia = et.getText().toString().toLowerCase().replace(" ", "");
@@ -151,12 +153,11 @@ public class Prueba2 extends Fragment {
                     provincia = provincia.replace("leon", "León");
                     provincia = provincia.replace("lerida", "Lérida");
                     provincia = provincia.replace("malaga", "Málaga");
-                    provincia = provincia.replace("acoruna","A Coruña");
+                    provincia = provincia.replace("acoruna", "A Coruña");
                 } else {
                     char firstLetter = provincia.charAt(0);
                     provincia = provincia.replace(provincia.charAt(0), Character.toUpperCase(firstLetter));
                 }
-
 
                 for (Province prov : provinciaList) {
                     if (Objects.equals(prov.getNombre(), provincia)) {
@@ -172,24 +173,23 @@ public class Prueba2 extends Fragment {
                 } else {
                     et.setText(null);
                 }
+            } catch (Exception e) {
+                Log.d("SearchBar", "Error: " + e);
             }
-            catch (Exception e) {
-                Log.d("SearchBar","Error: "+e);
-            }
-
         });
 
+        FloatingActionButton myfab = view.findViewById(R.id.fab);
         myfab.setOnClickListener(view1 -> {
             Intent intent = new Intent(getContext(), MapsActivity.class);
             startActivity(intent);
         });
 
+        BottomAppBar bottomAppBar = view.findViewById(R.id.bottom_app_bar);
         bottomAppBar.setNavigationOnClickListener(view12 -> {
             Intent intent = new Intent(getContext(), Consulta2.class);
             intent.putExtra("PROVINCIA", provincia);
             startActivity(intent);
         });
-
     }
 }
 
