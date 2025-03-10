@@ -12,8 +12,8 @@ android {
         applicationId = "com.proyecto.aquamaris"
         minSdk = 24
         targetSdk = 34
-        versionCode = 13
-        versionName = "1.3"
+        versionCode = 14
+        versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,7 +50,7 @@ secrets {
 
 
 dependencies {
-    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
+    implementation (libs.android.gif.drawable)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

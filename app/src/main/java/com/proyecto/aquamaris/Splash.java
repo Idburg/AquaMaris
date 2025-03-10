@@ -1,14 +1,10 @@
 package com.proyecto.aquamaris;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +19,6 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 
 public class Splash extends AppCompatActivity {
 
-    private ImageView gifImageView;  // Agregar ImageView para el GIF
     private AppUpdateManager appUpdateManager;
     private static final int APP_UPDATE_REQUEST_CODE = 123;
 
@@ -36,7 +31,8 @@ public class Splash extends AppCompatActivity {
         checkForAppUpdate();
 
 
-        gifImageView = findViewById(R.id.splash);  // Inicializar el ImageView para el GIF
+        // Agregar ImageView para el GIF
+        ImageView gifImageView = findViewById(R.id.splash);  // Inicializar el ImageView para el GIF
 
         // Cargar imágenes con Gli
 

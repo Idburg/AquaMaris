@@ -1,7 +1,6 @@
 package com.proyecto.aquamaris;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,7 +23,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 public class PezIndividual extends AppCompatActivity {
     private TextView Info_pez;

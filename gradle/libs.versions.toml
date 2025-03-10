@@ -1,5 +1,6 @@
 [versions]
 agp = "8.6.1"
+androidGifDrawable = "1.2.29"
 androidMapsUtils = "2.2.3"
 assetDelivery = "2.3.0"
 cardview = "1.0.0"
@@ -27,6 +28,7 @@ firebaseDatabaseVersion = "21.0.0"
 
 
 [libraries]
+android-gif-drawable = { module = "pl.droidsonroids.gif:android-gif-drawable", version.ref = "androidGifDrawable" }
 android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
 app-update = { module = "com.google.android.play:app-update", version.ref = "featureDelivery" }
 asset-delivery = { module = "com.google.android.play:asset-delivery", version.ref = "assetDelivery" }
