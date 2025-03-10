@@ -1,6 +1,7 @@
 package com.proyecto.aquamaris.Fragmentos;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,8 +68,11 @@ public class Prueba1 extends Fragment {
         newsList = new ArrayList<>();
 
 
-        // Configurar RecyclerView con un LinearLayoutManager (una sola columna)
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 columnas
+        int orientation = getResources().getConfiguration().orientation;
+        int spanCount = (orientation == Configuration.ORIENTATION_LANDSCAPE) ? 4 : 2;
+
+        // Configurar RecyclerView con un GridLayoutManager
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
         adapter = new NewsAdapter(newsList, getContext());
         recyclerView.setAdapter(adapter);
 
