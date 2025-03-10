@@ -12,9 +12,6 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +23,7 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 
 public class Splash extends AppCompatActivity {
 
-    private ImageView pez;
+    private ImageView gifImageView;  // Agregar ImageView para el GIF
     private AppUpdateManager appUpdateManager;
     private static final int APP_UPDATE_REQUEST_CODE = 123;
 
@@ -38,65 +35,22 @@ public class Splash extends AppCompatActivity {
         appUpdateManager = AppUpdateManagerFactory.create(this);
         checkForAppUpdate();
 
-        ImageView fondo = findViewById(R.id.fondo);
-        ImageView logo = findViewById(R.id.logo);
-        pez = findViewById(R.id.pez);
 
-        // Cargar imágenes con Glide
+        gifImageView = findViewById(R.id.splash);  // Inicializar el ImageView para el GIF
+
+        // Cargar imágenes con Gli
+
+        // Cargar GIF con Glide
         Glide.with(this)
-                .load(R.drawable.pez)
-                .into(fondo);
-
-        Glide.with(this)
-                .load(R.drawable.logo)
-                .dontTransform() // Evita transformaciones que podrían alterar la imagen
-                .into(logo);
+                .load(R.drawable.splash)  // Asegúrate de tener el GIF en res/drawable
+                .into(gifImageView);
 
 
-        // Animar el pez
-        animateFish();
-
-        // Manejar insets para padding
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         // Abrir la aplicación después de la animación
         openApp();
     }
 
-    private void animateFish() {
-        pez.setVisibility(View.VISIBLE);
-
-        // Obtener el tamaño de la pantalla
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        float screenWidth = displayMetrics.widthPixels; // Ancho de la pantalla en píxeles
-        float screenHeight = displayMetrics.heightPixels; // Alto de la pantalla en píxeles
-
-        // Ajustar las posiciones en función del tamaño de la pantalla
-        float finalPositionX = screenWidth * 0.04f; // 70% del ancho de la pantalla
-        float initialPositionX = -screenWidth * 0.5f;
-
-        // Posición Y ajustada a un valor fijo, puedes modificarla si es necesario
-        float finalPositionY = screenHeight * 0.1f; // Ajustar a la mitad de la pantalla
-
-        // Animación de movimiento horizontal (de izquierda a derecha)
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(pez, "translationX", initialPositionX, finalPositionX);
-        animatorX.setDuration(3000); // Duración de la animación
-        animatorX.setInterpolator(new LinearInterpolator());
-
-        // Animación de movimiento vertical (opcional, puedes ajustarla según tus necesidades)
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(pez, "translationY", finalPositionY, finalPositionY);
-        animatorY.setDuration(3000); // Duración de la animación
-        animatorY.setInterpolator(new LinearInterpolator());
-
-        // Iniciar las animaciones
-        animatorY.start();
-        animatorX.start();
-    }
 
     private void openApp() {
         new Handler().postDelayed(() -> {
@@ -139,5 +93,4 @@ public class Splash extends AppCompatActivity {
             }
         }
     }
-
 }
