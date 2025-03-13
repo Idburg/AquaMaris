@@ -23,8 +23,7 @@
 
 ### Pantalla que aparece al *inicializar la aplicación*
 
-![image](https://github.com/user-attachments/assets/6275b02d-ca05-4138-8ab8-6e7e6da0cac5)
-
+<img src="https://github.com/Idburg/AquaMaris/blob/master/Splash_animated-ezgif.com-video-to-gif-converter%20(1).gif" width="330" heigth="1000"/>
 > Al iniciarse la aplicación, se observará un pez moviéndose por la pantalla hasta situarse encima de la "m" del logo de la aplicación
 
 ### Pantalla *principal*
