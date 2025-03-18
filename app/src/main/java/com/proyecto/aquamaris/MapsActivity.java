@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,7 +91,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         layer.setOnFeatureClickListener(feature -> {
 
             String provincia = feature.getProperty("name");
-            Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Provincia: " + provincia, Toast.LENGTH_SHORT).show();
 
             if (lastFeature != null && lastFeature.equals(feature))
                 abrirDetalleProvincia(provincia);
